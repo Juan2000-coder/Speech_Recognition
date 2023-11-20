@@ -1,4 +1,3 @@
-# Imports
 import os
 import librosa
 import librosa.display
@@ -7,11 +6,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import butter, filtfilt
 from scipy.spatial.distance import pdist, cdist
+from mpl_toolkits.mplot3d import Axes3D
+import mplcursors
 
 # Diccionary with the list of fruits
 fruit_types = ['pera', 'banana', 'manzana', 'naranja']
 fruit_dict = {fruit: [] for fruit in fruit_types}
-root_dir = '../../dataset'
+root_dir = './dataset'
 
 for dirname, _, filenames in os.walk(root_dir):
     fruit_type = os.path.basename(dirname)
@@ -91,7 +92,7 @@ def trim(signal, perc):             # The audio signal and the percentaje umbral
     return signal[bottom_index:upper_index]   # Trimmed signal
 
 # Gets a diccionary with the names of the fruits a key and a list of vectors(features) as values
-def get_features(n_mfcc, components:list):
+def get_features(n_mfcc):
     fruit_vectors = dict.fromkeys(fruit_types)
     for fruit_name, fruits in fruit_dict.items():
         vectors = list()
@@ -107,7 +108,6 @@ def get_features(n_mfcc, components:list):
 
             mfccs = librosa.feature.mfcc(y=signal, n_mfcc=n_mfcc, sr=sr)                      # Gets the Mel coeeficients
             fruit_vector = np.mean(mfccs, axis=1)
-            fruit_vector = fruit_vector[components]
             vectors.append(fruit_vector.T)
         fruit_vectors[fruit_name] = np.array(vectors)
 
@@ -152,13 +152,7 @@ def get_overlaps(fruit_features):
     return overlaps # Each element is the number of vectors of one group in the sphere of anhoter
 
 # Gets an informative table with the distance between centers
-def get_table(fruit_features):
-    centers = dict.fromkeys(fruit_types)  # A dictionary for the centers
-
-    for name, group in fruit_features.items(): # Get the centers
-        _, center = get_sphere(group)     # The sphere that evolves the group
-        centers[name] = center
-
+def get_table(centers):
     from prettytable import PrettyTable
     table = PrettyTable()
     table.field_names = ["par"] + [f"{i}" for i in range(1, centers[fruit_types[0]].shape[1] + 1)]
@@ -175,29 +169,86 @@ def get_table(fruit_features):
     table.float_format = "0.2"
     return table
 
-import mplcursors
-fruit_features = get_features(10, [0, 1, 4])
-#print(get_table(fruit_features))
+# Function to get the centers
+def get_centers(features):
+    centers = dict.fromkeys(fruit_types)
+    for fruit, group in features.items():
+        _, center = get_sphere(group)
+        centers[fruit] = center
+    return centers
+
+# Function to get important component indexes
+def get_components(centers, nc):
+    pacum = np.zeros((1, centers[fruit_types[0]].shape[1]))
+    for i in range(len(fruit_types)):
+        for j in range(i + 1, len(fruit_types)):
+            dif = centers[fruit_types[i]] - centers[fruit_types[j]]
+            dist = cdist(centers[fruit_types[i]], centers[fruit_types[j]])
+            difp = (dif**2)*100/(dist**2)
+            pacum += difp
+    index_max = np.argsort(pacum[0])[-nc:]
+    #return np.sort(index_max)
+    return index_max
+
+# Funtion to get the variances
+def get_varianzs(features, nc):
+    varianzs = dict.fromkeys(fruit_types)
+    for fruit, group in features.items():
+        var = np.var(group, axis = 0)
+        varianzs[fruit] = np.argsort(var)[:nc]
+        # Obtener las componentes correspondientes
+    return varianzs
+
+# Main
+fruit_features = get_features(5) # Extract the features
+
+index = get_components(get_centers(fruit_features), 3)
+#index = [1, 3, 4]
+print(index)
+print(get_varianzs(fruit_features, 3))
+
+for group in fruit_features:
+    fruit_features[group] = fruit_features[group][:, index]
+
+centers = get_centers(fruit_features)
+center_list = list(centers.values())
+center_matrix = np.squeeze(center_list, axis=1)
+
+radius, _ = get_sphere(center_matrix)
+print(radius)
+
+# Plotting
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-# Configurar colores y marcas para cada grupo
-
+# Configure colors
 colors = dict(zip(fruit_types,['green','yellow','red','orange']))
+centers = get_centers(fruit_features)
+center_colors  = dict(zip(fruit_types,['blue','brown','black','cyan']))
 
 # Plotear los puntos para cada grupo
-for fruit, puntos in fruit_features.items():
-    ax.scatter(puntos[:, 0], puntos[:, 1], puntos[:, 2], c=colors[fruit], marker='o', label=fruit)
+for fruit, points in fruit_features.items():
+    ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=colors[fruit], marker='o', label=fruit)
+    ax.scatter(centers[fruit][:, 0], centers[fruit][:, 1], centers[fruit][:, 2], c=center_colors[fruit], marker='o', label=f"{fruit}-center")
 
-# Configurar etiquetas de ejes
+# configure labels
 ax.set_xlabel('Eje X')
 ax.set_ylabel('Eje Y')
 ax.set_zlabel('Eje Z')
 
-# Configurar leyenda
-ax.legend()
+"""
+for fruit, points in fruit_features.items():
+    plt.scatter(points[:, 0], points[:, 1], c = colors[fruit], label=fruit)
+    plt.scatter(centers[fruit][:, 0], centers[fruit][:, 1], c = 'black', label = f"{fruit}-center")
 
-# Agregar cursores interactivos
+# Configurar etiquetas de ejes
+plt.xlabel('Dimensión 1')
+plt.ylabel('Dimensión 2')
+"""
+# Mostrar leyenda
+#plt.legend()
+
+# Mostrar el gráfico
+plt.show()
 cursor = mplcursors.cursor(hover=True)
 cursor.connect("add", lambda sel: sel.annotation.set_text(f'({sel.target[0]:.2f}, {sel.target[1]:.2f})'))
-plt.show()
