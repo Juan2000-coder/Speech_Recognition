@@ -111,6 +111,8 @@ def plot_features3d(features):
     ax.set_ylabel('Eje Y')
     ax.set_zlabel('Eje Z')
     plt.show()
+
+
 # Features extraction
 features = dict.fromkeys(fruit_types)
 split_frequency = 3000
@@ -170,10 +172,10 @@ for fruit, audios in processed.items():
         zcr /= np.max(np.abs(zcr))
         #mean
         feat = np.mean(zcr)
-        #feature = np.append(feature, feat)
+        feature = np.append(feature, feat)
         #maximum
         feat = np.max(zcr)
-        feature = np.append(feature, feat)
+        #feature = np.append(feature, feat)
         #varnz
         feat = np.var(zcr)
         #feature = np.append(feature, feat)
@@ -183,8 +185,12 @@ for fruit, audios in processed.items():
 
         #MFCCS
         mfccs = librosa.feature.mfcc(y = signal, sr=sr, n_mfcc = n_mfcc, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+        #mean
+        feat = np.mean(mfccs[:, ((mfccs.shape[1]*2)//5 - 5) : ((mfccs.shape[1]*2)//5 + 5)], axis = 1)
+        feat = feat[1]
+        feature = np.append(feature, feat)
         #maximum
-        feat = np.max(mfccs, axis = 1)
+        feat = np.max(mfccs[:, ((mfccs.shape[1]*2)//5 - 5) : ((mfccs.shape[1]*2)//5 + 5)], axis = 1)
         feat = feat[3]
         feature = np.append(feature, feat)
         
@@ -197,13 +203,13 @@ for fruit, audios in processed.items():
         #std
         feat = np.std(mfccs, axis = 1)/np.mean(mfccs, axis = 1)
         feat = feat[1]
-        #feature = np.append(feature, feat)
+        feature = np.append(feature, feat)
         #momentum
         frames = range(mfccs.shape[1])
         t = librosa.frames_to_time(frames, sr=sr, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
         feat = np.dot(mfccs, t)/np.sum(mfccs, axis = 1)
         feat = feat[0]
-        #feature = np.append(feature, feat)
+        feature = np.append(feature, feat)
 
         #hilbert envelope
         env = smooth_envelope(signal, sr, 45)
