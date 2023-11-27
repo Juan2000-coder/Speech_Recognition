@@ -1,177 +1,225 @@
 import os
+import math
 import librosa
 import librosa.display
 import IPython.display as ipd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.signal import butter, filtfilt
 from scipy.spatial.distance import pdist, cdist
 from mpl_toolkits.mplot3d import Axes3D
 import soundfile as sf
 from prettytable import PrettyTable
-from scipy.signal import hilbert
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
-from scipy.signal import hilbert, butter, filtfilt
-
+from scipy.signal import hilbert, butter, filtfilt, medfilt, lfilter, wiener, convolve
 fruit_types = ['pera', 'banana', 'manzana', 'naranja']
-fruits = {fruit: [] for fruit in fruit_types}
+audios = {fruit: [] for fruit in fruit_types}
 root_dir = './dataset'
-
 for dirname, _, filenames in os.walk(root_dir):
     fruit_type = os.path.basename(dirname)
     if fruit_type in fruit_types:
-        fruits[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
-trimed_audio = {fruit: [] for fruit in fruit_types}
-for dirname, _, filenames in os.walk(root_dir):
-    trimpath = os.path.basename(dirname)
+        audios[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+processed = {fruit: [] for fruit in fruit_types}
 
-    if trimpath in 'trimed':
+for dirname, _, filenames in os.walk(root_dir):
+    path = os.path.basename(dirname)
+    if path == 'processed':
         fruit_type = os.path.basename(os.path.dirname(dirname))
         if fruit_type in fruit_types:
-            trimed_audio[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
-adjusted_audio = {fruit: [] for fruit in fruit_types}
-for dirname, _, filenames in os.walk(root_dir):
-    adjustedpath = os.path.basename(dirname)
-
-    if adjustedpath in 'adjusted':
-        fruit_type = os.path.basename(os.path.dirname(dirname))
-        if fruit_type in fruit_types:
-            adjusted_audio[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
-
-FRAME_SIZE = 512 # In the documentation says it's convenient for speech.C
-HOP_SIZE   = 256
-
+            processed[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+FRAME_SIZE = 1024 # In the documentation says it's convenient for speech.C
+HOP_SIZE   = int(FRAME_SIZE/2)
 def load_audio(audiofile):
     test_audio, sr = librosa.load(audiofile, sr = None)
     duration = librosa.get_duration(filename=audiofile, sr=sr)
     return test_audio, sr, duration
-def calculate_smoothed_envelope(signal, sr, cutoff_frequency = 10.0):
-    analytic_signal = hilbert(signal)
-
-    # Calcular la envolvente de amplitud
-    amplitude_envelope = np.abs(analytic_signal)
-
-    # Aplicar filtro pasa bajos para suavizar la envolvente
+def time_vector(signal, duration):
+    return np.linspace(0, duration, len(signal))
+def rms(signal):
+    return librosa.feature.rms(y=signal, frame_length = FRAME_SIZE, hop_length = HOP_SIZE)
+def normalize(signal):
+    peak = np.max(signal)
+    signal/=peak
+    return signal
+def low_pass_filter(signal, sr, cutoff_frequency = 5000):
     nyquist = 0.5 * sr
     cutoff = cutoff_frequency / nyquist
     b, a = butter(N=6, Wn=cutoff, btype='low', analog=False, output='ba')
+    filtered = lfilter(b, a, signal)
+    return filtered
+def band_pass_filter(signal, sr, low_cutoff, high_cutoff):
+    b, a = butter(N=3, Wn = [low_cutoff, high_cutoff], btype='band', fs=sr)
+    return lfilter(b, a, signal)
+def wiener_filter(signal, noise = 0.9):
+    filtered = wiener(signal, noise = noise)
+    return filtered
+def envelope(signal):
+    analytic_signal = hilbert(signal)
+    return np.abs(analytic_signal)
+def smooth_envelope(signal, sr, cutoff_frequency=50.0):
+    return low_pass_filter(envelope(signal), sr, cutoff_frequency)
+def calculate_split_frequency_bin(split_frequency, sample_rate, num_frequency_bins):
+    """Infer the frequency bin associated to a given split frequency."""
     
-    smoothed_envelope = filtfilt(b, a, amplitude_envelope)
-
-    return amplitude_envelope, smoothed_envelope
-def get_features(n_mfcc, fruits):
-    fruit_vectors = dict.fromkeys(fruits.keys())
+    frequency_range = sample_rate / 2
+    frequency_delta_per_bin = frequency_range / num_frequency_bins
+    split_frequency_bin = math.floor(split_frequency / frequency_delta_per_bin)
+    return int(split_frequency_bin)
+def band_energy_ratio(spectrogram, split_frequency, sample_rate):
+    """Calculate band energy ratio with a given split frequency."""
     
-    for fruit_name, group in fruits.items():
-        vectors = list()
-        for fruit in group:
-            signal, sr, _ = load_audio(fruit)
-
-            mfccs = librosa.feature.mfcc(y=signal, n_mfcc=n_mfcc, sr=sr)
-            delta_mfccs = librosa.feature.delta(mfccs)
-            delta2_mfccs = librosa.feature.delta(mfccs, order = 2)
-            
-            _, smoothed_envelope = calculate_smoothed_envelope(signal, sr, 45)
-
-            selected_indices = np.linspace(0, len(smoothed_envelope) - 1, n_mfcc, dtype=int)
-            smoothed_envelope = smoothed_envelope[selected_indices]
-            smoothed_envelope = smoothed_envelope.reshape(-1,1)
-
-            smoothed_envelope = smoothed_envelope /np.max(np.linalg.norm(smoothed_envelope , axis=0))
-            mfccs = mfccs/np.max(np.linalg.norm(mfccs, axis=0))
-            delta_mfccs  = delta_mfccs/np.max(np.linalg.norm(delta_mfccs, axis=0))
-            delta2_mfccs = delta2_mfccs/np.max(np.linalg.norm(delta2_mfccs, axis=0))
-
-            mfccs = np.mean(mfccs.T, axis = 0)
-            mfccs = mfccs.reshape(-1, 1)
-            delta_mfccs = np.mean(delta_mfccs.T, axis = 0)
-            delta_mfccs = mfccs.reshape(-1, 1)
-            delta2_mfccs = np.mean(delta2_mfccs.T, axis = 0)
-            delta2_mfccs = mfccs.reshape(-1, 1)
-
-            #features =  np.concatenate((delta_mfccs), axis = 0)
-            features = smoothed_envelope
-            #features = np.mean(features.T, axis = 0)
-            vectors.append(features.reshape(1,-1))
-            
-        fruit_vectors[fruit_name] = np.vstack(vectors)
-    return fruit_vectors
-
-def get_sphere(vectors):
-    center = np.mean(vectors, axis = 0)
-    center = center.reshape(1, -1)
-    radius = cdist(center, vectors).max()     # Pairwise distance
-    return radius, center
-def get_centers(features):
-    centers = dict.fromkeys(features.keys())
-    for fruit, group in features.items():
-        _, center = get_sphere(group)
-        centers[fruit] = center
-    return centers
-def get_radiuses(features):
-    radiuses = dict.fromkeys(features.keys())
-    for fruit, group in features.items():
-        radius, _ = get_sphere(group)
-        radiuses[fruit] = radius
-    return radiuses
-def get_overlaps(fruit_features):
-    centers = get_centers(fruit_features)
-    radiuses = get_radiuses(fruit_features)
-    overlaps = dict.fromkeys(fruit_features.keys())
+    split_frequency_bin = calculate_split_frequency_bin(split_frequency, sample_rate, len(spectrogram[0]))
+    band_energy_ratio = []
     
-    # A dictionary of dictionarys. Keys, the fruit types
-    for key in overlaps:
-        # Each dictionary in the dictionary
-        overlaps[key] = dict.fromkeys(fruit_types)
+    # calculate power spectrogram
+    power_spectrogram = np.abs(spectrogram) ** 2
+    power_spectrogram = power_spectrogram.T
     
-    for i in range(len(fruit_types)):
-        for j in range(i + 1, len(fruit_types)):
-            distancesAB = cdist(centers[fruit_types[i]], fruit_features[fruit_types[j]])
-            distancesBA = cdist(centers[fruit_types[j]], fruit_features[fruit_types[i]])
+    # calculate BER value for each frame
+    for frame in power_spectrogram:
+        sum_power_low_frequencies = frame[:split_frequency_bin].sum()
+        sum_power_high_frequencies = frame[split_frequency_bin:].sum()
+        band_energy_ratio_current_frame = sum_power_low_frequencies / sum_power_high_frequencies
+        band_energy_ratio.append(band_energy_ratio_current_frame)
+    
+    return np.array(band_energy_ratio)
+#2d
+def plot_features2d(features):
+    fig = plt.figure()
+    colors = dict(zip(fruit_types,['green','yellow','red','orange']))
+    
 
-            mask_distancesAB = distancesAB < radiuses[fruit_types[i]]
-            mask_distancesBA = distancesBA < radiuses[fruit_types[j]]
+    for fruit, points in features.items():
+        plt.scatter(points[:, 0], points[:, 1], c = colors[fruit], label=fruit)
 
-            numberBinA = np.count_nonzero(mask_distancesAB)
-            numberAinB = np.count_nonzero(mask_distancesBA)
+    plt.xlabel('Eje X')
+    plt.ylabel('Eje Y')
+    plt.show()
+#3d
+def plot_features3d(features):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    colors = dict(zip(fruit_types,['green','yellow','red','orange']))
 
-            overlaps[fruit_types[i]][fruit_types[j]] = numberBinA
-            overlaps[fruit_types[j]][fruit_types[i]] = numberAinB
-    return overlaps # Each element is the number of vectors of one group in the sphere of another
-def get_components(centers, nc):
-    pacum = np.zeros((1, centers[fruit_types[0]].shape[1]))
-    pair_components = dict()
-    for i in range(len(fruit_types)):
-        for j in range(i + 1, len(fruit_types)):
-            dif = centers[fruit_types[i]] - centers[fruit_types[j]]
-            dist = cdist(centers[fruit_types[i]], centers[fruit_types[j]])
-            difp = (dif**2)*100/(dist**2)
-            pair_components[f"{fruit_types[i]}-{fruit_types[j]}"]= np.argsort(difp[0])[-nc:]
-            pacum += difp
-    index_max = np.argsort(pacum[0])[-nc:]
-    #return np.sort(index_max)
-    return index_max, pair_components
+    for fruit, points in features.items():
+        ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=colors[fruit], marker='o', label=fruit)
+        
+    ax.set_xlabel('Eje X')
+    ax.set_ylabel('Eje Y')
+    ax.set_zlabel('Eje Z')
+    plt.show()
+# Features extraction
+features = dict.fromkeys(fruit_types)
+split_frequency = 3000
+cuton = 20
+cutoff = 8500
+n_mfcc = 4
 
-features = get_features(30, trimed_audio)
-overlaps = get_overlaps(features)
-centers = get_centers(features)
-components, _ = get_components(centers, 2) 
-radius, _ = get_sphere(np.squeeze(list(centers.values()), axis=1))
+for fruit, audios in processed.items():
+    features[fruit] = None
+    
+    for audio in audios:
+        # Load the audio signal
+        signal, sr, duration = load_audio(audio)
 
-print(f"componentes: {components}")
+        # Empty row of features
+        feature = np.empty((1, 0))
 
-for pair, overlap in overlaps.items():
-    print(f"{pair}: {overlap}")
+        # Calculate the rms
+        audio_rms = np.sqrt(np.mean(signal**2))/np.max(signal)
+        feat = audio_rms
+        feature = np.append(feature, audio_rms)
 
-print(f"radius: {radius}")
+        # BER min
+        spec = librosa.stft(signal, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+        BER  = band_energy_ratio(spec, split_frequency, sr)
+        feat = np.min(BER)
+        #feature = np.append(feature, feat)
 
-for name, group in features.items():
-    features[name] = group[:, np.sort(components)]
-"""
+        # Centroid
+        centroid = librosa.feature.spectral_centroid(y=signal, sr=sr, n_fft=FRAME_SIZE, hop_length=HOP_SIZE)[0]
+        centroid /= np.max(np.abs(centroid))
+        # Varnz
+        feat = np.var(centroid)
+        #feature = np.append(feature, feat)
+        # std
+        feat = np.std(centroid)/np.mean(centroid)
+        feature = np.append(feature, feat)
+
+        # Envelope RMS
+        smoothed = rms(signal)
+        smoothed = smoothed.reshape(-1,)
+        smoothed /= np.max(np.abs(smoothed))
+        # varnz
+        feat = np.var(smoothed)
+        #feature = np.append(feature, feat)
+        #std
+        feat = np.std(smoothed)/np.mean(smoothed)
+        feature = np.append(feature, feat)
+        #momentum
+        t = time_vector(smoothed, duration)
+        feat = np.dot(smoothed, t)/np.sum(smoothed)
+        feature = np.append(feature, feat)
+
+        #ZCR
+        filtered = band_pass_filter(signal, sr, cuton, cutoff)
+        zcr = librosa.feature.zero_crossing_rate(filtered, frame_length=FRAME_SIZE, hop_length=HOP_SIZE)[0]
+        zcr /= np.max(np.abs(zcr))
+        #mean
+        feat = np.mean(zcr)
+        #feature = np.append(feature, feat)
+        #maximum
+        feat = np.max(zcr)
+        feature = np.append(feature, feat)
+        #varnz
+        feat = np.var(zcr)
+        #feature = np.append(feature, feat)
+        #std
+        feat = np.std(zcr)/np.mean(zcr)
+        feature = np.append(feature, feat)
+
+        #MFCCS
+        mfccs = librosa.feature.mfcc(y = signal, sr=sr, n_mfcc = n_mfcc, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+        #maximum
+        feat = np.max(mfccs, axis = 1)
+        feat = feat[3]
+        feature = np.append(feature, feat)
+        
+        mfccs /= np.max(np.abs(mfccs), axis = 1, keepdims=True)
+
+        #vrnz
+        feat = np.var(mfccs, axis = 1)
+        feat = feat[1]
+        #feature = np.append(feature, feat)
+        #std
+        feat = np.std(mfccs, axis = 1)/np.mean(mfccs, axis = 1)
+        feat = feat[1]
+        #feature = np.append(feature, feat)
+        #momentum
+        frames = range(mfccs.shape[1])
+        t = librosa.frames_to_time(frames, sr=sr, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+        feat = np.dot(mfccs, t)/np.sum(mfccs, axis = 1)
+        feat = feat[0]
+        #feature = np.append(feature, feat)
+
+        #hilbert envelope
+        env = smooth_envelope(signal, sr, 45)
+        selected = np.linspace(0, len(env) - 1, 30, dtype=int)
+        env = env[selected]
+        env = env.reshape(-1,1)
+        feat = env[11]
+        feature = np.append(feature, feat)
+        feat = env[12]
+        feature = np.append(feature, feat)
+
+        if features[fruit] is not None:
+            features[fruit] = np.vstack([features[fruit], feature])
+        else:
+            features[fruit] = feature
+#PCA
 whole = np.concatenate(list(features.values()), axis=0)
 
 #Paso 2: Aplicar PCA para obtener dos componentes principales
@@ -186,35 +234,4 @@ for fruit, matrix in features.items():
     num_rows = matrix.shape[0]
     reduced[fruit] = reduced_features[start_idx:start_idx + num_rows, :]
     start_idx += num_rows
-features = reduced
-"""
-def knn(training, test, k_n):
-    X = np.concatenate([v for v in training.values()], axis=0)
-    y = np.concatenate([[k] * v.shape[0] for k, v in training.items()])
-
-    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    # Crear clasificador KNN
-    knn_classifier = KNeighborsClassifier(n_neighbors = k_n)
-
-    # Entrenar el clasificador
-    knn_classifier.fit(X, y)
-
-    # Predecir las etiquetas para los datos de prueba
-    predicted_fruit = knn_classifier.predict(test)
-
-    print(f'La fruta predicha para el nuevo audio es: {predicted_fruit[0]}')
-
-#3d
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-colors = dict(zip(fruit_types,['green','yellow','red','orange']))
-for fruit, points in features.items():
-    ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=colors[fruit], marker='o', label=fruit)
-    #ax.scatter(centers[fruit][:, 0], centers[fruit][:, 1], centers[fruit][:, 2], c=center_colors[fruit], marker='o', label=f"{fruit}-center")
-
-# configure labels
-ax.set_xlabel('Eje X')
-ax.set_ylabel('Eje Y')
-ax.set_zlabel('Eje Z')
-plt.show()
+plot_features3d(reduced)
