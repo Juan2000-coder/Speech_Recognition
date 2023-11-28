@@ -1,4 +1,0 @@
-En general los momentos de todos los features, con suma son buenos para la separación de las peras
-si los mfcccs se evaluan 13 componentes y se toman solameente los 15 frames centrados en el tercio bajo, las manzanas se separan muy bien del resto de los grupos en la componente 1 cuando se toma la media
-En la componente 1 se separan las naranjas en a 3/4 de la duración con la media
-Tal vez conviene evaluar a los 1/5, 2/5 y 3/%. SObre todo el croosing rate y las componentes de mel
