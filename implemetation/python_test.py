@@ -15,7 +15,7 @@ import soundfile as sf
 #**RUTAS Y TIPOS DE FRUTAS#**
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
 audios           = {fruit: [] for fruit in fruit_types}
-dataset_path     = './dataset'
+dataset_path     = './dataset/audios'
 original_path    = os.path.join(dataset_path, 'original')
 processed_path   = os.path.join(dataset_path, 'processed')
 o_tests_path     = os.path.join(original_path, 'tests')
@@ -119,7 +119,7 @@ def process_audios(original:dict, processed:dict):
                 pass
             else:
                 audio_out = os.path.join(processed_path, f"{fruit}/{file}")
-                process(audio, audio_out)
+                process(audio, audio_out, 0.18)
                 processed[fruit].append(audio_out)
 #**KNN#**
 def knn(training, test, k_n):
