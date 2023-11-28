@@ -1,49 +1,56 @@
+#**IMPORTS**
 import os
 import math
 import librosa
 import librosa.display
-import IPython.display as ipd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.spatial.distance import pdist, cdist
-from mpl_toolkits.mplot3d import Axes3D
-import soundfile as sf
-from prettytable import PrettyTable
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
-from scipy.signal import hilbert, butter, filtfilt, medfilt, lfilter, wiener, convolve
-fruit_types = ['pera', 'banana', 'manzana', 'naranja']
-audios = {fruit: [] for fruit in fruit_types}
-root_dir = './dataset'
-for dirname, _, filenames in os.walk(root_dir):
-    fruit_type = os.path.basename(dirname)
-    if fruit_type in fruit_types:
-        audios[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+from scipy.signal import hilbert, butter, lfilter
+import soundfile as sf
+#**RUTAS Y TIPOS DE FRUTAS**
+fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
+audios           = {fruit: [] for fruit in fruit_types}
+dataset_path     = './dataset'
+original_path    = os.path.join(dataset_path, 'original')
+processed_path   = os.path.join(dataset_path, 'processed')
+#**DICCIONARIO DE AUDIOS ORIGINALES**
+original = {fruit: [] for fruit in fruit_types}
+for dirname, _, filenames in os.walk(original_path):
+    subdir = os.path.basename(dirname)
+    if subdir in fruit_types:
+        original[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+#**DICCIONARIO DE AUDIOS PROCESADOS**
 processed = {fruit: [] for fruit in fruit_types}
-
-for dirname, _, filenames in os.walk(root_dir):
-    path = os.path.basename(dirname)
-    if path == 'processed':
-        fruit_type = os.path.basename(os.path.dirname(dirname))
-        if fruit_type in fruit_types:
-            processed[fruit_type].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
-FRAME_SIZE = 1024 # In the documentation says it's convenient for speech.C
+for dirname, _, filenames in os.walk(processed_path):
+    subdir = os.path.basename(dirname)
+    if subdir in fruit_types:
+        processed[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+#**PARAMETROS DEL AUDIO**
+FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
 HOP_SIZE   = int(FRAME_SIZE/2)
+#**FUNCIONES GENERALES DE AUDIO**
 def load_audio(audiofile):
     test_audio, sr = librosa.load(audiofile, sr = None)
     duration = librosa.get_duration(filename=audiofile, sr=sr)
     return test_audio, sr, duration
 def time_vector(signal, duration):
     return np.linspace(0, duration, len(signal))
-def rms(signal):
-    return librosa.feature.rms(y=signal, frame_length = FRAME_SIZE, hop_length = HOP_SIZE)
+def rms(signal, frames, hop):
+    return librosa.feature.rms(y=signal, frame_length = frames, hop_length = hop)
 def normalize(signal):
     peak = np.max(signal)
     signal/=peak
     return signal
+def derivative(signal, duration):
+    signal = signal.reshape(-1,)
+    dy = np.gradient(signal, np.linspace(0, duration, len(signal)))
+    return dy
+#**FILTERS**
 def low_pass_filter(signal, sr, cutoff_frequency = 5000):
     nyquist = 0.5 * sr
     cutoff = cutoff_frequency / nyquist
@@ -53,39 +60,58 @@ def low_pass_filter(signal, sr, cutoff_frequency = 5000):
 def band_pass_filter(signal, sr, low_cutoff, high_cutoff):
     b, a = butter(N=3, Wn = [low_cutoff, high_cutoff], btype='band', fs=sr)
     return lfilter(b, a, signal)
-def wiener_filter(signal, noise = 0.9):
-    filtered = wiener(signal, noise = noise)
-    return filtered
+def preemphasis(signal, coef=0.97):
+    return np.append(signal[0], signal[1:] - coef * signal[:-1])
 def envelope(signal):
     analytic_signal = hilbert(signal)
     return np.abs(analytic_signal)
 def smooth_envelope(signal, sr, cutoff_frequency=50.0):
     return low_pass_filter(envelope(signal), sr, cutoff_frequency)
-def calculate_split_frequency_bin(split_frequency, sample_rate, num_frequency_bins):
-    """Infer the frequency bin associated to a given split frequency."""
+#**PRROCCESSING OF THE AUDIO FILES FUNCTIONS**
+def process(audio_in, audio_out, umbral = 0.295):
+    signal, sr, duration = load_audio(audio_in)
     
-    frequency_range = sample_rate / 2
-    frequency_delta_per_bin = frequency_range / num_frequency_bins
-    split_frequency_bin = math.floor(split_frequency / frequency_delta_per_bin)
-    return int(split_frequency_bin)
-def band_energy_ratio(spectrogram, split_frequency, sample_rate):
-    """Calculate band energy ratio with a given split frequency."""
-    
-    split_frequency_bin = calculate_split_frequency_bin(split_frequency, sample_rate, len(spectrogram[0]))
-    band_energy_ratio = []
-    
-    # calculate power spectrogram
-    power_spectrogram = np.abs(spectrogram) ** 2
-    power_spectrogram = power_spectrogram.T
-    
-    # calculate BER value for each frame
-    for frame in power_spectrogram:
-        sum_power_low_frequencies = frame[:split_frequency_bin].sum()
-        sum_power_high_frequencies = frame[split_frequency_bin:].sum()
-        band_energy_ratio_current_frame = sum_power_low_frequencies / sum_power_high_frequencies
-        band_energy_ratio.append(band_energy_ratio_current_frame)
-    
-    return np.array(band_energy_ratio)
+    filtered = low_pass_filter(signal, sr, 1800)
+    filtered = preemphasis(filtered, 0.999)
+
+    rms_signal = rms(signal, 4096, 2048)
+
+    rms_signal = normalize(rms_signal)
+    drms = normalize(derivative(rms_signal, duration))
+
+    audio_vector = time_vector(signal, duration)
+    drms_vector = time_vector(drms, duration)
+
+    left_index = np.argmax(np.abs(drms) > umbral)
+    rigth_index = len(drms) - 1 - np.argmax(np.abs(np.flip(drms)) > umbral)
+
+    left_time = drms_vector[left_index]
+    rigth_time = drms_vector[rigth_index]
+
+    mask_vector = audio_vector >= left_time
+
+    audio_vector = audio_vector[mask_vector]
+    trimed_signal = signal[mask_vector]
+
+    mask_vector = audio_vector <= rigth_time
+
+    audio_vector = audio_vector[mask_vector]
+    trimed_signal = trimed_signal[mask_vector]
+
+    sf.write(audio_out, trimed_signal, sr)
+def process_audios(original:dict, processed:dict):
+    already_processed = []
+    for group in processed.values():
+        already_processed.extend(group)
+        
+    for fruit, audios in original.items():
+        for audio in audios:
+            file = os.path.basename(audio)
+            if file in already_processed:
+                pass
+            else:
+                process(audio, os.path.join(processed_path, f"{fruit}/{file}"))
+#**PLOTTING**
 #2d
 def plot_features2d(features):
     fig = plt.figure()
@@ -111,15 +137,16 @@ def plot_features3d(features):
     ax.set_ylabel('Eje Y')
     ax.set_zlabel('Eje Z')
     plt.show()
-
-
-# Features extraction
+#**AUDIO PROCESSING**
+process_audios(original, processed)
+#**FEATURES EXTRACTION**
+#*Constants*
 features = dict.fromkeys(fruit_types)
 split_frequency = 3000
 cuton = 20
 cutoff = 8500
 n_mfcc = 4
-
+#*Features extraction*
 for fruit, audios in processed.items():
     features[fruit] = None
     
@@ -135,29 +162,17 @@ for fruit, audios in processed.items():
         feat = audio_rms
         feature = np.append(feature, audio_rms)
 
-        # BER min
-        spec = librosa.stft(signal, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
-        BER  = band_energy_ratio(spec, split_frequency, sr)
-        feat = np.min(BER)
-        #feature = np.append(feature, feat)
-
         # Centroid
         centroid = librosa.feature.spectral_centroid(y=signal, sr=sr, n_fft=FRAME_SIZE, hop_length=HOP_SIZE)[0]
         centroid /= np.max(np.abs(centroid))
-        # Varnz
-        feat = np.var(centroid)
-        #feature = np.append(feature, feat)
         # std
         feat = np.std(centroid)/np.mean(centroid)
         feature = np.append(feature, feat)
 
         # Envelope RMS
-        smoothed = rms(signal)
+        smoothed = rms(signal, FRAME_SIZE, HOP_SIZE)
         smoothed = smoothed.reshape(-1,)
         smoothed /= np.max(np.abs(smoothed))
-        # varnz
-        feat = np.var(smoothed)
-        #feature = np.append(feature, feat)
         #std
         feat = np.std(smoothed)/np.mean(smoothed)
         feature = np.append(feature, feat)
@@ -173,12 +188,6 @@ for fruit, audios in processed.items():
         #mean
         feat = np.mean(zcr)
         feature = np.append(feature, feat)
-        #maximum
-        feat = np.max(zcr)
-        #feature = np.append(feature, feat)
-        #varnz
-        feat = np.var(zcr)
-        #feature = np.append(feature, feat)
         #std
         feat = np.std(zcr)/np.mean(zcr)
         feature = np.append(feature, feat)
@@ -196,10 +205,6 @@ for fruit, audios in processed.items():
         
         mfccs /= np.max(np.abs(mfccs), axis = 1, keepdims=True)
 
-        #vrnz
-        feat = np.var(mfccs, axis = 1)
-        feat = feat[1]
-        #feature = np.append(feature, feat)
         #std
         feat = np.std(mfccs, axis = 1)/np.mean(mfccs, axis = 1)
         feat = feat[1]
