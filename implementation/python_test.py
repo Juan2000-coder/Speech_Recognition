@@ -14,7 +14,7 @@ from scipy.signal import hilbert, butter, lfilter
 import soundfile as sf
 #**RUTAS Y TIPOS DE FRUTAS#**
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
-dataset_path     = './dataset/audios'
+dataset_path     = './dataset/audios/testing/'
 original_path    = os.path.join(dataset_path, 'original')
 processed_path   = os.path.join(dataset_path, 'processed')
 o_tests_path     = os.path.join(original_path, 'tests')
