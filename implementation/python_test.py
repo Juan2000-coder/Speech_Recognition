@@ -7,29 +7,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 import joblib
 from scipy.signal import hilbert, butter, lfilter
 import soundfile as sf
-import sounddevice as sd
-#**RUTAS Y TIPOS DE FRUTAS#**
+#**VARIABLES GLOBALES#**
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
+audios           = {fruit: [] for fruit in fruit_types}
 dataset_path     = './dataset/audios'
 original_path    = os.path.join(dataset_path, 'original')
 processed_path   = os.path.join(dataset_path, 'processed')
-o_tests_path     = os.path.join(original_path, 'tests')
-p_tests_path     = os.path.join(processed_path, 'tests')
 model_file       = './implemetation/knn/model.pkl'
-model            = dict.fromkeys(['pca', 'features'])
-#**ORIGINAL TESTS#**
-o_tests = []
-o_tests.extend([os.path.join(o_tests_path, filename) for filename in os.listdir(o_tests_path) if filename.endswith('.wav')])
-#**PROCESSED TESTS DICT#**
-p_tests = []
-p_tests.extend([os.path.join(p_tests_path, filename) for filename in os.listdir(p_tests_path) if filename.endswith('.wav')])
+model            = dict.fromkeys(['pca', 'features', 'scaler'])
+#**DICCIONARIO DE AUDIOS ORIGINALES#**
+original = {fruit: [] for fruit in fruit_types}
+for dirname, _, filenames in os.walk(original_path):
+    subdir = os.path.basename(dirname)
+    if subdir in fruit_types:
+        original[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
+#**DICCIONARIO DE AUDIOS PROCESADOS#**
+processed = {fruit: [] for fruit in fruit_types}
+for dirname, _, filenames in os.walk(processed_path):
+    subdir = os.path.basename(dirname)
+    if subdir in fruit_types:
+        processed[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
 #**PARAMETROS DEL AUDIO#**
 FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
 HOP_SIZE   = int(FRAME_SIZE/2)
@@ -67,16 +68,12 @@ def envelope(signal):
     return np.abs(analytic_signal)
 def smooth_envelope(signal, sr, cutoff_frequency=50.0):
     return low_pass_filter(envelope(signal), sr, cutoff_frequency)
-#**PROCCESSING OF THE AUDIO FILES FUNCTIONS#**
-#*File naming*
-def get_name(o_tests:list):
-    return os.path.join(o_tests_path,"test" + f"{len(o_tests) + 1}" + ".wav")
-#*Processing*
+#**PRROCCESSING OF THE AUDIO FILES FUNCTIONS#**
 def process(audio_in, audio_out, umbral = 0.295):
     signal, sr, duration = load_audio(audio_in)
     
     filtered = low_pass_filter(signal, sr, 1800)
-    filtered = preemphasis(filtered, 0.999)
+    filtered = preemphasis(filtered, 0.9999)
 
     rms_signal = rms(signal, 4096, 2048)
 
@@ -103,22 +100,20 @@ def process(audio_in, audio_out, umbral = 0.295):
     trimed_signal = trimed_signal[mask_vector]
 
     sf.write(audio_out, trimed_signal, sr)
-#**KNN#**
-def knn(training, test, k_n):
-    X = np.concatenate([v for v in training.values()], axis = 0)
-    y = np.concatenate([[k] * v.shape[0] for k, v in training.items()])
-    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    # Crear clasificador KNN
-    knn_classifier = KNeighborsClassifier(n_neighbors = k_n)
-
-    # Entrenar el clasificador
-    knn_classifier.fit(X, y)
-
-    # Predecir las etiquetas para los datos de prueba
-    predicted_fruit = knn_classifier.predict(test)
-
-    print(f'La fruta predicha para el nuevo audio es: {predicted_fruit}')
+def process_audios(original:dict, processed:dict):
+    already_processed = []
+    for group in processed.values():
+        already_processed.extend([os.path.basename(audio) for audio in group])
+        
+    for fruit, audios in original.items():
+        for audio in audios:
+            file = os.path.basename(audio)
+            if file in already_processed:
+                pass
+            else:
+                audio_out = os.path.join(processed_path, f"{fruit}/{file}")
+                process(audio, audio_out, 0.295)
+                processed[fruit].append(audio_out)
 #**PLOTTING#**
 #2d
 def plot_features2d(features):
@@ -145,19 +140,8 @@ def plot_features3d(features):
     ax.set_ylabel('Eje Y')
     ax.set_zlabel('Eje Z')
     plt.show()
-#3d
-def plot_features3d_extra(features):
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    colors = dict(zip(features.keys(),['green','yellow','red','orange','cyan']))
-
-    for fruit, points in features.items():
-        ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=colors[fruit], marker='o', label=fruit)
-        
-    ax.set_xlabel('Eje X')
-    ax.set_ylabel('Eje Y')
-    ax.set_zlabel('Eje Z')
-    plt.show()
+#**AUDIO PROCESSING#**
+process_audios(original, processed)
 #**FEATURES EXTRACTION#**
 #*Features extraction function*
 def get_features(signal, sr, duration):
@@ -224,51 +208,46 @@ def get_features(signal, sr, duration):
     feature = np.append(feature, feat)
 
     return feature
-#**PREDICTION TEST#**
-#*Audio recording*
-'''duration = 3
-fs       = 48000
+#*Extraction of features from processed audios*
+def extract_features(processed:dict):
+    features = dict.fromkeys(fruit_types)
+    for fruit, audios in processed.items():
+        features[fruit] = None
+        
+        for audio in audios:
+            # Load the audio signal
+            signal, sr, duration = load_audio(audio)
+            feature = get_features(signal, sr, duration)
+        
+            if features[fruit] is not None:
+                features[fruit] = np.vstack([features[fruit], feature])
+            else:
+                features[fruit] = feature
+    return features
+#**Training audios features extraction#**
+features = extract_features(processed)
+#**PCA#**
+#PCA and dump
+whole            = np.concatenate(list(features.values()), axis=0)
 
-print("Grabando...")
-audio_data = sd.rec(int(duration * fs), samplerate = fs, channels = 1, dtype = 'int16')
-sd.wait()
-print("Grabación completa.")
+#Aplicar PCA para obtener dos componentes principales
+pca              = PCA(n_components = 3)
+scaler           = StandardScaler()
+whole_scaled     = scaler.fit_transform(whole)
+reduced_features = pca.fit_transform(whole_scaled)
+#**REDUCED MODEL#**
+#Paso 3: Crear un diccionario con las matrices reducidas
+reduced = {}
+start_idx = 0
 
-file = get_name(o_tests)
-
-o_tests.append(file)
-sf.write(file, audio_data, fs)'''
-#*Process tests*
-already_processed = [os.path.basename(audio) for audio in p_tests]
-for test in o_tests:
-    basename =  os.path.basename(test)
-    if basename in already_processed:
-        pass
-    else:
-        audio_out = os.path.join(p_tests_path, basename)
-        process(test, audio_out, 0.1955)
-        p_tests.append(audio_out)
-#*Extract features*
-tests_features = None
-for test in p_tests:
-    signal, sr, duration = load_audio(test)
-    feature = get_features(signal, sr, duration)
-    
-    if tests_features is not None:
-        tests_features = np.vstack([tests_features, feature])
-    else:
-        tests_features = feature.reshape(1, -1)
-#*Load de reduced model*
-model        = joblib.load(model_file)
-reduced:dict = model['features']
-pca          = model['pca']
-scaler       = model['scaler']
-#*Transform*
-scaled_tests_features= scaler.transform(tests_features)
-reduced_tests = pca.transform(scaled_tests_features)
-#*Extension of the feature dict*
-extra = reduced.copy()
-extra['test'] = reduced_tests
-plot_features3d_extra(extra)
-#*Prediction*
-knn(reduced, reduced_tests, 3)
+for fruit, matrix in features.items():
+    num_rows = matrix.shape[0]
+    reduced[fruit] = reduced_features[start_idx:start_idx + num_rows, :]
+    start_idx += num_rows
+#**Dumping to file#**
+model['pca']      = pca
+model['features'] = reduced
+model['scaler']   = scaler
+joblib.dump(model, model_file)
+#**PLOTTING#**
+plot_features3d(reduced)
