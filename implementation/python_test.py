@@ -8,25 +8,17 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import joblib
-from scipy.signal import hilbert, butter, lfilter
+from scipy.signal import butter, lfilter
 import soundfile as sf
 #**VARIABLES GLOBALES#**
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
-audios           = {fruit: [] for fruit in fruit_types}
+
 training_path    = './dataset/audios/training'
 original_path    = os.path.join(training_path, 'original')
 processed_path   = os.path.join(training_path, 'processed')
 model_file       = './implementation/knn/model.pkl'
 model            = dict.fromkeys(['pca', 'features', 'scaler'])
-#**AGREGADO LO SIGUIENTE PARA LA PRUEBA DEL TRIMM#**
-trimming_test_path      =  os.path.join(training_path, 'trimming_test')
 #**DICCIONARIO DE AUDIOS ORIGINALES#**
-#*AGREGADO LO SIGUIENTE PARA LA PRUEBA DEL TRIM*
-trimm_test = {fruit: [] for fruit in fruit_types}
-for dirname, _, filenames in os.walk(trimming_test_path):
-    subdir = os.path.basename(dirname)
-    if subdir in fruit_types:
-        trimm_test[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
 original = {fruit: [] for fruit in fruit_types}
 for dirname, _, filenames in os.walk(original_path):
     subdir = os.path.basename(dirname)
@@ -39,27 +31,15 @@ for dirname, _, filenames in os.walk(processed_path):
     if subdir in fruit_types:
         processed[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
 #**PARAMETROS DEL AUDIO#**
-'''FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
-HOP_SIZE   = int(FRAME_SIZE/2)'''
-FRAME_SIZE = 1024 # In the documentation says it's convenient for speech.C
+FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
 HOP_SIZE   = int(FRAME_SIZE/2)
 #**FUNCIONES GENERALES DE AUDIO#**
 def load_audio(audiofile):
     test_audio, sr = librosa.load(audiofile, sr = None)
     duration = librosa.get_duration(filename=audiofile, sr=sr)
     return test_audio, sr, duration
-def time_vector(signal, duration):
-    return np.linspace(0, duration, len(signal))
 def rms(signal, frames, hop):
     return librosa.feature.rms(y=signal, frame_length = frames, hop_length = hop)
-def normalize(signal):
-    peak = np.max(signal)
-    signal/=peak
-    return signal
-def derivative(signal, duration):
-    signal = signal.reshape(-1,)
-    dy = np.gradient(signal, np.linspace(0, duration, len(signal)))
-    return dy
 #**FILTERS#**
 def low_pass_filter(signal, sr, cutoff_frequency = 5000):
     nyquist = 0.5 * sr
@@ -72,57 +52,17 @@ def band_pass_filter(signal, sr, low_cutoff, high_cutoff):
     return lfilter(b, a, signal)
 def preemphasis(signal, coef=0.97):
     return np.append(signal[0], signal[1:] - coef * signal[:-1])
-def envelope(signal):
-    analytic_signal = hilbert(signal)
-    return np.abs(analytic_signal)
-def smooth_envelope(signal, sr, cutoff_frequency=50.0):
-    return low_pass_filter(envelope(signal), sr, cutoff_frequency)
 #**PRROCCESSING OF THE AUDIO FILES FUNCTIONS#**
-'''def process(audio_in, audio_out, umbral = 0.295):
-    signal, sr, duration = load_audio(audio_in)
-    
-    filtered = low_pass_filter(signal, sr, 1800)
-    filtered = preemphasis(filtered, 0.9999)
-
-    rms_signal = rms(signal, 4096, 2048)
-
-    rms_signal = normalize(rms_signal)
-    drms = normalize(derivative(rms_signal, duration))
-
-    audio_vector = time_vector(signal, duration)
-    drms_vector = time_vector(drms, duration)
-
-    left_index = np.argmax(np.abs(drms) > umbral)
-    rigth_index = len(drms) - 1 - np.argmax(np.abs(np.flip(drms)) > umbral)
-
-    left_time = drms_vector[left_index]
-    rigth_time = drms_vector[rigth_index]
-
-    mask_vector = audio_vector >= left_time
-
-    audio_vector = audio_vector[mask_vector]
-    trimed_signal = signal[mask_vector]
-
-    mask_vector = audio_vector <= rigth_time
-
-    audio_vector = audio_vector[mask_vector]
-    trimed_signal = trimed_signal[mask_vector]
-
-    sf.write(audio_out, trimed_signal, sr)'''
-#*LO QUE SIGUE ES PARA PROBAR EL TRIMMING*
 def spectral_flux(signal):
 
     # Calcular el espectrograma de magnitudes
-    spectrogram = np.abs(librosa.stft(signal, n_fft=FRAME_SIZE, hop_length=HOP_SIZE))
+    spectrogram = np.abs(librosa.stft(signal, n_fft=512, hop_length=256))
 
     # Calcular el flujo espectral
     spectral_flux_values = np.sum(np.diff(spectrogram, axis=1)**2, axis=0)
 
     return spectral_flux_values
-'''flux_umbral = 0.1
-rms_umbral = 0.04'''
-    
-def process(audio_in, audio_out, rms_umbral, flux_umbral):
+def process(audio_in, audio_out, rms_umbral = 0.043, flux_umbral = 0.096):
     signal, sr, duration = load_audio(audio_in)
 
     rms = librosa.feature.rms(y = signal, frame_length = 512, hop_length = 256)
@@ -134,7 +74,7 @@ def process(audio_in, audio_out, rms_umbral, flux_umbral):
     flux /= np.max(np.abs(flux))
     fluxframes = range(len(flux))
     tflux = librosa.frames_to_time(fluxframes, hop_length=256, n_fft = 512)
-    tflux/=tflux[-1]
+    tflux /= tflux[-1]
                 
     left_index = np.argmax(np.abs(flux) > flux_umbral)
     rigth_index = len(flux) - 1 - np.argmax(np.abs(np.flip(flux)) > flux_umbral)
@@ -187,36 +127,6 @@ def process(audio_in, audio_out, rms_umbral, flux_umbral):
     ttrimed = ttrimed[mask]
     trimed = trimed[mask]
     sf.write(audio_out, trimed, sr)
-'''def process_audios(original:dict, processed:dict):
-    already_processed = []
-    for group in processed.values():
-        already_processed.extend([os.path.basename(audio) for audio in group])
-        
-    for fruit, audios in original.items():
-        for audio in audios:
-            file = os.path.basename(audio)
-            if file in already_processed:
-                pass
-            else:
-                audio_out = os.path.join(processed_path, f"{fruit}/{file}")
-                process(audio, audio_out, 0.295)
-                processed[fruit].append(audio_out)'''
-#*LO QUE SIGUE ES PARA PROBAR EL TRIMMING*
-'''def process_audios(original:dict, processed:dict):
-    already_processed = []
-    for group in processed.values():
-        already_processed.extend([os.path.basename(audio) for audio in group])
-        
-    for fruit, audios in original.items():
-        for audio in audios:
-            file = os.path.basename(audio)
-            if file in already_processed:
-                pass
-            else:
-                audio_out = os.path.join(processed_path, f"{fruit}/{file}")
-                process(audio, audio_out, 0.295)
-                processed[fruit].append(audio_out)'''
-#*EL QUE SIGUE ES PARA PROBAR EL TRIMMING*
 def process_audios(original:dict, processed:dict):
     already_processed = []
     for group in processed.values():
@@ -228,23 +138,10 @@ def process_audios(original:dict, processed:dict):
             if file in already_processed:
                 pass
             else:
-                if not file.endswith('6.wav'):
-                    audio_out = os.path.join(trimming_test_path, f"{fruit}/{file}")
-                    process(audio, audio_out, 0.04, 0.1)
-                    processed[fruit].append(audio_out)
+                audio_out = os.path.join(processed_path, f"{fruit}/{file}")
+                process(audio, audio_out)
+                processed[fruit].append(audio_out)
 #**PLOTTING#**
-#2d
-def plot_features2d(features):
-    fig = plt.figure()
-    colors = dict(zip(fruit_types,['green','yellow','red','orange']))
-    
-
-    for fruit, points in features.items():
-        plt.scatter(points[:, 0], points[:, 1], c = colors[fruit], label=fruit)
-
-    plt.xlabel('Eje X')
-    plt.ylabel('Eje Y')
-    plt.show()
 #3d
 def plot_features3d(features):
     fig = plt.figure()
@@ -259,39 +156,48 @@ def plot_features3d(features):
     ax.set_zlabel('Eje Z')
     plt.show()
 #**AUDIO PROCESSING#**
-'''process_audios(original, processed)'''
-#*ESTO ES PARA LA PRUEBA DEL TRIMM*
-process_audios(original, trimm_test)
+process_audios(original, processed)
 #**FEATURES EXTRACTION#**
 #*Features extraction function*
 def get_features(signal, sr, duration):
-    split_frequency = 3000
-    cuton = 20
+    cuton = 15
     cutoff = 8500
     n_mfcc = 4
     feature = np.empty((1, 0))
 
     # Envelope RMS
-    smoothed = rms(signal, FRAME_SIZE, HOP_SIZE)
+    smoothed = librosa.feature.rms(y = signal, frame_length = FRAME_SIZE, hop_length = HOP_SIZE)
     smoothed = smoothed.reshape(-1,)
     smoothed /= np.max(np.abs(smoothed))
+    t =librosa.times_like(smoothed, sr = sr, hop_length=HOP_SIZE, n_fft=FRAME_SIZE)
+    t /= t[-1]
     #std
     feat = np.std(np.abs(smoothed))/np.mean(np.abs(smoothed))
     feature = np.append(feature, feat)
 
+    #momentum
+    feat = np.dot(smoothed, t)/np.sum(smoothed)
+    #feature = np.append(feature, feat)
+
     #ZCR
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
-    zcr = librosa.feature.zero_crossing_rate(filtered, frame_length=FRAME_SIZE, hop_length=HOP_SIZE)[0]
+    zcr = librosa.feature.zero_crossing_rate(signal, frame_length = FRAME_SIZE, hop_length = HOP_SIZE)[0]
+    t =librosa.times_like(zcr, sr = sr, hop_length=HOP_SIZE, n_fft=FRAME_SIZE)
+    t /= t[-1]
+
     #maximum
-    feat = np.max(zcr[((len(zcr)*4)//5 - 5) : ((len(zcr)*4)//5 + 5)])
+    feat = np.max(zcr[((len(zcr)*4)//5 - 10) : ((len(zcr)*4)//5 + 10)])
     feature = np.append(feature, feat)
     zcr /= np.max(np.abs(zcr))
     #mean
-    feat = np.mean(zcr[((len(zcr)*2)//7 - 5) : ((len(zcr)*2)//7 + 5)])
+    feat = np.mean(zcr[((len(zcr)*3)//14 - 5) : ((len(zcr)*3)//14 + 5)])
     feature = np.append(feature, feat)
     #std
     feat = np.std(zcr)/np.mean(zcr)
     feature = np.append(feature, feat)
+    #momentum
+    feat = np.dot(zcr, t)/np.sum(zcr)
+    #feature = np.append(feature, feat)
 
     #MFCCS
     mfccs = librosa.feature.mfcc(y = signal, sr=sr, n_mfcc = n_mfcc, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
@@ -306,10 +212,10 @@ def get_features(signal, sr, duration):
     feat = np.std(mfccs, axis = 1)/np.mean(mfccs, axis = 1)
     feat = feat[1]
     feature = np.append(feature, feat)
-
     #momentum
     frames = range(mfccs.shape[1])
     t = librosa.frames_to_time(frames, sr=sr, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+    t/=t[-1]
     feat = np.dot(mfccs, t)/np.sum(mfccs, axis = 1)
     feat = feat[0]
     feature = np.append(feature, feat)
@@ -317,10 +223,8 @@ def get_features(signal, sr, duration):
     feat = feat[1]
     feature = np.append(feature, feat)
 
-    #hilbert envelope
-    env = smooth_envelope(signal, sr, 45)
-    selected = np.linspace(0, len(env) - 1, 30, dtype=int)
-    env = env[selected]
+    selected = np.linspace(0, len(smoothed) - 1, 30, dtype=int)
+    env = smoothed[selected]
     env = env.reshape(-1,1)
     feat = env[11]
     feature = np.append(feature, feat)
@@ -345,9 +249,7 @@ def extract_features(processed:dict):
                 features[fruit] = feature
     return features
 #**Training audios features extraction#**
-'''features = extract_features(processed)'''
-#*ESTO ES PARA EL TRIMMING*
-features = extract_features(trimm_test)
+features = extract_features(processed)
 #**PCA#**
 #PCA and dump
 whole            = np.concatenate(list(features.values()), axis=0)
