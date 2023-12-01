@@ -18,7 +18,15 @@ original_path    = os.path.join(training_path, 'original')
 processed_path   = os.path.join(training_path, 'processed')
 model_file       = './implementation/knn/model.pkl'
 model            = dict.fromkeys(['pca', 'features', 'scaler'])
+#**AGREGADO LO SIGUIENTE PARA LA PRUEBA DEL TRIMM#**
+trimming_test_path      =  os.path.join(training_path, 'trimming_test')
 #**DICCIONARIO DE AUDIOS ORIGINALES#**
+#*AGREGADO LO SIGUIENTE PARA LA PRUEBA DEL TRIM*
+trimm_test = {fruit: [] for fruit in fruit_types}
+for dirname, _, filenames in os.walk(trimming_test_path):
+    subdir = os.path.basename(dirname)
+    if subdir in fruit_types:
+        trimm_test[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
 original = {fruit: [] for fruit in fruit_types}
 for dirname, _, filenames in os.walk(original_path):
     subdir = os.path.basename(dirname)
@@ -31,7 +39,9 @@ for dirname, _, filenames in os.walk(processed_path):
     if subdir in fruit_types:
         processed[subdir].extend([os.path.join(dirname, filename) for filename in filenames if filename.endswith('.wav')])
 #**PARAMETROS DEL AUDIO#**
-FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
+'''FRAME_SIZE = 1024# In the documentation says it's convenient for speech.C
+HOP_SIZE   = int(FRAME_SIZE/2)'''
+FRAME_SIZE = 1024 # In the documentation says it's convenient for speech.C
 HOP_SIZE   = int(FRAME_SIZE/2)
 #**FUNCIONES GENERALES DE AUDIO#**
 def load_audio(audiofile):
@@ -68,7 +78,7 @@ def envelope(signal):
 def smooth_envelope(signal, sr, cutoff_frequency=50.0):
     return low_pass_filter(envelope(signal), sr, cutoff_frequency)
 #**PRROCCESSING OF THE AUDIO FILES FUNCTIONS#**
-def process(audio_in, audio_out, umbral = 0.295):
+'''def process(audio_in, audio_out, umbral = 0.295):
     signal, sr, duration = load_audio(audio_in)
     
     filtered = low_pass_filter(signal, sr, 1800)
@@ -98,8 +108,86 @@ def process(audio_in, audio_out, umbral = 0.295):
     audio_vector = audio_vector[mask_vector]
     trimed_signal = trimed_signal[mask_vector]
 
-    sf.write(audio_out, trimed_signal, sr)
-def process_audios(original:dict, processed:dict):
+    sf.write(audio_out, trimed_signal, sr)'''
+#*LO QUE SIGUE ES PARA PROBAR EL TRIMMING*
+def spectral_flux(signal):
+
+    # Calcular el espectrograma de magnitudes
+    spectrogram = np.abs(librosa.stft(signal, n_fft=FRAME_SIZE, hop_length=HOP_SIZE))
+
+    # Calcular el flujo espectral
+    spectral_flux_values = np.sum(np.diff(spectrogram, axis=1)**2, axis=0)
+
+    return spectral_flux_values
+'''flux_umbral = 0.1
+rms_umbral = 0.04'''
+    
+def process(audio_in, audio_out, rms_umbral, flux_umbral):
+    signal, sr, duration = load_audio(audio_in)
+
+    rms = librosa.feature.rms(y = signal, frame_length = 512, hop_length = 256)
+    rms /= np.max(np.abs(rms))
+    trms = librosa.times_like(rms, sr = sr, hop_length = 256, n_fft = 512)
+    trms /= trms[-1]
+
+    flux = spectral_flux(signal)
+    flux /= np.max(np.abs(flux))
+    fluxframes = range(len(flux))
+    tflux = librosa.frames_to_time(fluxframes, hop_length=256, n_fft = 512)
+    tflux/=tflux[-1]
+                
+    left_index = np.argmax(np.abs(flux) > flux_umbral)
+    rigth_index = len(flux) - 1 - np.argmax(np.abs(np.flip(flux)) > flux_umbral)
+
+    tsignal = librosa.times_like(signal, sr = sr, hop_length=256, n_fft=512)
+    tsignal /= tsignal[-1]
+
+    flag      = False
+    pad_left  = 0
+    pad_rigth = 0
+    flag_left  =  False
+    flag_rigth =  False
+                
+    while not flag:
+        if rms[0, left_index] > rms_umbral:
+            if left_index > pad_left + 15:
+                rms_left = left_index - np.argmax(np.flip(np.abs(rms[0, :left_index]) < rms_umbral))
+                if rms_left <= 0:
+                    rms_left = left_index
+                flag_left = True
+            else:
+                pad_left += 15
+                left_index = pad_left + np.argmax(np.abs(flux[pad_left:]) > flux_umbral)
+        else:
+                rms_left = left_index
+                flag_left = True
+
+        if rms[0, rigth_index] > rms_umbral:
+            if rigth_index < (len(flux) - 1 - pad_rigth-15):
+                rms_rigth = rigth_index + np.argmax(np.abs(rms[0, rigth_index:]) < rms_umbral)
+                if rms_rigth >= rms.shape[1]:
+                    rms_rigth = rigth_index
+                flag_rigth = True
+            else:
+                pad_rigth += 15
+                rigth_index = len(flux[:-pad_rigth]) - 1 - np.argmax(np.flip(np.abs(flux[:-pad_rigth]) > flux_umbral))                               
+        else:
+            rms_rigth = rigth_index
+            flag_rigth = True
+
+        flag = flag_left and flag_rigth
+
+    left_index  = min(left_index, rms_left)
+    rigth_index = max(rigth_index, rms_rigth)
+
+    mask = tsignal >= tflux[left_index]
+    ttrimed = tsignal[mask]
+    trimed = signal[mask]
+    mask = ttrimed <= tflux[rigth_index]
+    ttrimed = ttrimed[mask]
+    trimed = trimed[mask]
+    sf.write(audio_out, trimed, sr)
+'''def process_audios(original:dict, processed:dict):
     already_processed = []
     for group in processed.values():
         already_processed.extend([os.path.basename(audio) for audio in group])
@@ -112,7 +200,38 @@ def process_audios(original:dict, processed:dict):
             else:
                 audio_out = os.path.join(processed_path, f"{fruit}/{file}")
                 process(audio, audio_out, 0.295)
-                processed[fruit].append(audio_out)
+                processed[fruit].append(audio_out)'''
+#*LO QUE SIGUE ES PARA PROBAR EL TRIMMING*
+'''def process_audios(original:dict, processed:dict):
+    already_processed = []
+    for group in processed.values():
+        already_processed.extend([os.path.basename(audio) for audio in group])
+        
+    for fruit, audios in original.items():
+        for audio in audios:
+            file = os.path.basename(audio)
+            if file in already_processed:
+                pass
+            else:
+                audio_out = os.path.join(processed_path, f"{fruit}/{file}")
+                process(audio, audio_out, 0.295)
+                processed[fruit].append(audio_out)'''
+#*EL QUE SIGUE ES PARA PROBAR EL TRIMMING*
+def process_audios(original:dict, processed:dict):
+    already_processed = []
+    for group in processed.values():
+        already_processed.extend([os.path.basename(audio) for audio in group])
+        
+    for fruit, audios in original.items():
+        for audio in audios:
+            file = os.path.basename(audio)
+            if file in already_processed:
+                pass
+            else:
+                if not file.endswith('6.wav'):
+                    audio_out = os.path.join(trimming_test_path, f"{fruit}/{file}")
+                    process(audio, audio_out, 0.04, 0.1)
+                    processed[fruit].append(audio_out)
 #**PLOTTING#**
 #2d
 def plot_features2d(features):
@@ -140,7 +259,9 @@ def plot_features3d(features):
     ax.set_zlabel('Eje Z')
     plt.show()
 #**AUDIO PROCESSING#**
-process_audios(original, processed)
+'''process_audios(original, processed)'''
+#*ESTO ES PARA LA PRUEBA DEL TRIMM*
+process_audios(original, trimm_test)
 #**FEATURES EXTRACTION#**
 #*Features extraction function*
 def get_features(signal, sr, duration):
@@ -224,7 +345,9 @@ def extract_features(processed:dict):
                 features[fruit] = feature
     return features
 #**Training audios features extraction#**
-features = extract_features(processed)
+'''features = extract_features(processed)'''
+#*ESTO ES PARA EL TRIMMING*
+features = extract_features(trimm_test)
 #**PCA#**
 #PCA and dump
 whole            = np.concatenate(list(features.values()), axis=0)
