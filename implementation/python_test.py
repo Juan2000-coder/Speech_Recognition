@@ -195,30 +195,35 @@ def get_features(signal, sr):
 
     # BER
     spec = librosa.stft(signal, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
-    # max-Separa las peras de lo demas
+    # max
     split_frequency = 600
     BER  = band_energy_ratio(spec, split_frequency, sr)
     feat = np.max(np.abs(BER))
     feature = np.append(feature, feat)
     # min
-    # 1-Bananas arriba manzanas abajo estratificación al medio
+    # 1
+    split_frequency = 1900
+    BER  = band_energy_ratio(spec, split_frequency, sr)
+    feat = np.min(np.abs(BER))
+    feature = np.append(feature, feat)
+    # 2
     split_frequency = 5000
     BER  = band_energy_ratio(spec, split_frequency, sr)
     feat = np.min(np.abs(BER))
     feature = np.append(feature, feat)
-    # 3-Manzanas al fondo. Separa manzanas
+    # 3
     split_frequency = 9000
     BER  = band_energy_ratio(spec, split_frequency, sr)
     feat = np.min(np.abs(BER))
     feature = np.append(feature, feat)
     # std
-    # 1-Separa las bananas de las manzanas quedando en extremos opuestos
+    # 1
     split_frequency = 8000
     BER  = band_energy_ratio(spec, split_frequency, sr)
     BER /= np.max(np.abs(BER))
     feat = np.std(BER)/np.mean(np.abs(BER))
     feature = np.append(feature, feat)
-    # 2-Separa a las peras de lo demas
+    # 2
     split_frequency = 1000
     BER  = band_energy_ratio(spec, split_frequency, sr)
     BER /= np.max(np.abs(BER))
@@ -231,24 +236,24 @@ def get_features(signal, sr):
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     zcr = librosa.feature.zero_crossing_rate(filtered, frame_length=FRAME_SIZE, hop_length=HOP_SIZE)[0]
     zcr /= np.max(np.abs(zcr))
-    # mean - Peras-naranjas(algo solapadas con bananas)-manzanas(bananas)
+    # mean
     feat = np.mean(zcr)
     feature = np.append(feature, feat)
-    # max - Peras(bananas)-naranjas-Manzanas
+    # maximum
     cutoff = 10000
     cuton = 10
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     zcr = librosa.feature.zero_crossing_rate(filtered, frame_length=FRAME_SIZE, hop_length=HOP_SIZE)[0]
     feat = np.max(np.abs(zcr))
     feature = np.append(feature, feat)
-    # std - Peras(bananas)-Naranjas-Manzanas(my separadas)
+    # std
     cutoff = 10000
     cuton  = 20
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     zcr = librosa.feature.zero_crossing_rate(filtered, frame_length=FRAME_SIZE, hop_length=HOP_SIZE)[0]
     feat = np.std(zcr)/np.mean(np.abs(zcr))
     feature = np.append(feature, feat)
-    # mean local - Manzanas-Naranjas(bananas)-Peras
+    # mean local
     cutoff = 5000
     cuton = 1000
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
@@ -256,7 +261,7 @@ def get_features(signal, sr):
     zcr /= np.max(np.abs(zcr))
     feat = np.mean(zcr[((len(zcr)*3)//14 - 5) : ((len(zcr)*3)//14 + 5)])
     feature = np.append(feature, feat)
-    # local max - Naranjas - lo demas
+    # local max
     cutoff = 10000
     cuton = 10
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
@@ -270,17 +275,17 @@ def get_features(signal, sr):
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     roll_off = librosa.feature.spectral_rolloff(y=filtered, sr=sr, n_fft=FRAME_SIZE, hop_length=HOP_SIZE, roll_percent=0.28)[0]
     roll_off /= np.max(np.abs(roll_off))
-    # mean - manzanas - Naranjas(algo con banana) - Peras(bananas)
+    # mean
     feat = np.mean(np.abs(roll_off))
     feature = np.append(feature, feat)
-    # max - manzanas - Naranjas(algo con banana) - Peras(bananas)
+    # max
     cuton = 100
     cutoff = 8500
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     roll_off = librosa.feature.spectral_rolloff(y=filtered, sr=sr, n_fft=FRAME_SIZE, hop_length=HOP_SIZE, roll_percent=0.55)[0]
     feat = np.max(np.abs(roll_off))
     feature = np.append(feature, feat)
-    # std - manzanas - Naranjas(bananas) - Peras(algo bananas)
+    # std
     cutoff = 8500
     cuton = 50
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
@@ -291,15 +296,24 @@ def get_features(signal, sr):
 
     #MFCCS
     n_mfcc = 4
-    # 1 - manzanas - bananas(naranjas/peras)
+    # 1
+    cuton = 500
+    cutoff = 5000
+    filtered = band_pass_filter(signal, sr, cuton, cutoff)
+    mfccs = librosa.feature.mfcc(y = signal, sr=sr, n_mfcc = n_mfcc, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
+    feat = np.max(mfccs, axis = 1)
+    feature = np.append(feature, feat[3])
+    
+    # 2
     cuton = 10
     cutoff = 8000
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
     mfccs = librosa.feature.mfcc(y = filtered, sr=sr, n_mfcc = n_mfcc, n_fft = FRAME_SIZE, hop_length = HOP_SIZE)
     mfccs /= np.max(np.abs(mfccs), axis = 1, keepdims=True)
     feat = np.std(np.abs(mfccs), axis = 1)/np.mean(np.abs(mfccs), axis = 1)
-    feature = np.append(feature, feat[1])
-    # 2 - naranjas - peras(algo de manzana banana naranja) - banana(manzana)
+    feature = np.append(feature, feat[3])
+
+    # 3
     cuton = 10
     cutoff = 8000
     filtered = band_pass_filter(signal, sr, cuton, cutoff)
@@ -318,6 +332,7 @@ def get_features(signal, sr):
     feature = np.append(feature, feat)
     feat = env[12]
     feature = np.append(feature, feat)
+
     return feature
 #**AUFIO RECORGING#**
 '''duration = 3      # Duración de la grabación en segundos
