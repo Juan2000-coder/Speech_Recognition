@@ -15,7 +15,7 @@ from scipy.signal import butter, lfilter
 import soundfile as sf
 #**RUTAS Y TIPOS DE FRUTAS#**
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
-dataset_path     = './dataset/audios/validation'
+dataset_path     = './dataset/audios/test'
 original_path    = os.path.join(dataset_path, 'original')
 processed_path   = os.path.join(dataset_path, 'processed')
 model_file       = './implementation/knn/model.pkl'
@@ -144,7 +144,6 @@ def plot_features3d(features):
     ax.set_ylabel('Eje Y')
     ax.set_zlabel('Eje Z')
     plt.show()
-#3d
 #3d
 def plot_features3d_extra(features):
     fig = plt.figure()
@@ -393,12 +392,13 @@ for i, audio in enumerate(processed):
         N_aciertos += 1
     else:
         aciertos.append('falla')
-precision = N_aciertos*100/len(aciertos)
+precission = N_aciertos*100/len(aciertos)
 
 table = PrettyTable()
-table.add_row(['audios'] + audios)
-table.add_row(['predict']  + prediction)
-table.add_row(['result'] + aciertos)
+table.field_names = ['audios'] + audios
+table.add_row(['prediction']  + prediction)
+table.add_row(['results'] + aciertos)
+
 print(table)
-print(f"El número de aciertoe es: {N_aciertos}")
-print(f"El porcentaje de aciertos es: {precision}")
+print(f"Se acertaron: {N_aciertos}/{len(prediction)}")
+print(f"El porcentaje de aciertos es: {precission}")
