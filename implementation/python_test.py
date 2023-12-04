@@ -41,7 +41,7 @@ def band_pass_filter(signal, sr, low_cutoff, high_cutoff):
 #**PROCCESSING OF THE AUDIO FILES FUNCTIONS#**
 #*File naming*
 def get_name(original:list):
-    return os.path.join(original_path,"validation" + f"{len(original) + 1}" + ".wav")
+    return os.path.join(original_path,"test" + f"{len(original) + 1}" + ".wav")
 #*Processing*
 def spectral_flux(signal):
 
@@ -152,7 +152,7 @@ def plot_features3d_extra(features):
 
     for fruit, points in features.items():
         ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=colors[fruit], marker='o', label=fruit)
-        if fruit == 'validation':
+        if fruit == 'testing':
             for i, point in enumerate(points):
                 ax.text(point[0], point[1], point[2], f"{i}", color='red', fontsize=10) 
     ax.set_xlabel('Eje X')
@@ -334,8 +334,8 @@ def get_features(signal, sr):
 
     return feature
 #**AUFIO RECORGING#**
-'''duration = 3      # Duración de la grabación en segundos
-fs       = 48000  # Frecuencia de muestreo en Hz
+duration = 2.5      # Duración de la grabación en segundos
+fs       = 48000    # Frecuencia de muestreo en Hz
 
 print("Grabando...")
 data = sd.rec(int(duration * fs), samplerate = fs, channels = 1, dtype = 'int16')
@@ -344,7 +344,7 @@ print("Grabación completa.")
 
 file = get_name(original)
 sf.write(file, data, fs)
-original.append(file)'''
+original.append(file)
 #**PROCESSING#**
 already_processed = [os.path.basename(audio) for audio in processed]
 for audio in original:
@@ -356,49 +356,35 @@ for audio in original:
         process(audio, audio_out)
         processed.append(audio_out)
 #**FEATURE EXTRACTION#**
-validation_features = None
+test_features = None
 for audio in processed:
     signal, sr, _ = load_audio(audio)
     feature = get_features(signal, sr)
     
-    if validation_features is not None:
-        validation_features = np.vstack([validation_features, feature])
+    if test_features is not None:
+        test_features = np.vstack([test_features, feature])
     else:
-        validation_features = feature.reshape(1, -1)
+        test_features = feature.reshape(1, -1)
 #**LOAD THE REDUCED MODEL#**
 model        = joblib.load(model_file)
 reduced:dict = model['features']
 pca          = model['pca']
 scaler       = model['scaler']
 #**TRANSFORM#**
-scaled_validation_features = scaler.transform(validation_features)
-reduced_validation         = pca.transform(scaled_validation_features)
+scaled_test_features   = scaler.transform(test_features)
+reduced_test           = pca.transform(scaled_test_features)
 #**EXTENSION OF THE FEATURES DICT#**
 extra               = reduced.copy()
-extra['validation'] = reduced_validation
+extra['testing']    = reduced_test
 plot_features3d_extra(extra)
 #**PREDICTION#**
 from prettytable import PrettyTable
-
-prediction  = knn(reduced, reduced_validation, 3)
-aciertos    = []
+prediction  = knn(reduced, reduced_test, 3)
 audios      = []
-N_aciertos  = 0
-
-for i, audio in enumerate(processed):
-    audios.append(os.path.basename(audio))
-    if prediction[i] in os.path.basename(audio):
-        aciertos.append('acierto')
-        N_aciertos += 1
-    else:
-        aciertos.append('falla')
-precission = N_aciertos*100/len(aciertos)
+audios      = [os.path.basename(audio) for audio in processed]
 
 table = PrettyTable()
 table.field_names = ['audios'] + audios
 table.add_row(['prediction']  + prediction)
-table.add_row(['results'] + aciertos)
 
 print(table)
-print(f"Se acertaron: {N_aciertos}/{len(prediction)}")
-print(f"El porcentaje de aciertos es: {precission}")
