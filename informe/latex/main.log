@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  17 DEC 2023 18:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  18 DEC 2023 20:05
 entering extended mode
 **c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
 (c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
@@ -19,15 +19,24 @@ File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
+) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\enitkv@toks@=\toks15
+\labelindent=\skip49
+\enit@outerparindent=\dimen139
+\enit@toks=\toks16
+\enit@inbox=\box47
+\enit@count@id=\count187
+\enitdp@description=\count188
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2020/08/01 v1.3d Input encoding file
-\inpenc@prehook=\toks15
-\inpenc@posthook=\toks16
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
+\KV@toks@=\toks19
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
@@ -39,19 +48,19 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen139
-\Gin@req@width=\dimen140
+\Gin@req@height=\dimen140
+\Gin@req@width=\dimen141
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
-\f@nch@headwidth=\skip49
-\f@nch@O@elh=\skip50
-\f@nch@O@erh=\skip51
-\f@nch@O@olh=\skip52
-\f@nch@O@orh=\skip53
-\f@nch@O@elf=\skip54
-\f@nch@O@erf=\skip55
-\f@nch@O@olf=\skip56
-\f@nch@O@orf=\skip57
+\f@nch@headwidth=\skip50
+\f@nch@O@elh=\skip51
+\f@nch@O@erh=\skip52
+\f@nch@O@olh=\skip53
+\f@nch@O@orh=\skip54
+\f@nch@O@elf=\skip55
+\f@nch@O@erf=\skip56
+\f@nch@O@olf=\skip57
+\f@nch@O@orf=\skip58
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
@@ -59,52 +68,52 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count187
-\Gm@cntv=\count188
-\c@Gm@tempcnt=\count189
-\Gm@bindingoffset=\dimen141
-\Gm@wd@mp=\dimen142
-\Gm@odd@mp=\dimen143
-\Gm@even@mp=\dimen144
-\Gm@layoutwidth=\dimen145
-\Gm@layoutheight=\dimen146
-\Gm@layouthoffset=\dimen147
-\Gm@layoutvoffset=\dimen148
-\Gm@dimlist=\toks18
+\Gm@cnth=\count189
+\Gm@cntv=\count190
+\c@Gm@tempcnt=\count191
+\Gm@bindingoffset=\dimen142
+\Gm@wd@mp=\dimen143
+\Gm@odd@mp=\dimen144
+\Gm@even@mp=\dimen145
+\Gm@layoutwidth=\dimen146
+\Gm@layoutheight=\dimen147
+\Gm@layouthoffset=\dimen148
+\Gm@layoutvoffset=\dimen149
+\Gm@dimlist=\toks20
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count190
-\l__pdf_internal_box=\box47
+\l__color_backend_stack_int=\count192
+\l__pdf_internal_box=\box48
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count191
-\scratchdimen=\dimen149
-\scratchbox=\box48
-\nofMPsegments=\count192
-\nofMParguments=\count193
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count194
-\MPscratchDim=\dimen150
-\MPnumerator=\count195
-\makeMPintoPDFobject=\count196
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count193
+\scratchdimen=\dimen150
+\scratchbox=\box49
+\nofMPsegments=\count194
+\nofMParguments=\count195
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count196
+\MPscratchDim=\dimen151
+\MPnumerator=\count197
+\makeMPintoPDFobject=\count198
+\everyMPtoPDFconversion=\toks22
 ) (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -146,27 +155,27 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 37.
+(Font)              <12> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 37.
+(Font)              <6> on input line 38.
 <Imagenes//escudo.PNG, id=1, 487.06969pt x 84.315pt>
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 37.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 38.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 <Imagenes//año.PNG, id=3, 160.34906pt x 50.43843pt>
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 38.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 39.
 (pdftex.def)             Requested size: 96.21017pt x 30.26328pt.
 [1
 
 {C:/Users/Juan/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./Imagenes//escudo.PNG> <./Imagenes//año.PNG>]
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 45.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 56.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -178,21 +187,300 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 45.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 56.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[1] (main.aux) ) 
+[1]
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 72.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 72.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[2]
+
+LaTeX Warning: Citation `referencia' on page 3 undefined on input line 80.
+
+
+LaTeX Warning: Citation `referencia' on page 3 undefined on input line 80.
+
+
+Underfull \hbox (badness 1215) in paragraph at lines 90--91
+[]\OT1/cmr/m/n/12 Exactitud en el
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+\OT1/cmr/m/n/12 re-conocimiento
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+\OT1/cmr/m/n/12 de las fru-tas
+ []
+
+
+Underfull \hbox (badness 8170) in paragraph at lines 90--91
+\OT1/cmr/m/n/12 me-dida por el
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+[]\OT1/cmr/m/n/12 Rapidez en la
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+\OT1/cmr/m/n/12 re-spuesta del
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+\OT1/cmr/m/n/12 agente me-dida
+ []
+
+
+Underfull \hbox (badness 1281) in paragraph at lines 91--92
+\OT1/cmr/m/n/12 como el tiempo
+ []
+
+
+Underfull \hbox (badness 4254) in paragraph at lines 91--92
+\OT1/cmr/m/n/12 usuario ll-eva a
+ []
+
+
+Underfull \hbox (badness 1028) in paragraph at lines 91--92
+\OT1/cmr/m/n/12 cabo una or-den
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+[]\OT1/cmr/m/n/12 Tratamiento
+ []
+
+
+Underfull \hbox (badness 2903) in paragraph at lines 95--96
+\OT1/cmr/m/n/12 es-tantes, el es-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
+[]\OT1/cmr/m/n/12 El en-torno
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
+\OT1/cmr/m/n/12 en donde la
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
+\OT1/cmr/m/n/12 maquina se
+ []
+
+
+Underfull \hbox (badness 1728) in paragraph at lines 96--97
+\OT1/cmr/m/n/12 ubica, su ruido
+ []
+
+
+Underfull \hbox (badness 4954) in paragraph at lines 96--97
+\OT1/cmr/m/n/12 am-bi-en-tal y la
+ []
+
+
+Underfull \hbox (badness 1019) in paragraph at lines 97--98
+[]\OT1/cmr/m/n/12 Los usuar-ios de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+[]\OT1/cmr/m/n/12 Elementos de
+ []
+
+
+Underfull \hbox (badness 2096) in paragraph at lines 100--101
+\OT1/cmr/m/n/12 la camara para
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+\OT1/cmr/m/n/12 de-splazarla y
+ []
+
+
+Underfull \hbox (badness 3668) in paragraph at lines 100--101
+\OT1/cmr/m/n/12 tomar fo-tos en
+ []
+
+
+Underfull \hbox (badness 7595) in paragraph at lines 101--102
+[]\OT1/cmr/m/n/12 Elementos para
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 101--102
+\OT1/cmr/m/n/12 las fru-tas, para
+ []
+
+
+Underfull \hbox (badness 5091) in paragraph at lines 101--102
+\OT1/cmr/m/n/12 es-tantes y dis-
+ []
+
+
+Underfull \hbox (badness 2460) in paragraph at lines 102--103
+[]\OT1/cmr/m/n/12 Sistema de ilu-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
+\OT1/cmr/m/n/12 mi-nacion para
+ []
+
+
+Underfull \hbox (badness 3954) in paragraph at lines 102--103
+\OT1/cmr/m/n/12 preparar la es-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+[]\OT1/cmr/m/n/12 Microfono para
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+[]\OT1/cmr/m/n/12 Camara para
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+\OT1/cmr/m/n/12 cap-turar
+ []
+
+
+Underfull \hbox (badness 2005) in paragraph at lines 107--108
+[]\OT1/cmr/m/n/12 Boton que pre-
+ []
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 113.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 113.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[3]
+
+LaTeX Warning: Citation `referencia' on page 4 undefined on input line 117.
+
+
+LaTeX Warning: Citation `referencia' on page 4 undefined on input line 119.
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 120.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 120.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[4]
+
+LaTeX Warning: Citation `cita_repositorio_github' on page 5 undefined on input line 126.
+
+
+LaTeX Warning: Citation `cita_videos' on page 5 undefined on input line 128.
+
+
+LaTeX Warning: Citation `cita_repositorio' on page 5 undefined on input line 128.
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 131.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 131.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[5]
+
+LaTeX Warning: Reference `fig:spectral_flux_and_peaks' on page 6 undefined on input line 134.
+
+<Imagenes//trimming1.png, id=30, 906.2658pt x 340.3917pt>
+File: Imagenes//trimming1.png Graphic file (type png)
+<use Imagenes//trimming1.png>
+Package pdftex.def Info: Imagenes//trimming1.png  used on input line 138.
+(pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
+<Imagenes//trimming2.png, id=31, 906.2658pt x 340.3917pt>
+File: Imagenes//trimming2.png Graphic file (type png)
+<use Imagenes//trimming2.png>
+Package pdftex.def Info: Imagenes//trimming2.png  used on input line 145.
+(pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 152.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 152.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[6 <./Imagenes//trimming1.png> <./Imagenes//trimming2.png>] (main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1924 strings out of 479321
- 29974 string characters out of 2857060
- 323712 words of memory out of 3000000
- 19399 multiletter control sequences out of 15000+600000
- 407079 words of font info for 39 fonts, out of 8000000 for 9000
+ 2274 strings out of 479321
+ 35943 string characters out of 2857060
+ 345238 words of memory out of 3000000
+ 19740 multiletter control sequences out of 15000+600000
+ 408190 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,21n,74p,347b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
-<C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on main.pdf (2 pages, 113013 bytes).
+ 68i,21n,74p,1653b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\Juan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (7 pages, 251301 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
+ 56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

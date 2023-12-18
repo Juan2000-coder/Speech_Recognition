@@ -1,4 +1,5 @@
 \documentclass[a4paper, 12pt]{article}
+\usepackage{enumitem}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -11,7 +12,7 @@
 \setlength{\headheight}{30 pt}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyhead[L]{\begin{tabular}{@{}l@{}}\includegraphics[scale=0.4]{escudo.PNG}\end{tabular}}
-\fancyhead[R]{\begin{tabular}{@{}c@{}} \textbf{Inteligencia Artificial I} \\ Trabajo Integrador \end{tabular}}
+\fancyhead[R]{\begin{tabular}{@{}c@{}} \textbf{Inteligencia Artificial I} \\ Trabajo Final \end{tabular}}
 
 
 
@@ -41,5 +42,111 @@
 
 \section{Resumen}
 %------------------------------------RESUMEN------------------------------
+En este informe se presenta el desarrollo de una solución al problema propuesto por la cátedra. Se tiene una máquina expendedora de 4 tipos de fruta: manzana, naranja, banana y pera. La máquina cuenta con una cámara para tomar fotos de las frutas en los estantes y un micrófono para solicitar frutas por voz. El software de la máquina identifica las frutas en las imágenes y sus nombres cuando son mencionadas por el usuario. La clasificación de la voz se realiza mediante un algoritmo KNN con k=3, y la clasificación de las imágenes se lleva a cabo con un algoritmo KNN con k=1 comparando cada imagen con los centroides obtenidos del entrenamiento de un segmentador basado en KMeans. Se construyó un dataset disponible en línea con audios de varias personas e imágenes recopiladas en línea o tomadas por alumnos. Los resultados obtenidos fueron suficientemente satisfactorios; en concreto, la validación del modelo de reconocimiento de voz se realizó con 24 archivos de distintas personas sin falla. El reconocimiento de frutas en imágenes, aunque no completamente probado, es vulnerable ante frutas descoloridas, siendo el color la característica principal para la separación. El desarrollo se encuentra principalmente documentado en notebooks de Jupyter.
+\vspace{0.5cm}
+
+This report presents the development of a solution to the problem proposed by the department. There is a vending machine with 4 types of fruit: apple, orange, banana, and pear. The machine is equipped with a camera to take photos of the fruits on the shelves and a microphone to request fruits by voice. The machine's software identifies the fruits in the images and their names when mentioned by the user. Voice classification is done using a KNN algorithm with k=3, and image classification is performed with a KNN algorithm with k=1 comparing each image with centroids obtained from training a KMeans-based segmenter. A dataset, available online, was built with audio from various people and images collected online or taken by students. The results obtained were sufficiently satisfactory; specifically, voice recognition model validation was performed with 24 files from different people without failure. Fruit recognition in images, although not fully tested, is vulnerable to discolored fruits, with color being the main feature for separation. The development is primarily documented in Jupyter notebooks.
+
+\section{Introduccion}
+%----------------------------------INTRODUCCION--------------------------
+\subsection{Visión Artificial}
+La visión artificial es la tecnología que le permite a las equipos industriales percibir las características del entorno a través de imágenes de forma automática. A diferencia de un simple procesamiento de imágenes, en el que el resultado de una imagén de entrada es otra imágen de salida modificada, la visión artificial implica la extracción de características relevantes de las imágenes que permitan identificar los elementos de interés del entorno. Las imágenes se pueden obtener con distintos tipos de sensores y es así que se tienen imágenes como las que se pueden obtener con una camara tradicional sensible a la radiación en el rango del espectro visible o imágenes termográficas obtenidas con sensores sensibles a la radiación infraroja del espectro por dar ejemplos.
+
+La visión artificial clásica es un campo que se comenzó a desarrollar mucho antes del desarrollo de las aplicaciones más avanzadas como el Machine Learning y sin embargo, a través de simples operaciones con características de las imágenes permitió identificar diferentes elementos en principio bien definidos como códigos de barras, bordes, objetos, colores, etc.
+
+Las aplicaciones de la visión artifical son variadas e incluyen la detección de defectos en partes de máquinas, medición de partes, identificación y rastreo de objetos, identificación de textos, etc.
+Los principales elementos involucrados en la obtención de imágenes para la visión artificial son: una fuente de luz, un escenario específico y controlado para capturar una toma o un elemento para lograr dicho escenario como un gripper, aumentos y un sensor para capturar la imágen, en general una camará de algún tipo.
+
+En este trabajo se implementa la visión artificial en el sentido clásico para extraer características de imágenes de 4 tipos de frutas: peras, bananas, manzanas y naranjas con el objeto de hacer una segmentación del conjunto de imágenes en grupos según el tipo de fruta.
+
+Inicialmente se planteó la solución al problema tratando de que sea lo suficientemente robusta como para poder identificar las frutas en cualquier tipo de fondo, en ese sentido se exploraron diversas características, máscaras y estrategias para tratar de separar a las frutas del fondo. Sin embargo, el problema de lograr la robustez no se pudo resolver de forma satisfactoria en todos los casos y por falta de tiempo se decidió tomar mayor control del escenario optandose finalmente por el uso de fondo blanco en todos los casos.
+
+Para entrenar el segmentador fue necesario disponer de un dataset de imágenes de entrenamiento. De este dataset, algunas de las imágenes se obtuvieron de recopilación de imágenes en línea mientras que la mayoría se obtuvieron tomando fotos a frutas con la cámara de un celular. En las imágenes capturadas no se tuvo demasiado recaudo en cuanto a la escena más que la utilización de luz natural y el posicionamiento de la fruta en algún fondo blanco.
+
+Se exploraron diversas características de las imágenes como los bordes, texturas, color, etc., que fueron relevantes tanto para la separación de las frutas del fondo como para lograr la posterior segmentación del conjunto de imágenes en grupos de frutas.
+\subsection{Reconocimiento de Voz}
+
+El reconocimiento de voz es la capacidad de un sistema de software para transformar el discurso de una persona en su representación en texto, permitiendo la comunicación entre un humano y una computadora a través del habla. Este tipo de sistemas integran diferentes tipos de información contenida en la señal de audio, como la gramática, la sintaxis, la estructura y la composición del audio, incluso en presencia de ambigüedades, incertidumbres y perturbaciones como el ruido, con el objetivo de obtener una interpretación aceptable del mensaje que se desea transmitir. Estos sistemas se utilizan en aplicaciones como el dictado automático, el control por comandos de voz, traductores, reconocimiento de canciones, entre otras.
+
+Este tipo de sistemas pueden utilizar aprendizaje deductivo o sistemas expertos, que son entrenados con los conocimientos de un conjunto de campos involucrados en el habla, tales como la lingüística, la fonética, la acústica, etc. También pueden ser sistemas que hagan uso de aprendizaje inductivo, en el cual el sistema tiene la capacidad de adquirir los conocimientos necesarios de manera automática. Dentro de esta última categoría se encuentran la mayoría de las técnicas utilizadas: Hidden Markov Models, N-Grams y Redes Neuronales.
+
+En el trabajo que se presenta aquí, el reconocimiento del discurso se limita a la identificación de los nombres de las frutas mencionadas. Tanto si se trata de una solución con aprendizaje automático como la solución que se presenta en este caso, en la cual no se utiliza tal técnica, es necesario llevar a cabo la extracción de las características que representan la información relevante contenida en la señal. La parte más complicada de esta solución radica precisamente en el preprocesamiento de las señales de audio para lograr pasar por alto perturbaciones como el silencio o el ruido, y la posterior extracción de características que permitan diferenciar audios de distintas frutas. Después de extraer un conjunto de características que permitan separar adecuadamente el conjunto de audios, la clasificación de un nuevo dato a través del algoritmo k-NN es algo trivial.
+%--------------------------------------ESPECIFICACIÓN DEL AGENTE------------------------------------
+\section{Especificación del Agente}
+\subsection{Descripción y tipo de Agente}
+
+El agente se ha interpretado de la siguiente manera. El mismo consiste en una máquina expendedora de frutas. La máquina dispone de 4 estanterías, en cada una de las cuales se encuentra uno de los tipos de fruta considerados. Cuando un usuario desea obtener una fruta de la máquina expendedora, presiona un botón para hablar en el micrófono de la máquina y decir el nombre de la fruta deseada. El programa del agente le permite identificar el nombre de la fruta mencionada. Luego, el agente determina si la fruta se encuentra en alguna de las estanterías y, si es así, identifica en cuál de las estanterías se encuentra la fruta. Entonces, a través de un actuador empuja la fruta del estante para expenderla al usuario. Para la determinación de la existencia y ubicación de la fruta solicitada, previo al requerimiento del usuario, el agente toma imágenes a través de una cámara de las frutas en los estantes y las clasifica. La actualización de esta información se realiza siempre que la disposición de frutas en los estantes es modificada.
+
+Se considera que se trata de un \textbf{agente que aprende} debido a que los algoritmos que utiliza para la clasificación de las frutas en imágenes y por voz están comprendidos dentro de ese tipo de agentes (\cite{referencia}). El aprendizaje como tal se evidencia sobre todo en el algoritmo K-means, ya que durante el entrenamiento, el agente se vuelve capaz de encontrar similitudes y diferencias entre los grupos de imágenes. Por otro lado, en la clasificación de frutas por voz, no existe una etapa de entrenamiento como tal, y el agente requiere toda la base de datos de audio para hacer una predicción en base a una nueva orden (aprendizaje basado en memoria \cite{referencia}). En ambos casos, se puede decir que el agente tiene la capacidad de mejorar su habilidad para clasificar imágenes y audio mediante la incorporación de más datos a la base de datos de imágenes y audios utilizados para el entrenamiento, razón por la cual se considera como un agente que aprende. En esta implementación, sin embargo, no se contempla la posibilidad de que audios de nuevas órdenes o las nuevas imágenes tomadas de las frutas en la estantería sean incorporadas a la base de entrenamiento para reentrenar al segmentador K-means o para ampliar los datos del clasificador k-NN para audio. Terminada la validación del clasificador de audios y entrenado el segmentador de imágenes, el comportamiento del agente es como el de un \textbf{agente reflexivo simple}.
+%------------------------------TABLA-------------------------------
+\subsection{Tabla REAS}
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+        \hline
+        \textbf{Rendimiento} & \textbf{Entorno} & \textbf{Actuadores} & \textbf{Sensores} \\
+        \hline
+        \begin{itemize}[left=0pt, itemsep=-2pt]
+            \item Exactitud en el reconocimiento de las frutas medida por el número de aciertos respecto del total de ordenes del usuario.
+            \item Rapidez en la respuesta del agente medida como el tiempo entre en que el usuario lleva a cabo una orden y recibe la fruta requerida.
+            \item Tratamiento cuidadoso de las frutas.
+        \end{itemize} & 
+        \begin{itemize}[left=0pt, itemsep=-2pt]
+            \item El gabinete de la máquina con los estantes, el estado de los mismos y la iluminación.
+            \item El entorno en donde la máquina se ubica, su ruido ambiental y la iluminación.
+            \item Los usuarios de la máquina.
+        \end{itemize} & 
+        \begin{itemize}[left=0pt, itemsep=-2pt]
+            \item Elementos de manipulación de la cámara para desplazarla y tomar fotos en los estantes.
+            \item Elementos para manipulación de las frutas, para colocarlas en los estantes y dispensarlas.
+            \item Sistema de iluminación para preparar la escena al tomar las imágenes.
+        \end{itemize} & 
+        \begin{itemize}[left=0pt]
+            \item Micrófono para recibir la orden.
+            \item Cámara para capturar imágenes.
+            \item Botón que presiona el usuario para hacer la orden.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+    \caption{Tabla REAS}
+    \label{tabla:ejemplo}
+\end{table}
+%------------------------------ENTORNO-----------------------------
+\subsection{Descripción del Entorno}
+\begin{itemize}
+\item \textbf{Parcialmente observable}: Aunque se cuente con una escena controlada, es decir, la iluminación dentro de la cabina es suficiente, el color del fondo es el adecuado, la cámara funciona correctamente, se hace uso de un micrófono con poco nivel de ruido que funciona adecuadamente y el ambiente no es ruidoso, la probabilidad de que se pueda identificar con exactitud tanto a las frutas en los estantes como la orden del usuario no es del 100\%. Las características relevantes del entorno son justamente qué frutas se encuentran en los estantes y qué orden dio el usuario. El no poder acceder con exactitud a las características relevantes del entorno es equivalente a un agente trabajando con un sensor impreciso y es esta una de las condiciones en las que se puede considerar al entorno como parcialmente observable \cite{referencia}.
+\item \textbf{Multi Agente}: Se considera que se trata de un entorno multiagente dado que la pronunciación de las frutas de una u otra forma puede tener efecto en que el agente entregue la fruta solicitada, otra diferente o ninguna, lo cual afecta el rendimiento del agente. Dicho de otra manera, el estado que percibe el agente está afectado por el comportamiento del usuario considerado en sí como un agente.
+\item \textbf{Determinista}: Dada la percepción que tiene el agente del estado actual del entorno y las acciones que toma en consecuencia, el siguiente estado del sistema estará determinado; será una fruta menos en el estante en el que se identificó que se encontraba la fruta solicitada. Si existe un mecanismo de reposición automático, otra fruta ocupará su lugar, la que en principio no se puede anticipar de qué tipo será. Sin embargo, esto no implica algún efecto en el rendimiento del agente de manera directa y, por lo tanto, no se considera fuente de indeterminismo. Por otro lado, no se puede predecir la orden que el usuario realice en un instante posterior, pero esto no debe ser considerado como fuente de indeterminismo tampoco \cite{referencia}.
+\item \textbf{Episódico}: La clasificación del audio y de las imágenes se hace en episodios aislados. La clasificación que se haga de una próxima orden o de las imágenes de las frutas en las estanterías no depende de las clasificaciones hechas anteriormente.
+\item \textbf{Estático}: El agente no tiene que hacer un seguimiento del entorno mientras hace la clasificación del audio y de las imágenes dado que el mismo no cambia cuando esta haciendo una determinación; las estanterías no cambiarán hasta que se expenda una fruta y el usuario no podrá dar una orden hasta que la actual esté completa.
+\item \textbf{Discreto}: Como se dijo, el estado viene dado por las frutas en las estanterías y la orden del usuario. Asumiendo que el usuario, entendido como un agente, solamente solicitará frutas válidas por el micrófono, la cantidad de posibles órdenes en un instante determinado son solamente 4 (pera, banana, manzana o naranja). De la misma manera, en 4 estanterías en las que en cada alberga una fruta de 4 tipos diferentes, la cantidad de posibles combinaciones será de 256. En total habrá solamente 1024 posibles estados. Luego se considera que se trata de un entorno discreto.
+\end{itemize}
+%--------------------------DISEÑO DEL AGENTE-----------------------
+\section{Diseño del Agente}
+Para el diseño de ambos sistemas se realizaron variadas pruebas que son muy extensas como para documentar en este informe, por lo que se decidió presentar aquí solamente una descripción del diseño final de los sistemas con algunas descripciones de la evolución y justificaciones de diseño. Sin embargo, está disponible en línea en un repositorio de GitHub \cite{cita_repositorio_github} toda la investigación realizada junto con los datasets que se utilizaron.
+\subsection{Reconocimiento de voz}
+La principal fuente de información que se utilizó fue una lista de videos \cite{cita_videos}, acompañada de un repositorio en GitHub \cite{cita_repositorio} centrado en la extracción de características para el reconocimiento de voz y música.
+\subsubsection{Recorte de Audios}
+Uno de los principales problemas que se tuvo que resolver fue el de recortar los audios para preservar únicamente la parte hablada de los mismos. Inicialmente, esto se llevó a cabo con funciones de librerías cargadas, como \texttt{librosa.trim} (esto en forma de código), para la que hay que definir un umbral por debajo del cual algo es considerado como silencio. Este tipo de solución no pareció ser tan robusta, sobre todo cuando los audios presentaban cierto nivel de ruido tanto al inicio como al final del audio, dado que superaban el nivel considerado como silencio. Luego de la exploración de diversas alternativas propias, se concluyó con una solución suficientemente robusta para el recorte de los audios.
+
+Se pudo observar que el flujo espectral era una excelente característica para identificar las partes habladas de un audio de las partes no habladas, siendo poco sensible a los ruidos. El flujo espectral es una característica del audio muy útil en la identificación de eventos de sonido. Se calcula a partir de un espectrograma de magnitudes (energía) calculando la diferencia entre frames sucesivos, esto se eleva al cuadrado para eliminar el efecto de pequeñas variaciones y se suma a lo largo de todos los intervalos de frecuencia para obtener un valor para cada frame.
+En la Figura \ref{spectral flux} se muestra un ejemplo de cómo el flujo espectral indica el comienzo y finalización de una parte hablada. En la misma para un audio de ejemplo en el que se menciona la fruta naranja se superponene la señal original y el flujo espectral normalizados en el rango de -1 a 1.
+Para producir el recorte del audio con esta propiedad basta con definir un umbral y proceder. Sin embargo, este corte es sensible a ciertos audios en los que se presentarán picos iniciales y finales en el audio. En ese caso, hay que definir un umbral suficientemente grande de modo de pasar por alto esos picos. Al hacer eso, el audio queda recortado de más, eliminando partes del audio habladas en los extremos, como sucedería en el ejemplo que se muestra en la Figura~\ref{fig:spectral_flux_and_peaks}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{trimming1.png}
+    \caption{Flujo Espectral sobre la señal de Audio}
+    \label{spectral flux}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{trimming2.png}
+    \caption{Flujo Espectral - Audios con Picos}
+    \label{spectral flux and peaks}
+\end{figure}
+
+
 
 \end{document}
