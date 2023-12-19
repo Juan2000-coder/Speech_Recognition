@@ -15,7 +15,9 @@ from sklearn.preprocessing import StandardScaler
 import sounddevice as sd
 from scipy.signal import butter, lfilter
 import soundfile as sf
+import warnings
 
+warnings.filterwarnings("ignore", message="Empty filters detected in mel frequency basis", category=UserWarning)
 #---------------------------------PATHS--------------------------------------
 image_path      = './dataset/images'
 shelfs_path     = os.path.join(image_path, 'test')
@@ -63,6 +65,7 @@ def get_light_background(mask, f = 20, p = 0.75):
         return np.bitwise_not(mask)
     return mask
 #--------------------------OBTENCIÓN DE MÁSCARAS---------------------------------
+os.system('cls')
 print('Procesando las imagenes...')
 for shelf, file in shelf_files.items():
     # BGR image
@@ -245,10 +248,10 @@ shelfs = dict(zip(image_features.keys(), prediction))
 
 #-------------------------RECONOCIMIENTO DE VOZ---------------------------------
 fruit_types      = ['pera', 'banana', 'manzana', 'naranja']
-dataset_path     = '../../dataset/audios/test'
+dataset_path     = './dataset/audios/test'
 original_path    = os.path.join(dataset_path, 'original')
 processed_path   = os.path.join(dataset_path, 'processed')
-model_file       = '../audio/knn/model.pkl'
+model_file       = './implementation/audio/knn/model.pkl'
 model            = dict.fromkeys(['pca', 'features', 'scaler'])
 
 #--------------------------PARAMETROS DE AUDIO----------------------------------
@@ -257,7 +260,7 @@ HOP_SIZE   = int(FRAME_SIZE/2)
 #------------------------GENERAL AUDIO FUNCTIONS--------------------------------
 def load_audio(audiofile):
     test_audio, sr = librosa.load(audiofile, sr = None)
-    duration = librosa.get_duration(filename=audiofile, sr=sr)
+    duration = librosa.get_duration(path=audiofile, sr=sr)
     return test_audio, sr, duration
 #---------------------------------FILTERS---------------------------------------
 def band_pass_filter(signal, sr, low_cutoff, high_cutoff):
@@ -518,17 +521,17 @@ duration = 2.5      # Duración de la grabación en segundos
 fs       = 48000    # Frecuencia de muestreo en Hz
 #-------------------------------LOOP--------------------------------------------
 while True:
-    c = input('Presione una tecla cuando este listo para grabar o presione N para salir.')
-    if c == 'N':
+    c = input('Presione una ENTER cuando este listo para grabar o presione \'n\' para salir.')
+    if  c.lower() == 'n':
         break
     os.system('cls')
     print("Grabando...")
-    data = sd.rec(int(duration * fs), samplerate = fs, channels = 1, dtype = 'int16')
+    data_recorded = sd.rec(int(duration * fs), samplerate = fs, channels = 1, dtype = 'int16')
     sd.wait()
     print("Grabación completa.")
 
     orden = os.path.join(original_path, f"test{len(os.listdir(original_path)) + 1}.wav")
-    sf.write(orden, data, fs)
+    sf.write(orden, data_recorded, fs)
 
     #------------------------------PROCESSING----------------------------------------
     processed_order = os.path.join(processed_path, f"test{len(os.listdir(processed_path)) + 1}.wav")
@@ -566,9 +569,10 @@ while True:
 
         if shelf in place:
             h, w, _ = image.shape
-            rect = plt.Rectangle((0, 0), w, h, linewidth = 4, edgecolor = 'green', facecolor = 'none')
+            rect = plt.Rectangle((0, 0), w, h, linewidth = 5, edgecolor = 'green', facecolor = 'none')
             axs[i].add_patch(rect)
         i += 1
 
     plt.subplots_adjust(wspace = 0.5)
     plt.show()
+warnings.resetwarnings()
