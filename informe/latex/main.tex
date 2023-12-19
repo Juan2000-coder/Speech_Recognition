@@ -229,7 +229,47 @@ A continuación, se detallan aquellas características que finalmente se utiliza
             \end{figure}
     \end{itemize}
     
-    \item \textbf{Máximo:}
+    \item \textbf{Zero Crossing Rate (ZCR):} esta medida cuenta la cantidad de veces que una señal cruza el eje horizontal (cero) en un intervalo de tiempo dado.    
+        El ZCR se expresa una tasa, representando la frecuencia con la que la señal cambia de polaridad. Un ZCR alto indica que la señal cambia de polaridad con frecuencia, lo que podría ser característico de señales con contenido de alta frecuencia o ruido. Por otro lado, un ZCR bajo indica que la señal mantiene la misma polaridad durante un período de tiempo prolongado, lo que podría ser característico de señales más suaves.
+    \begin{itemize}
+        \item \textbf{Media:} Se obtiene respecto del valor máximo luego de un filtro pasa banda con corte en 1000 y 5000 Hz. Como se puede ver en la Figure~\ref{ZCR 1} esto logra la separación de las manzanas respecto de los demás grupos. Eso se debe a una variación de esta propiedad que no presentan el resto de los grupos cuando se pronuncia la letra 'z'.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR1.png}
+                \caption{Zero Crossing Rate - Media}
+                \label{ZCR 1}
+            \end{figure}
+        \item \textbf{Máximo:} Se obtiene luego de un filtro pasa banda con cortes en 10 y 1000 Hz. En la Figura ~\ref{ZCR 2} se puede observar como nuevamente las manzanas se separan del resto de los grupos quedando las peras y las manzanas en grupos separados.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR2.png}
+                \caption{Zero Crossing Rate - Máximo}
+                \label{ZCR 2}
+            \end{figure}
+        \item \textbf{Desviación Estándar:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 20 y 10000 Hz. 
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR3.png}
+                \caption{Zero Crossing Rate - Desviación Estándar}
+                \label{ZCR 3}
+            \end{figure}
+        \item \textbf{Media a 3/14:} Luego de un filtro pasabanda con cortes en 1000 y 5000 Hz se calcula la media del audio normalizado en ese punto en la duración del audio a lo largo de 10 frames, 5 a cada lado. Nuevamente se observa una separación de las manzanas (Figure ~\ref{ZCR 4})
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR3.png}
+                \caption{Zero Crossing Rate - Desviación Estándar}
+                \label{ZCR 3}
+            \end{figure}
+        \item \textbf{Máximo a 3/4:} Luego de un filtro pasabanda con cortes en 10 y 10000 Hz se calcula el máximo en ese punto en la duración del audio a lo largo de 20 frames, 10 a cada lado buscando resaltar las diferencias entre las naranjas y las demás frutas cuando se pronuncia la letra 'j'. Se observa una separación de las naranjas (Figure ~\ref{ZCR 4}).
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR3.png}
+                \caption{Zero Crossing Rate - Desviación Estándar}
+                \label{ZCR 3}
+            \end{figure}
+    \end{itemize}
+
+    
 \end{itemize}
 
 

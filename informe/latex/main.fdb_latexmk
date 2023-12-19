@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1702976800 "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" "main.pdf" "main" 1702976812 0
+["pdflatex"] 1702980975 "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" "main.pdf" "main" 1702980988 0
   "C:/Users/Juan/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1630121123 14064 d67cb4b4f38962f1d170f54a9ec27595 ""
   "C:/Users/Juan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1621213614 9524100 244f43f4c56583d0402c50877a6e09f3 ""
   "C:/Users/Juan/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1702917003 83459 04a0cb00e5823ad02954c9048feb15f3 ""
@@ -47,14 +47,17 @@
   "Imagenes//BER4.png" 1702955649 17398 c548d717ceab3478aff3675a1ec692b0 ""
   "Imagenes//BER5.png" 1702956023 20075 8c5236e35db817f0a727e87087ecebac ""
   "Imagenes//BER6.png" 1702956060 19788 93aa818cedc365121dba32c9782912aa ""
+  "Imagenes//ZCR1.png" 1702979969 18500 1b9ad45e0aa220a6cadb803a401e95c5 ""
+  "Imagenes//ZCR2.png" 1702979987 14709 11cc46c1a391704ec5e70025cb336888 ""
+  "Imagenes//ZCR3.png" 1702980274 18806 030ed9cf66048eea58e76d91d73ae393 ""
   "Imagenes//año.PNG" 1702940871 9645 6f9409532bdcaaf214c75ea1c3b9f719 ""
   "Imagenes//escudo.PNG" 1702940871 69225 41b43b0c4e1c0519f6c2684bc9389e3d ""
   "Imagenes//trimming1.png" 1702949208 66840 fed4991e8e97549e5fa33901e7a7e542 ""
   "Imagenes//trimming2.png" 1702949225 59244 353faf13121f7bca24e5f4e2a9a78bb9 ""
   "Imagenes//trimming3.png" 1702949245 57003 6b07cc7b53edbc9ca78d321868ce72d8 ""
   "Imagenes//trimming4.png" 1702949323 78009 0791d1a4fb380ef65bbea4e28b0281ac ""
-  "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" 1702976795 28779 b6116ab202d992d4737152bd6d92989c ""
-  "main.aux" 1702976812 3292 70096f6492656d57ace332be54a69757 "pdflatex"
+  "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" 1702980937 32066 fa4d358bb63f9abf859e223f1b73a1f8 ""
+  "main.aux" 1702980987 4132 cc3f6c1c6e4982c21651a4e514a47314 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
