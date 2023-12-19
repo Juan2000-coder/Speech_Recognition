@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  18 DEC 2023 20:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  18 DEC 2023 22:30
 entering extended mode
 **c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
 (c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
@@ -422,7 +422,7 @@ LaTeX Warning: Citation `cita_repositorio' on page 5 undefined on input line 128
 
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 131.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 132.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -433,12 +433,9 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 131.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 132.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
 [5]
-
-LaTeX Warning: Reference `fig:spectral_flux_and_peaks' on page 6 undefined on input line 134.
-
 <Imagenes//trimming1.png, id=30, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming1.png Graphic file (type png)
 <use Imagenes//trimming1.png>
@@ -447,12 +444,13 @@ Package pdftex.def Info: Imagenes//trimming1.png  used on input line 138.
 <Imagenes//trimming2.png, id=31, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming2.png Graphic file (type png)
 <use Imagenes//trimming2.png>
-Package pdftex.def Info: Imagenes//trimming2.png  used on input line 145.
+Package pdftex.def Info: Imagenes//trimming2.png  used on input line 147.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 152.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 153.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
 (fancyhdr)                Make it at least 38.07542pt, for example:
@@ -462,25 +460,52 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 152.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 153.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[6 <./Imagenes//trimming1.png> <./Imagenes//trimming2.png>] (main.aux)
+[6 <./Imagenes//trimming1.png> <./Imagenes//trimming2.png>]
+<Imagenes//trimming3.png, id=38, 906.2658pt x 340.3917pt>
+File: Imagenes//trimming3.png Graphic file (type png)
+<use Imagenes//trimming3.png>
+Package pdftex.def Info: Imagenes//trimming3.png  used on input line 156.
+(pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
+<Imagenes//trimming4.png, id=39, 906.2658pt x 340.3917pt>
+File: Imagenes//trimming4.png Graphic file (type png)
+<use Imagenes//trimming4.png>
+Package pdftex.def Info: Imagenes//trimming4.png  used on input line 166.
+(pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 172.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 172.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[7 <./Imagenes//trimming3.png> <./Imagenes//trimming4.png>] (main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2274 strings out of 479321
- 35943 string characters out of 2857060
- 345238 words of memory out of 3000000
- 19740 multiletter control sequences out of 15000+600000
+ 2287 strings out of 479321
+ 36216 string characters out of 2857060
+ 345254 words of memory out of 3000000
+ 19751 multiletter control sequences out of 15000+600000
  408190 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,21n,74p,1653b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\Juan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (7 pages, 251301 bytes).
+Output written on main.pdf (8 pages, 361412 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
+ 63 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

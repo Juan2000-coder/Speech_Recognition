@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1702940750 "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" "main.pdf" "main" 1702940766 0
+["pdflatex"] 1702949429 "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" "main.pdf" "main" 1702949439 0
   "C:/Users/Juan/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1630121123 14064 d67cb4b4f38962f1d170f54a9ec27595 ""
   "C:/Users/Juan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1621213614 9524100 244f43f4c56583d0402c50877a6e09f3 ""
   "C:/Users/Juan/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1702917003 83459 04a0cb00e5823ad02954c9048feb15f3 ""
@@ -39,12 +39,14 @@
   "C:/Users/Juan/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1601745126 2677 8bf0251bbc6fa542a4741485cf6bf9c9 ""
   "C:/Users/Juan/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1601745126 4093 a9ed0e8e6719af98ec5e44cff6b193b1 ""
   "C:/Users/Juan/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1616086534 27164 3d5f7887a89df4eb2f6e86ba26ef3254 ""
-  "Imagenes//año.PNG" 1692736330 9645 6f9409532bdcaaf214c75ea1c3b9f719 ""
-  "Imagenes//escudo.PNG" 1692736330 69225 41b43b0c4e1c0519f6c2684bc9389e3d ""
-  "Imagenes//trimming1.png" 1702940026 65569 e4aa89aed6af5e78c9de2595f1f44db5 ""
-  "Imagenes//trimming2.png" 1702940451 61186 d857295c6131cf73a682aaa1a09b22c7 ""
-  "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" 1702940713 20882 312357e88fdc77dd006af8666fc29d2a ""
-  "main.aux" 1702940765 1918 daefad7cb7fb0e9426af7c0964060743 "pdflatex"
+  "Imagenes//año.PNG" 1702940871 9645 6f9409532bdcaaf214c75ea1c3b9f719 ""
+  "Imagenes//escudo.PNG" 1702940871 69225 41b43b0c4e1c0519f6c2684bc9389e3d ""
+  "Imagenes//trimming1.png" 1702949208 66840 fed4991e8e97549e5fa33901e7a7e542 ""
+  "Imagenes//trimming2.png" 1702949225 59244 353faf13121f7bca24e5f4e2a9a78bb9 ""
+  "Imagenes//trimming3.png" 1702949245 57003 6b07cc7b53edbc9ca78d321868ce72d8 ""
+  "Imagenes//trimming4.png" 1702949323 78009 0791d1a4fb380ef65bbea4e28b0281ac ""
+  "c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex" 1702949425 23387 28273f996aa96f9348c554f6cee3f498 ""
+  "main.aux" 1702949438 2240 fdccf2bb1da705ce4b5044cb664da858 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
