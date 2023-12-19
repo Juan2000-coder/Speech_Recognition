@@ -42,7 +42,7 @@
 
 \section{Resumen}
 %------------------------------------RESUMEN------------------------------
-En este informe se presenta el desarrollo de una solución al problema propuesto por la cátedra. Se tiene una máquina expendedora de 4 tipos de fruta: manzana, naranja, banana y pera. La máquina cuenta con una cámara para tomar fotos de las frutas en los estantes y un micrófono para solicitar frutas por voz. El software de la máquina identifica las frutas en las imágenes y sus nombres cuando son mencionadas por el usuario. La clasificación de la voz se realiza mediante un algoritmo KNN con k=3, y la clasificación de las imágenes se lleva a cabo con un algoritmo KNN con k=1 comparando cada imagen con los centroides obtenidos del entrenamiento de un segmentador basado en KMeans. Se construyó un dataset disponible en línea con audios de varias personas e imágenes recopiladas en línea o tomadas por alumnos. Los resultados obtenidos fueron suficientemente satisfactorios; en concreto, la validación del modelo de reconocimiento de voz se realizó con 24 archivos de distintas personas sin falla. El reconocimiento de frutas en imágenes, aunque no completamente probado, es vulnerable ante frutas descoloridas, siendo el color la característica principal para la separación. El desarrollo se encuentra principalmente documentado en notebooks de Jupyter.
+En este informe se presenta el desarrollo de una solución al problema propuesto por la cátedra. Se tiene una máquina expendedora de 4 tipos de fruta: manzana, naranja, banana y pera. La máquina cuenta con una cámara para tomar fotos de las frutas en los estantes y un micrófono para solicitar frutas por voz. El software de la máquina identifica las frutas en las imágenes y sus nombres cuando son mencionadas por el usuario. La clasificación de la voz se realiza mediante un algoritmo \textbf{KNN} con k=3, y la clasificación de las imágenes se lleva a cabo con un algoritmo KNN con k=1 comparando cada imagen con los centroides obtenidos del entrenamiento de un segmentador basado en \textbf{KMeans}. Se construyó un dataset disponible en línea con audios de varias personas e imágenes recopiladas en línea o tomadas por alumnos. Los resultados obtenidos fueron suficientemente satisfactorios; en concreto, la validación del modelo de reconocimiento de voz se realizó con 24 archivos de distintas personas sin falla. El reconocimiento de frutas en imágenes, aunque no completamente probado, es vulnerable ante frutas descoloridas, siendo el color la característica principal para la separación. El desarrollo se encuentra principalmente documentado en notebooks de Jupyter.
 \vspace{0.5cm}
 
 This report presents the development of a solution to the problem proposed by the department. There is a vending machine with 4 types of fruit: apple, orange, banana, and pear. The machine is equipped with a camera to take photos of the fruits on the shelves and a microphone to request fruits by voice. The machine's software identifies the fruits in the images and their names when mentioned by the user. Voice classification is done using a KNN algorithm with k=3, and image classification is performed with a KNN algorithm with k=1 comparing each image with centroids obtained from training a KMeans-based segmenter. A dataset, available online, was built with audio from various people and images collected online or taken by students. The results obtained were sufficiently satisfactory; specifically, voice recognition model validation was performed with 24 files from different people without failure. Fruit recognition in images, although not fully tested, is vulnerable to discolored fruits, with color being the main feature for separation. The development is primarily documented in Jupyter notebooks.
@@ -126,27 +126,213 @@ Se considera que se trata de un \textbf{agente que aprende} debido a que los alg
 Para el diseño de ambos sistemas se realizaron variadas pruebas que son muy extensas como para documentar en este informe, por lo que se decidió presentar aquí solamente una descripción del diseño final de los sistemas con algunas descripciones de la evolución y justificaciones de diseño. Sin embargo, está disponible en línea en un repositorio de GitHub \cite{cita_repositorio_github} toda la investigación realizada junto con los datasets que se utilizaron.
 \subsection{Reconocimiento de voz}
 La principal fuente de información que se utilizó fue una lista de videos \cite{cita_videos}, acompañada de un repositorio en GitHub \cite{cita_repositorio} centrado en la extracción de características para el reconocimiento de voz y música.
+%--------------------------RECORTE DE AUDIOS------------------------
 \subsubsection{Recorte de Audios}
-Uno de los principales problemas que se tuvo que resolver fue el de recortar los audios para preservar únicamente la parte hablada de los mismos. Inicialmente, esto se llevó a cabo con funciones de librerías cargadas, como \texttt{librosa.trim} (esto en forma de código), para la que hay que definir un umbral por debajo del cual algo es considerado como silencio. Este tipo de solución no pareció ser tan robusta, sobre todo cuando los audios presentaban cierto nivel de ruido tanto al inicio como al final del audio, dado que superaban el nivel considerado como silencio. Luego de la exploración de diversas alternativas propias, se concluyó con una solución suficientemente robusta para el recorte de los audios.
+Uno de los principales problemas que se tuvo que resolver fue el de recortar los audios para preservar únicamente la parte hablada de los mismos. Inicialmente, esto se llevó a cabo con funciones de librerías cargadas, como \texttt{librosa.trim}, para la que hay que definir un umbral por debajo del cual algo es considerado como silencio. Este tipo de solución no pareció ser tan robusta, sobre todo cuando los audios presentaban cierto nivel de ruido tanto al inicio como al final del audio, dado que superaban el nivel considerado como silencio. Luego de la exploración de diversas alternativas propias, se concluyó con una solución suficientemente robusta para el recorte de los audios.
 
-Se pudo observar que el flujo espectral era una excelente característica para identificar las partes habladas de un audio de las partes no habladas, siendo poco sensible a los ruidos. El flujo espectral es una característica del audio muy útil en la identificación de eventos de sonido. Se calcula a partir de un espectrograma de magnitudes (energía) calculando la diferencia entre frames sucesivos, esto se eleva al cuadrado para eliminar el efecto de pequeñas variaciones y se suma a lo largo de todos los intervalos de frecuencia para obtener un valor para cada frame.
-En la Figura \ref{spectral flux} se muestra un ejemplo de cómo el flujo espectral indica el comienzo y finalización de una parte hablada. En la misma para un audio de ejemplo en el que se menciona la fruta naranja se superponene la señal original y el flujo espectral normalizados en el rango de -1 a 1.
-Para producir el recorte del audio con esta propiedad basta con definir un umbral y proceder. Sin embargo, este corte es sensible a ciertos audios en los que se presentarán picos iniciales y finales en el audio. En ese caso, hay que definir un umbral suficientemente grande de modo de pasar por alto esos picos. Al hacer eso, el audio queda recortado de más, eliminando partes del audio habladas en los extremos, como sucedería en el ejemplo que se muestra en la Figura~\ref{fig:spectral_flux_and_peaks}.
+Se pudo observar que el \textbf{flujo espectral} era una excelente característica para identificar las partes habladas de un audio de las partes no habladas, siendo poco sensible a los ruidos. El flujo espectral es una característica del audio muy útil en la identificación de eventos de sonido. Se calcula a partir de un espectrograma de magnitudes (energía) calculando la diferencia entre frames sucesivos, esto se eleva al cuadrado para eliminar el efecto de pequeñas variaciones y se suma a lo largo de todos los intervalos de frecuencia para obtener un valor para cada frame.
+En la Figura ~\ref{trimming 1} se muestra un ejemplo de cómo el flujo espectral indica el comienzo y finalización de una parte hablada. En la misma, para un audio de ejemplo en el que se menciona la fruta naranja se superponene la señal original y el flujo espectral normalizados en el rango de -1 a 1.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{trimming1.png}
     \caption{Flujo Espectral sobre la señal de Audio}
-    \label{spectral flux}
+    \label{trimming 1}
 \end{figure}
+
+Para producir el recorte del audio con esta propiedad basta con definir un umbral y proceder. Sin embargo, este corte es sensible a ciertas perturbaciones en el audio que se presentan como picos iniciales y finales en la señal. En ese caso, hay que definir un umbral suficientemente grande de modo de pasar por alto esos picos. Al hacer eso, el audio queda recortado de más, eliminando partes del audio habladas en los extremos, como sucedería en el ejemplo que se muestra en la Figura ~\ref{trimming 2}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{trimming2.png}
     \caption{Flujo Espectral - Audios con Picos}
-    \label{spectral flux and peaks}
+    \label{trimming 2}
 \end{figure}
 
+Como estrategia para resolver este problema, se propone definir un umbral mínimo y un umbral máximo. El umbral máximo debe ser tal que permita pasar por alto los picos, y luego el umbral mínmo sirve como ajuste fino del corte. De esa manera, se buscaría en la señal de flujo espectral el primer instante a la izquierda y a la derecha del audio en donde se supere el umbral, y desde ese punto y buscando hacia la izquierda en el extremo izquierdo o hacia la derecha en el extremo derecho encontrar el primer instante de tiempo en el que la señal de flujo espectral se encuentre por debajo del umbral máximo. El problema que se presenta en este caso es que existen audios en los que el flujo espectral es prácticamente nulo aún en partes habladas, como en el ejemplo de la Figura ~\ref{trimming 3}. Esto hace que el umbral míximo deba ser prácticamente igual a cero.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{trimming3.png}
+    \caption{Flujo Espectral - Umbral mínimo}
+    \label{trimming 3}
+\end{figure}
+
+Para resolver este problema, se introduce una segunda característica que sirve como envolvente de la señal original, que es el valor \textbf{RMS} de la señal. Este se calcula en frames a lo largo de la duración de la señal. Ahora, la estrategia es la misma, pero el umbral mínimo se define a partir de una fracción del valor RMS y no a partir de una fracción del valor del flujo espectral. En la Figura ~\ref{trimming 4} se muestra un ejemplo de este corte. En esa figura, la línea horizontal de color rojo indica el umbral de corte grueso por flujo espectral, mientras que la línea horizontal de color azul indica el umbral de corte fino por RMS. Las líneas punteadas verticales indican los puntos de corte, las rojas indican los puntos determinados por el corte grueso, mientras que las azules indican los puntos finales de corte fino por RMS. Como se puede observar, ahora es posible superar los picos finales que se presentan en la señal de audio.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{trimming4.png}
+    \caption{Flujo Espectral - RMS - Ejemplo de Corte}
+    \label{trimming 4}
+\end{figure}
+%--------------------------------EXTRACCIÓN DE CARACTERÍSTICAS----------------------------
+\subsubsection{Extracción de Características}
+En las figuras de esta sección, en el eje \(X\) se representa la razón entre el valor RMS de las señales de audio y el valor máximo de la señal, mientras que en el eje \(Y\) se representa la característica de que se trate. Los colores de los puntos se corresponden con los colores de las frutas que representan.
+
+La extracción de características comenzó con pruebas con los coeficientes de Mel, \textbf{MFCC} (Mel Frequency Cepstral Coefficients por sus siglas en inglés), dado que la investigación arrojó que los mismos son características ampliamente utilizadas en el reconocimiento de voz. Estos tienen la capacidad de describir los fonemas (unidades de sonido de un idioma) y toman en cuenta la percepción del oído humano al utilizar la escala logarítmica de Mel para la representación de características en función de la frecuencia.
+
+En primer lugar, se probó utilizando la media de cada coeficiente de Mel a lo largo de la duración del audio, conservando aquellas componentes que producían la mayor contribución a la separación o que tenían la menor variación dentro de cada grupo. Varias otras pruebas se realizaron con los coeficientes de Mel, por nombrar otra, se probó la utilización de los valores de los mismos a lo largo de todo el audio dispuestos en un solo vector largo, para lo que se tuvo primero que normalizar los audios en amplitud y en duración sin lograr tampoco una separación y agrupamiento satisfactorio.
+
+En el camino, se descubrió una técnica denominada Análisis de Componentes Principales, \textbf{PCA} (Principal Component Analysis, por sus siglas en inglés), que permite la reducción de un conjunto de k observaciones en un espacio m-dimensional a un conjunto de k observaciones en un espacio n-dimensional con n \textless\ m, conservando la mayor cantidad posible de variación a través de los datos, pero de modo tal que las componentes del nuevo espacio son linealmente independientes entre sí.
+
+Al no obtener los resultados esperados haciendo uso solo de los MFCCs, es que se decidió hacer pruebas con otras medidas agregadas del audio, entre ellas \textbf{BER} (Band Energy Ratio, por sus siglas en inglés), \textbf{ZCR} (Zero Crossing Rate, por sus siglas en inglés), la envolvente del audio, etc.
+
+A continuación, se detallan aquellas características que finalmente se utilizaron.
+
+\begin{itemize}
+    \item \textbf{BER:} Esta medida proporciona información sobre cómo está distribuida la energía en distintas partes del espectro de frecuencia. En esta solución se calcula como la fracción de la energía comprendida por debajo de cierta frecuencia de corte.
+    \begin{itemize}
+        \item \textbf{Máximo:} Se utiliza el máximo del BER para una frecuencia de corte de 600 Hz. En la Figura ~\ref{BER 1} se muestra cómo se puede lograr una separación de las peras respecto de los demás.
+        \item \textbf{Mínimo:} Se utiliza el mínimo del BER a las frecuencias de corte de 1900, 5000 y 9000 Hz, en las Figuras~\ref{BER 2},~\ref{BER 3} y~\ref{BER 4}, respectivamente. Como se puede ver, la primera permite la separación de las peras respecto de los demás, la segunda logra una separación de las bananas respecto de las manzanas y la última una separación de las manzanas respecto de los demás, observándose cierta estratificación de los grupos en el medio.
+        \item \textbf{Desviación estándar:} Para el BER normalizado y considerado respecto de la media. Se tomó con frecuencias de corte a 8000 Hz (Figura ~\ref{BER 5}) y 1000 Hz (Figura ~\ref{BER 6}). Se puede observar cómo en el primer caso se logra una separación de las manzanas respecto de los otros grupos mientras que en el segundo caso se logra una separación de las peras respecto de los otros grupos.
+            \begin{figure}[htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER1.png}
+                    \caption{Máximo BER}
+                    \label{BER 1}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER2.png}
+                    \caption{Mínimo BER - 1900 Hz}
+                    \label{BER 2}
+                \end{minipage}
+            \end{figure}
+            \begin{figure}[htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER3.png}
+                    \caption{Mínimo BER - 5000 Hz}
+                    \label{BER 3}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER4.png}
+                    \caption{Mínimo BER - 9000 Hz}
+                    \label{BER 4}
+                \end{minipage}
+            \end{figure}
+            \begin{figure}[!htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER5.png}
+                    \caption{Std BER - 8000 Hz}
+                    \label{BER 5}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER6.png}
+                    \caption{Std BER - 1000 Hz}
+                    \label{BER 6}
+                \end{minipage}
+            \end{figure}
+    \end{itemize}
+    \item \textbf{Zero Crossing Rate (ZCR):} Esta medida cuenta la cantidad de veces que una señal cruza el eje horizontal (cero) en un intervalo de tiempo dado.    
+        El ZCR expresa una tasa, representando la frecuencia con la que la señal cambia de polaridad. Un ZCR alto indica que la señal cambia de polaridad con frecuencia. Por otro lado, un ZCR bajo indica que la señal mantiene la misma polaridad durante un período de tiempo prolongado, lo que podría ser característico de señales más suaves.
+    \begin{itemize}
+        \item \textbf{Media:} Se obtiene respecto del valor máximo luego de un filtro pasa banda con corte en 1000 y 5000 Hz. Como se puede ver en la Figure~\ref{ZCR 1} esto logra la separación de las manzanas respecto de los demás grupos. Eso se debe a una variación de esta propiedad que no presentan el resto de los grupos cuando se pronuncia la letra 'z'.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR1.png}
+                \caption{Zero Crossing Rate - Media}
+                \label{ZCR 1}
+            \end{figure}
+        \item \textbf{Máximo:} Se obtiene luego de un filtro pasa banda con cortes en 10 y 1000 Hz. En la Figura ~\ref{ZCR 2} se puede observar como nuevamente las manzanas se separan del resto de los grupos quedando las peras y las manzanas en grupos separados.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR2.png}
+                \caption{Zero Crossing Rate - Máximo}
+                \label{ZCR 2}
+            \end{figure}
+        \item \textbf{Desviación Estándar:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 20 y 10000 Hz. En la figura ~\ref{ZCR 3} se puede ver cómo las manzanas se separan del resto y en el centro se pueden observar un grupo casi solo de naranjas.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR3.png}
+                \caption{Zero Crossing Rate - Desviación Estándar}
+                \label{ZCR 3}
+            \end{figure}
+        \item \textbf{Media a 3/14:} Luego de un filtro pasabanda con cortes en 1000 y 5000 Hz se calcula la media del audio normalizado en ese punto en la duración del audio a lo largo de 10 frames, 5 a cada lado. Nuevamente se observa una separación de las manzanas (Figure ~\ref{ZCR 4})
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR4.png}
+                \caption{Zero Crossing Rate - Media a 3/14}
+                \label{ZCR 4}
+            \end{figure}
+        \item \textbf{Máximo a 3/4:} Luego de un filtro pasabanda con cortes en 10 y 10000 Hz se calcula el máximo en ese punto en la duración del audio a lo largo de 20 frames, 10 a cada lado buscando resaltar las diferencias entre las naranjas y las demás frutas cuando se pronuncia la letra 'j' (Figura ~\ref{ZCR 4}).
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{ZCR5.png}
+                \caption{Zero Crossing Rate - Máximo a 3/4}
+                \label{ZCR 5}
+            \end{figure}
+    \end{itemize}
+    \item \textbf{Spectral Roll Off:} El \textit{Spectral Roll-off} es una medida que indica la frecuencia por debajo de la cual se encuentra un cierto porcentaje de la energía total del espectro. Un valor bajo indica una concentración en frecuencias bajas, mientras que un valor alto implica una distribución hacia frecuencias más altas.
+    \begin{itemize}
+        \item \textbf{Media:} Se obtiene respecto del máximo luego de un filtro pasa banda con cortes en 100 y 8500 considerando un pocentaje del 28\% de la energía del espectro. Se separan las manzanas y las peras también las naranjas de las bananas y de las peras aunque queda un solapamiento entre bananas y naranjas (Figura ~\ref{SRO 1}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO1.png}
+            \caption{Spectral Roll Off - Media}
+            \label{SRO 1}
+        \end{figure}
+        \item \textbf{Máximo:} Se obtiene luego de un filtro pasa banda con cortes en 100 y 8500 considerando un pocentaje del 55\% de la energía del espectro. Se observa una separación de las manzanas (Figura ~\ref{SRO 2}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO2.png}
+            \caption{Spectral Roll Off - Máximo}
+            \label{SRO 2}
+        \end{figure}
+        \item \textbf{Desviación Estándar:} Se obtiene respectro de la media luego de un filtro pasa banda con cortes en 50 y 8500 considerando un pocentaje del 28\% de la energía del espectro. Nuevamente se observa una separación de las manzanas (Figura ~\ref{SRO 3}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO3.png}
+            \caption{Spectral Roll Off - Desviación Estándar}
+            \label{SRO 3}
+        \end{figure}
+    \end{itemize}
+    \item \textbf{MFCCs:} Como ya se mencionó, es de las principales características utilizadas para el reconocimiento de voz dado que tiene la capacidad de identificar fonemas y demás.
+    \begin{itemize}
+        \item \textbf{Máximo del coeficiente 3:} Se obtiene luego de un filtro pasa banda con cortes en 500 y 5000. Se separan las manzanas (Figura ~\ref{MFCCS 1}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{MFCCS1.png}
+            \caption{MFCCs - Máximo del coeficiente 3}
+            \label{MFCCS 1}
+        \end{figure}
+        \item \textbf{Desviación estándar coeficiente 1 a 4/5:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 10 y 8000 en 20 frames alrededor de este punto en la duración del audio (10 frames de cada lado). Aunque existe cierta dispersión, se observa una separación de las naranjas (Figura ~\ref{MFCCS 3}).
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{MFCCS3.png}
+            \caption{MFCCs - Desviación estándar coeficiente 1 a 4/5}
+            \label{MFCCS 3}
+        \end{figure}
+    \end{itemize}
+    \item \textbf{Envolvente:} El cálculo del valor RMS en cada frame en que se divide un audio funciona como una buena envolvente de amplitud de la señal. De esta envolvente se toman 30 componentes equi-espaciadas de las cuales se conservan la componente 11 y la 12 (Figura~\ref{ENVELOPE}). Dentro de todo se logra una separación de las manzanas respecto al resto
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.4\linewidth]{ENVELOPE.png}
+        \caption{Envolvente componentes 11 y 12}
+        \label{ENVELOPE}
+    \end{figure}
+\end{itemize}
+Como se puede notar, algunas de las características extraídas son demasiado específicas. Sin embargo, este conjunto de características fue seleccionado después de muchas pruebas, ya que se consideró que lograba los mejores resultados en términos de agrupamiento y separación.
+
+\subsubsection{Reducción de componentes}
+La cantidad de componentes del vector de características de cada audio es de 17. Se pretende hacer la visualización en un gráfico de los agrupamientos que se consiguen, y para eso, luego de la extracción de las características de los audios se utiliza PCA para reducir el conjunto de componentes a 3. En la Figuras~\ref{GRUPOS 1} y ~\ref{GRUPOS 2} se observa el agrupamiento conseguido.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{GRUPOS1.png}
+    \caption{Agrupamiento post PCA - 1}
+    \label{GRUPOS 1}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{GRUPOS2.png}
+    \caption{Agrupamiento post PCA - 2}
+    \label{GRUPOS 2}
+\end{figure}
 
 \end{document}
