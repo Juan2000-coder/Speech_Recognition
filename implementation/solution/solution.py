@@ -86,7 +86,7 @@ for shelf, file in shelf_files.items():
     data_vector[:, 2:] = lab_matrix[:, 1:]
 
     # Segmentamos la imagen con los vectores obtenidos pos cada pixel
-    kmeans = KMeans(n_clusters = 2, n_init = 10)  # 2 Clusters. Background and fruit
+    kmeans = KMeans(n_clusters = 2, n_init = 10, random_state=42)  # 2 Clusters. Background and fruit
     kmeans.fit(data_vector)
 
     # Get clusters labels
@@ -547,18 +547,18 @@ while True:
     reduced_test           = pca.transform(scaled_test_features)
     #---------------------------PREDICTION-------------------------------------------
     prediction  = knn(reduced, reduced_test, 3)
-    place = [shelf for shelf, fruit in shelfs.items() if fruit == prediction]
+    place = [shelf for shelf, fruit in shelfs.items() if fruit in prediction]
     #----------------------------RESULTS---------------------------------------------
     if len(place) == 0:
-        print(f"No se una {prediction} en ninguna de las 4 estanterías.")
+        print(f"No se encontró una {prediction} en ninguna de las 4 estanterías.")
     elif len(place) == 1:
-        print(f"Se encontró una {prediction} en la {place[0]}")
+        print(f"Se encontró una {prediction} en el {place[0]}")
     elif len(place) > 1:
         print(f"Se encontró una {prediction} en las siguientes estanterias: {place}")
+
     fig, axs = plt.subplots(1, 4, figsize = (15, 5))
     i = 0
     for shelf, file in shelf_files.items():
-        i += 1
         image = cv2.imread(file)
         axs[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
         axs[i].axis('off')
@@ -566,8 +566,9 @@ while True:
 
         if shelf in place:
             h, w, _ = image.shape
-            rect = plt.Rectangle((0, 0), w, h, linewidth = 2, edgecolor = 'green', facecolor = 'none')
+            rect = plt.Rectangle((0, 0), w, h, linewidth = 4, edgecolor = 'green', facecolor = 'none')
             axs[i].add_patch(rect)
+        i += 1
 
     plt.subplots_adjust(wspace = 0.5)
     plt.show()
