@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  18 DEC 2023 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  19 DEC 2023 06:06
 entering extended mode
 **c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
 (c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
@@ -475,7 +475,7 @@ Package pdftex.def Info: Imagenes//trimming4.png  used on input line 166.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 172.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 173.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -487,25 +487,146 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 172.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 173.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[7 <./Imagenes//trimming3.png> <./Imagenes//trimming4.png>] (main.aux)
+[7 <./Imagenes//trimming3.png> <./Imagenes//trimming4.png>]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 178.
+ (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 178.
+<Imagenes//BER1.png, id=45, 409.7709pt x 312.2064pt>
+File: Imagenes//BER1.png Graphic file (type png)
+<use Imagenes//BER1.png>
+Package pdftex.def Info: Imagenes//BER1.png  used on input line 191.
+(pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//BER2.png, id=46, 409.7709pt x 312.2064pt>
+File: Imagenes//BER2.png Graphic file (type png)
+<use Imagenes//BER2.png>
+Package pdftex.def Info: Imagenes//BER2.png  used on input line 198.
+(pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//BER3.png, id=47, 409.7709pt x 312.2064pt>
+File: Imagenes//BER3.png Graphic file (type png)
+<use Imagenes//BER3.png>
+Package pdftex.def Info: Imagenes//BER3.png  used on input line 205.
+(pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//BER4.png, id=48, 409.7709pt x 312.2064pt>
+File: Imagenes//BER4.png Graphic file (type png)
+<use Imagenes//BER4.png>
+Package pdftex.def Info: Imagenes//BER4.png  used on input line 212.
+(pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//BER5.png, id=49, 416.2752pt x 312.2064pt>
+File: Imagenes//BER5.png Graphic file (type png)
+<use Imagenes//BER5.png>
+Package pdftex.def Info: Imagenes//BER5.png  used on input line 219.
+(pdftex.def)             Requested size: 182.09486pt x 136.5709pt.
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 223.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 223.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[8]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//BER6.png, id=54, 409.7709pt x 314.3745pt>
+File: Imagenes//BER6.png Graphic file (type png)
+<use Imagenes//BER6.png>
+Package pdftex.def Info: Imagenes//BER6.png  used on input line 226.
+(pdftex.def)             Requested size: 182.09486pt x 139.70192pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 236.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 236.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[9 <./Imagenes//BER1.png> <./Imagenes//BER2.png>]
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 236.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 236.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[10 <./Imagenes//BER3.png> <./Imagenes//BER4.png> <./Imagenes//BER5.png>]
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 236.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 236.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[11 <./Imagenes//BER6.png>] (main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2287 strings out of 479321
- 36216 string characters out of 2857060
- 345254 words of memory out of 3000000
- 19751 multiletter control sequences out of 15000+600000
+ 2346 strings out of 479321
+ 37271 string characters out of 2857060
+ 345309 words of memory out of 3000000
+ 19801 multiletter control sequences out of 15000+600000
  408190 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,21n,74p,1653b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\Juan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (8 pages, 361412 bytes).
+ 68i,21n,74p,1653b,568s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\Juan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (12 pages, 449597 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
+ 91 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
