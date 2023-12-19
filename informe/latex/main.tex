@@ -392,7 +392,53 @@ En la figuras ~\ref{imagen ejemplo mascara} y ~\ref{mascara ejemplo mascara} se 
     \end{minipage}
 \end{figure}
 
-\subsection{Extracción de Características}
+\subsubsection{Extracción de Características}
+Las características utilizadas para la separación fueron el color de la fruta y los momentos de Hu 3 y 4.
+\begin{itemize}
+    \item \textbf{Color:} Para obtener la característica de color, primero se definen rangos de color en el espacio HSV que correspondan a los colores verde, naranja, rojo y amarillo. Luego, se aplica la máscara obtenida durante el procesamiento a la imagen original, obteniendo la fruta en el fondo negro. Se determina en qué rango de color cae cada píxel y se cuenta la cantidad de píxeles que caen en cada rango. El color de la fruta en la imagen se determina como el rango de color más frecuente en la imagen.
+    
+    Un problema que se tuvo en esta separación es que en ocasiones las manzanas eran clasificadas en el grupo de las naranjas por un límite no muy bien definido entre esos rangos de color. Para resolver ese problema, se aplicó una segunda condición aprovechando el hecho de que las otras frutas presentan en general muy poco nivel de rojo comparado con el color principal en sus cáscaras. De esta manera, para que una manzana no sea clasificada como naranja, además de determinar el primer color frecuente, se encuentra el segundo color frecuente. Si el primer color frecuente es naranja y el segundo color frecuente es el rojo, y además la cantidad de rojo es mayor a cierto porcentaje del color primero (se adoptó un 35\%), entonces se acepta que en realidad el color de la fruta es rojo. De esta manera, solo las manzanas que erróneamente son clasificadas como de color naranja se clasifican de color rojo y ninguna naranja es considerada de color rojo.
+    
+    Para obtener estas características, se utiliza la imagen original y la máscara obtenida durante el procesamiento. Se aplica la máscara a la imagen original para obtener solo la fruta en fondo negro. Luego, se determina en qué rango de color del campo HSV entra cada uno de los píxeles de la imagen obtenida.
+    \item \textbf{Momentos de Hu:} Con los datos hasta ese momento, el color bastaba para la separación de los grupos. Sin embargo, se pretendió incorporar otras características que pudieran separar a los conjuntos cuando, por ejemplo, las frutas se presentaran descoloridas. Los momentos de Hu también se calculan aplicando primero la máscara a la imagen, se recorta la imagen al rectángulo que enmarca al contorno de la fruta, y luego se obtienen con la función \texttt{huMoments} de OpenCV.
+\end{itemize}
+\subsubsection{Clasificación con K-means}
+
+En cuanto al algoritmo K-means implementado, este utiliza la distancia euclidiana como métrica. La inicialización de los centroides, aunque aleatoria, es "más inteligente", ya que hace uso de un algoritmo que aumenta las probabilidades de que los centroides estén suficientemente dispersos en el conjunto de datos, evitando grupos vacíos, por ejemplo. Cuando se utiliza esta forma de inicializar los centroides, el algoritmo se denomina K-means++~\cite{referencia}. Básicamente, se eligen centroides de manera iterativa entre los datos de modo tal que sea más probable elegir un dato como centroide cuanto más alejado esté de los centroides ya elegidos.
+Las imágenes~\ref{cluster0},~\ref{cluster1},~\ref{cluster2} y~\ref{cluster3} muestran la clasificación de las imágenes luego del entrenamiento.
+\begin{figure}[!htbp]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{cluster0.png}
+        \caption{Cluster 0}
+        \label{cluster0}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{cluster1.png}
+        \caption{Cluster 1}
+        \label{cluster1}
+    \end{minipage}
+\end{figure}
+\begin{figure}[!htbp]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{cluster2.png}
+        \caption{Cluster 2}
+        \label{cluster2}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{cluster3.png}
+        \caption{Cluster 3}
+        \label{cluster3}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Clasificación}
+
+Luego del entrenamiento, como lo que se pretende hacer es identificar nuevas imágenes en base al modelo entrenado, es necesario poder determinar a cuál de los clústeres pertenece. Esto se logra con el algoritmo de clasificación Knn, donde se utiliza K = 1. Para ello, se toman las características o coordenadas de los centroides obtenidos en la base de datos del algoritmo durante el entrenamiento del segmentador Kmeans. Nuevamente, la métrica utilizada es la distancia euclidiana. La etiquetación de los centroides se realiza de forma manual luego de evaluar la separación lograda con Kmeans. El algoritmo utilizado para Knn es el mismo utilizado para la clasificación de audios.
+
 
 
 \end{document}
