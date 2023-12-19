@@ -77,8 +77,9 @@ En el trabajo que se presenta aquí, el reconocimiento del discurso se limita a 
 
 El agente se ha interpretado de la siguiente manera. El mismo consiste en una máquina expendedora de frutas. La máquina dispone de 4 estanterías, en cada una de las cuales se encuentra uno de los tipos de fruta considerados. Cuando un usuario desea obtener una fruta de la máquina expendedora, presiona un botón para hablar en el micrófono de la máquina y decir el nombre de la fruta deseada. El programa del agente le permite identificar el nombre de la fruta mencionada. Luego, el agente determina si la fruta se encuentra en alguna de las estanterías y, si es así, identifica en cuál de las estanterías se encuentra la fruta. Entonces, a través de un actuador empuja la fruta del estante para expenderla al usuario. Para la determinación de la existencia y ubicación de la fruta solicitada, previo al requerimiento del usuario, el agente toma imágenes a través de una cámara de las frutas en los estantes y las clasifica. La actualización de esta información se realiza siempre que la disposición de frutas en los estantes es modificada.
 
-Se considera que se trata de un \textbf{agente que aprende} debido a que los algoritmos que utiliza para la clasificación de las frutas en imágenes y por voz están comprendidos dentro de ese tipo de agentes (\cite{referencia}). El aprendizaje como tal se evidencia sobre todo en el algoritmo K-means, ya que durante el entrenamiento, el agente se vuelve capaz de encontrar similitudes y diferencias entre los grupos de imágenes. Por otro lado, en la clasificación de frutas por voz, no existe una etapa de entrenamiento como tal, y el agente requiere toda la base de datos de audio para hacer una predicción en base a una nueva orden (aprendizaje basado en memoria \cite{referencia}). En ambos casos, se puede decir que el agente tiene la capacidad de mejorar su habilidad para clasificar imágenes y audio mediante la incorporación de más datos a la base de datos de imágenes y audios utilizados para el entrenamiento, razón por la cual se considera como un agente que aprende. En esta implementación, sin embargo, no se contempla la posibilidad de que audios de nuevas órdenes o las nuevas imágenes tomadas de las frutas en la estantería sean incorporadas a la base de entrenamiento para reentrenar al segmentador K-means o para ampliar los datos del clasificador k-NN para audio. Terminada la validación del clasificador de audios y entrenado el segmentador de imágenes, el comportamiento del agente es como el de un \textbf{agente reflexivo simple}.
+Se considera que se trata de un \textbf{agente que aprende} debido a que los algoritmos que utiliza para la clasificación de las frutas en imágenes y por voz están comprendidos dentro de ese tipo de agentes (\cite{referencia}). El aprendizaje como tal se evidencia sobre todo en el algoritmo K-means, ya que durante el entrenamiento, el agente se vuelve capaz de encontrar similitudes y diferencias entre los grupos de imágenes. Por otro lado, en la clasificación de frutas por voz, no existe una etapa de entrenamiento como tal, y el agente requiere toda la base de datos de audio para hacer una predicción en base a una nueva orden (aprendizaje basado en memoria \cite{referencia}). En ambos casos, se puede decir que el agente tiene la capacidad de mejorar su habilidad para clasificar imágenes y audio mediante la incorporación de más datos a la base de datos de imágenes y audios utilizados para el entrenamiento, razón por la cual se considera como un agente que aprende. En esta implementación, sin embargo, no se contempla la posibilidad de que audios de nuevas órdenes o las nuevas imágenes tomadas de las frutas en la estantería sean incorporadas a la base de entrenamiento para reentrenar al segmentador K-means o para ampliar los datos del clasificador k-NN para audio. Terminada la validación del clasificador de audios y entrenado el segmentador de imágenes, el comportamiento del agente es como el de un \textbf{agente basado en modelos} dado que son los moedelos entrenados que permiten identificar lon nombres y los objetos. En suma, existe durante la propia implementación del agente un proceso de ajuste no automático sino asistido por el diseñador del sistema y en base a una comparación entre el rendimiento que tiene el agente en un instante determinado y el rendimiento esperado.
 %------------------------------TABLA-------------------------------
+\newpage
 \subsection{Tabla REAS}
 \begin{table}[htbp]
     \centering
@@ -99,7 +100,7 @@ Se considera que se trata de un \textbf{agente que aprende} debido a que los alg
         \begin{itemize}[left=0pt, itemsep=-2pt]
             \item Elementos de manipulación de la cámara para desplazarla y tomar fotos en los estantes.
             \item Elementos para manipulación de las frutas, para colocarlas en los estantes y dispensarlas.
-            \item Sistema de iluminación para preparar la escena al tomar las imágenes.
+            \item Indicadores para decir al usuario si la fruta no se encuentra.
         \end{itemize} & 
         \begin{itemize}[left=0pt]
             \item Micrófono para recibir la orden.
@@ -114,9 +115,9 @@ Se considera que se trata de un \textbf{agente que aprende} debido a que los alg
 %------------------------------ENTORNO-----------------------------
 \subsection{Descripción del Entorno}
 \begin{itemize}
-\item \textbf{Parcialmente observable}: Aunque se cuente con una escena controlada, es decir, la iluminación dentro de la cabina es suficiente, el color del fondo es el adecuado, la cámara funciona correctamente, se hace uso de un micrófono con poco nivel de ruido que funciona adecuadamente y el ambiente no es ruidoso, la probabilidad de que se pueda identificar con exactitud tanto a las frutas en los estantes como la orden del usuario no es del 100\%. Las características relevantes del entorno son justamente qué frutas se encuentran en los estantes y qué orden dio el usuario. El no poder acceder con exactitud a las características relevantes del entorno es equivalente a un agente trabajando con un sensor impreciso y es esta una de las condiciones en las que se puede considerar al entorno como parcialmente observable \cite{referencia}.
+\item \textbf{Completamente observable}: Si la escena es controlada, es decir, el nivel de iluminación dentro de la cabina es suficiente, el color del fondo es el adecuado, la cámara funciona correctamente, el micrófono funciona correctamente y el ambiente no tiene demasiado nivel de ruido como se supone, entonces los sensores permiten acceso a toda la información del entorno relevante para la toma de una decisión por parte del agente.
 \item \textbf{Multi Agente}: Se considera que se trata de un entorno multiagente dado que la pronunciación de las frutas de una u otra forma puede tener efecto en que el agente entregue la fruta solicitada, otra diferente o ninguna, lo cual afecta el rendimiento del agente. Dicho de otra manera, el estado que percibe el agente está afectado por el comportamiento del usuario considerado en sí como un agente.
-\item \textbf{Determinista}: Dada la percepción que tiene el agente del estado actual del entorno y las acciones que toma en consecuencia, el siguiente estado del sistema estará determinado; será una fruta menos en el estante en el que se identificó que se encontraba la fruta solicitada. Si existe un mecanismo de reposición automático, otra fruta ocupará su lugar, la que en principio no se puede anticipar de qué tipo será. Sin embargo, esto no implica algún efecto en el rendimiento del agente de manera directa y, por lo tanto, no se considera fuente de indeterminismo. Por otro lado, no se puede predecir la orden que el usuario realice en un instante posterior, pero esto no debe ser considerado como fuente de indeterminismo tampoco \cite{referencia}.
+\item \textbf{Determinístico}: No existe fuente de elatoriedad en la operación del agente como para que la respuesta no se puede conocer con total certidumbre. Para una mismo conjunto de imágenes de frutas y para un mismo audio de entrada, la respuesta, sea la deseada o no, siempre es la misma.
 \item \textbf{Episódico}: La clasificación del audio y de las imágenes se hace en episodios aislados. La clasificación que se haga de una próxima orden o de las imágenes de las frutas en las estanterías no depende de las clasificaciones hechas anteriormente.
 \item \textbf{Estático}: El agente no tiene que hacer un seguimiento del entorno mientras hace la clasificación del audio y de las imágenes dado que el mismo no cambia cuando esta haciendo una determinación; las estanterías no cambiarán hasta que se expenda una fruta y el usuario no podrá dar una orden hasta que la actual esté completa.
 \item \textbf{Discreto}: Como se dijo, el estado viene dado por las frutas en las estanterías y la orden del usuario. Asumiendo que el usuario, entendido como un agente, solamente solicitará frutas válidas por el micrófono, la cantidad de posibles órdenes en un instante determinado son solamente 4 (pera, banana, manzana o naranja). De la misma manera, en 4 estanterías en las que en cada alberga una fruta de 4 tipos diferentes, la cantidad de posibles combinaciones será de 256. En total habrá solamente 1024 posibles estados. Luego se considera que se trata de un entorno discreto.
@@ -322,17 +323,76 @@ Como se puede notar, algunas de las características extraídas son demasiado es
 
 \subsubsection{Reducción de componentes}
 La cantidad de componentes del vector de características de cada audio es de 17. Se pretende hacer la visualización en un gráfico de los agrupamientos que se consiguen, y para eso, luego de la extracción de las características de los audios se utiliza PCA para reducir el conjunto de componentes a 3. En la Figuras~\ref{GRUPOS 1} y ~\ref{GRUPOS 2} se observa el agrupamiento conseguido.
-\begin{figure}[h]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{GRUPOS1.png}
     \caption{Agrupamiento post PCA - 1}
     \label{GRUPOS 1}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\linewidth]{GRUPOS2.png}
     \caption{Agrupamiento post PCA - 2}
     \label{GRUPOS 2}
 \end{figure}
+\newpage
+\subsection{Reconocimiento de Imágenes}
+\subsubsection{Separación del fondo}
+
+Para lograr la separación de la fruta del fondo se exploraron diversas alternativas. A continuación, se describe brevemente el proceso indicando los resultados o los pasos de las partes que quedaron en la solución final.
+
+Principalmente, el problema se abordó tratando de que las imágenes pudieran ser tomadas en diferentes tipos de fondos y no en uno solo normalizado, para que, por ejemplo, sea posible sacar la foto de la fruta sobre una mesa de cualquier tipo. Siguiendo esta línea, lo primero que se exploró fue la detección de contornos utilizando filtros de Sobel~\cite{sobel} (figure ~\ref{SOBEL}), sin embargo, esto también detectaba las diferentes texturas que podía llegar a tener el fondo, con lo cual no era una solución viable, ya que no se encontraba forma de separar el contorno de la fruta del resto de los contornos.
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{SOBEL.png}
+    \caption{Ejemplo de aplicación de filtros de Sobel}
+    \label{SOBEL}
+\end{figure}
+Entonces, se exploró el uso de máscaras de color que pudieran detectar cualquiera de los colores de las frutas que se consideran (naranja, verde, amarillo y rojo). Estas máscaras se diseñan en el espacio de colores HSV (Hue, Saturation, Value por sus siglas en inglés), que es una escala cómoda para el manejo de colores, dado que distribuye distintos colores en un cilindro en el que el color varía según el ángulo, la iluminación en la altura y la saturación o pureza del color en el radio, permitiendo pasar de forma continua por todo el rango de lo que se puede llegar a considerar rojo, por poner un ejemplo. El inconveniente se presentaba en estos casos cuando el fondo tenía colores parecidos a los mencionados, dado que quedaban incluidos dentro de lo que se consideraba como fruta.
+
+Por este motivo, se comenzó un trabajo de pruebas de distintas máscaras para evaluar el comportamiento de las mismas. Las máscaras se construían considerando canales de distintas representaciones de la imagen. Por ejemplo, se consideraba el canal H del espacio HSV y se aplicaba binarización (pasar a blanco y negro) haciendo uso de OTSU~\cite{otsu}. Esto se practicó con los canales L, A, B del espacio LAB~\cite{lab}, con los canales H, S y V, con los canales R, G B y con la imagen en escala de grises. En la figura~\ref{MASCARAS} se muestra un ejemplo de esto. En la misma, la máscara la máscara señalada como kmeans es una máscara obtenida de aplicar el algoritmo kmeans con dos clusters y en el que los datos a segmentar son los vectores que tienen los valores HSV, LAB, RGB y de escala de grises y hay tantos datos como pixeles de la imágen. Está máscara como se puede ver funciona bastante bien para la separación d ela fruta aunque se puede comprobar que no funciona de forma perfecta en todos los casos. La máscara indicada como color es la máscara obtenida por la detección de colores antes mencionada.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{MASCARAS.png}
+    \caption{Máscaras probadas}
+    \label{MASCARAS}
+\end{figure}
+
+Lo que se puede observar que sucede es que los fondos de las máscaras, en algunas de las ocasiones, son negros y en otros son blancos. En lugar de tomar las máscaras en sí, lo que se buscó es, con Sobel, los contornos y luego se volvió a binarizar con OTSU para resaltar solamente los contornos, como se muestra en la imagen~\ref{CONTORNOS} lo que permite pasar por alto la situación de qué color queda en el fondo. En esa imágen Whole representa la combinación de todos los contornos de las máscaras. Esta figura muestra que son varias las máscaras que pueden funcionar adecuadamente para separar a la fruta del fondo. Esto es sin embargo para frutas en las que el fondo de la imagen original es blanco o de otro color pero de tipo uniforme y sin texturas. En fondos mas complejos como por ejemplo, en una mesa con cierta textura, en cambio, en general no hay siquiera una máscara que permita separar correctamente a la fruta del fondo
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\linewidth]{CONTORNOS.png}
+    \caption{Contornos de las máscaras}
+    \label{CONTORNOS}
+\end{figure}
+
+Esta figura muestra que son varias las máscaras que pueden funcionar adecuadamente para separar a la fruta del fondo. Esto es sin embargo para frutas en las que el fondo de la imagen original es blanco o de otro color pero de tipo uniforme y sin texturas. En fondos mas complejos como por ejemplo, en una mesa con cierta textura, en cambio, en general no hay siquiera una máscara que permita separar correctamente a la fruta del fondo.
+
+Por esos motivos, finalmente se decidió utilizar solamente fondos blancos en las imágenes y se simplificó la separación de la fruta respecto del fondo.
+
+El procesamiento final que se realiza en todas las imágenes para obtener las máscaras consiste en obtener los canales B del RGB, el canal S del espacio HSV y los canales A y B del espacio LAB, ya que se consideró que con estos se conseguían las máscaras más inertes ante sombras o variaciones de iluminación del entorno. Con esos datos por píxel, se procede a realizar la segmentación en dos clusters utilizando Kmeans de la biblioteca `sklearn.cluster` (ver código). Lo que sucede con Kmeans es que, en ocasiones, el fondo de la máscara obtenida por segmentación puede ser blanco o negro; sin embargo, lo que se pretende es un fondo negro en todos los casos, con la parte de la imagen donde se encuentra la fruta en blanco. Esto se resolvió evaluando los colores de los píxeles (blanco o negro) de la máscara en las esquinas y en las aristas, en matrices de píxeles con tamaños iguales a la 20-ava parte de la menor dimensión de la imagen. Luego, contando la cantidad de píxeles del total que se encuentran en blanco, se puede determinar si el fondo de la máscara es blanco o negro. Si la cantidad es mayor al 75\%, como quedó fijado, se considera que es fondo blanco y, por lo tanto, se invierte.
+
+Con la máscara así definida, todavía se presentan algunos defectos, por los cuales existen zonas en los bordes de la fruta en los que hay varias zonas pequeñas aisladas blancas, principalmente debido a los reflejos de la iluminación y la presencia de sombras. Para resolver esto, se aplican operaciones de erosión para limpiar la imagen y luego una operación de dilatación para expandir la máscara en la zona de la fruta y unir todos los bordes irregulares. De esta máscara resultante, se obtiene el contorno con la función incorporada en la librería OpenCV. Este contorno luego se aproxima con líneas poligonales y se dibuja sobre una plantilla de fondo negro con relleno, de modo que todo en el interior del contorno es blanco y el exterior es negro. Esta es la máscara final que se aplicará posteriormente a la imagen para extraer las características y se guarda en un archivo.
+
+En la figuras ~\ref{imagen ejemplo mascara} y ~\ref{mascara ejemplo mascara} se presentan como ejemplo una imágen y su máscara respectivamente.
+\begin{figure}[!htbp]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{imagen_mascara.jpeg}
+        \caption{Imágen Ejemplo}
+        \label{imagen ejemplo mascara}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{mascara_mascara.jpeg}
+        \caption{Máscara Ejemplo}
+        \label{mascara ejemplo mascara}
+    \end{minipage}
+\end{figure}
+
+\subsection{Extracción de Características}
+
 
 \end{document}

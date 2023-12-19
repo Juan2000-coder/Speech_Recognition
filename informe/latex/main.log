@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  19 DEC 2023 10:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.16)  19 DEC 2023 16:45
 entering extended mode
 **c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
 (c:/Users/Public/Documents/UNCUYO/4-Cuarto_anio/2-Octavo_Semestre/1-Inteligencia_Artificial/3-Trabajos_Prácticos/fruit_recognition/informe/latex/main.tex
@@ -213,169 +213,186 @@ LaTeX Warning: Citation `referencia' on page 3 undefined on input line 80.
 
 LaTeX Warning: Citation `referencia' on page 3 undefined on input line 80.
 
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 82.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
-Underfull \hbox (badness 1215) in paragraph at lines 90--91
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 82.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[3]
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 82.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 82.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[4]
+Underfull \hbox (badness 1215) in paragraph at lines 91--92
 []\OT1/cmr/m/n/12 Exactitud en el
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 \OT1/cmr/m/n/12 re-conocimiento
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 \OT1/cmr/m/n/12 de las fru-tas
  []
 
 
-Underfull \hbox (badness 8170) in paragraph at lines 90--91
+Underfull \hbox (badness 8170) in paragraph at lines 91--92
 \OT1/cmr/m/n/12 me-dida por el
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 []\OT1/cmr/m/n/12 Rapidez en la
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 re-spuesta del
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 agente me-dida
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 91--92
+Underfull \hbox (badness 1281) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 como el tiempo
  []
 
 
-Underfull \hbox (badness 4254) in paragraph at lines 91--92
+Underfull \hbox (badness 4254) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 usuario ll-eva a
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 91--92
+Underfull \hbox (badness 1028) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 cabo una or-den
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 []\OT1/cmr/m/n/12 Tratamiento
  []
 
 
-Underfull \hbox (badness 2903) in paragraph at lines 95--96
+Underfull \hbox (badness 2903) in paragraph at lines 96--97
 \OT1/cmr/m/n/12 es-tantes, el es-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 []\OT1/cmr/m/n/12 El en-torno
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 \OT1/cmr/m/n/12 en donde la
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 \OT1/cmr/m/n/12 maquina se
  []
 
 
-Underfull \hbox (badness 1728) in paragraph at lines 96--97
+Underfull \hbox (badness 1728) in paragraph at lines 97--98
 \OT1/cmr/m/n/12 ubica, su ruido
  []
 
 
-Underfull \hbox (badness 4954) in paragraph at lines 96--97
+Underfull \hbox (badness 4954) in paragraph at lines 97--98
 \OT1/cmr/m/n/12 am-bi-en-tal y la
  []
 
 
-Underfull \hbox (badness 1019) in paragraph at lines 97--98
+Underfull \hbox (badness 1019) in paragraph at lines 98--99
 []\OT1/cmr/m/n/12 Los usuar-ios de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 []\OT1/cmr/m/n/12 Elementos de
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 100--101
+Underfull \hbox (badness 2096) in paragraph at lines 101--102
 \OT1/cmr/m/n/12 la camara para
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 \OT1/cmr/m/n/12 de-splazarla y
  []
 
 
-Underfull \hbox (badness 3668) in paragraph at lines 100--101
+Underfull \hbox (badness 3668) in paragraph at lines 101--102
 \OT1/cmr/m/n/12 tomar fo-tos en
  []
 
 
-Underfull \hbox (badness 7595) in paragraph at lines 101--102
+Underfull \hbox (badness 7595) in paragraph at lines 102--103
 []\OT1/cmr/m/n/12 Elementos para
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 101--102
+Underfull \hbox (badness 1292) in paragraph at lines 102--103
 \OT1/cmr/m/n/12 las fru-tas, para
  []
 
 
-Underfull \hbox (badness 5091) in paragraph at lines 101--102
+Underfull \hbox (badness 5091) in paragraph at lines 102--103
 \OT1/cmr/m/n/12 es-tantes y dis-
  []
 
 
-Underfull \hbox (badness 2460) in paragraph at lines 102--103
-[]\OT1/cmr/m/n/12 Sistema de ilu-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
-\OT1/cmr/m/n/12 mi-nacion para
- []
-
-
-Underfull \hbox (badness 3954) in paragraph at lines 102--103
-\OT1/cmr/m/n/12 preparar la es-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 []\OT1/cmr/m/n/12 Microfono para
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
 []\OT1/cmr/m/n/12 Camara para
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
 \OT1/cmr/m/n/12 cap-turar
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 107--108
+Underfull \hbox (badness 2005) in paragraph at lines 108--109
 []\OT1/cmr/m/n/12 Boton que pre-
  []
 
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 113.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 121.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -386,69 +403,47 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 113.
-(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[3]
-
-LaTeX Warning: Citation `referencia' on page 4 undefined on input line 117.
-
-
-LaTeX Warning: Citation `referencia' on page 4 undefined on input line 119.
-
-File: Imagenes//escudo.PNG Graphic file (type png)
-<use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 120.
-(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
-
-Package fancyhdr Warning: \headheight is too small (30.0pt): 
-(fancyhdr)                Make it at least 38.07542pt, for example:
-(fancyhdr)                \setlength{\headheight}{38.07542pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
-
-File: Imagenes//año.PNG Graphic file (type png)
-<use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 120.
-(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[4]
-
-LaTeX Warning: Citation `cita_repositorio_github' on page 5 undefined on input line 126.
-
-
-LaTeX Warning: Citation `cita_videos' on page 5 undefined on input line 128.
-
-
-LaTeX Warning: Citation `cita_repositorio' on page 5 undefined on input line 128.
-
-File: Imagenes//escudo.PNG Graphic file (type png)
-<use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 132.
-(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
-
-Package fancyhdr Warning: \headheight is too small (30.0pt): 
-(fancyhdr)                Make it at least 38.07542pt, for example:
-(fancyhdr)                \setlength{\headheight}{38.07542pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
-
-File: Imagenes//año.PNG Graphic file (type png)
-<use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 132.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 121.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
 [5]
-<Imagenes//trimming1.png, id=30, 906.2658pt x 340.3917pt>
+
+LaTeX Warning: Citation `cita_repositorio_github' on page 6 undefined on input line 127.
+
+
+LaTeX Warning: Citation `cita_videos' on page 6 undefined on input line 129.
+
+
+LaTeX Warning: Citation `cita_repositorio' on page 6 undefined on input line 129.
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 136.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 136.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[6]
+<Imagenes//trimming1.png, id=34, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming1.png Graphic file (type png)
 <use Imagenes//trimming1.png>
-Package pdftex.def Info: Imagenes//trimming1.png  used on input line 138.
+Package pdftex.def Info: Imagenes//trimming1.png  used on input line 139.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
-<Imagenes//trimming2.png, id=31, 906.2658pt x 340.3917pt>
+<Imagenes//trimming2.png, id=35, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming2.png Graphic file (type png)
 <use Imagenes//trimming2.png>
-Package pdftex.def Info: Imagenes//trimming2.png  used on input line 147.
+Package pdftex.def Info: Imagenes//trimming2.png  used on input line 148.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 153.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 154.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -460,22 +455,22 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 153.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 154.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[6 <./Imagenes//trimming1.png> <./Imagenes//trimming2.png>]
-<Imagenes//trimming3.png, id=38, 906.2658pt x 340.3917pt>
+[7 <./Imagenes//trimming1.png> <./Imagenes//trimming2.png>]
+<Imagenes//trimming3.png, id=41, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming3.png Graphic file (type png)
 <use Imagenes//trimming3.png>
-Package pdftex.def Info: Imagenes//trimming3.png  used on input line 156.
+Package pdftex.def Info: Imagenes//trimming3.png  used on input line 157.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
-<Imagenes//trimming4.png, id=39, 906.2658pt x 340.3917pt>
+<Imagenes//trimming4.png, id=42, 906.2658pt x 340.3917pt>
 File: Imagenes//trimming4.png Graphic file (type png)
 <use Imagenes//trimming4.png>
-Package pdftex.def Info: Imagenes//trimming4.png  used on input line 166.
+Package pdftex.def Info: Imagenes//trimming4.png  used on input line 167.
 (pdftex.def)             Requested size: 364.19667pt x 136.7931pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 173.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 175.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -487,48 +482,48 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 173.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 175.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[7 <./Imagenes//trimming3.png> <./Imagenes//trimming4.png>]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 178.
+[8 <./Imagenes//trimming3.png> <./Imagenes//trimming4.png>]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 179.
  (C:\Users\Juan\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 178.
-<Imagenes//BER1.png, id=45, 409.7709pt x 312.2064pt>
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 179.
+<Imagenes//BER1.png, id=49, 409.7709pt x 312.2064pt>
 File: Imagenes//BER1.png Graphic file (type png)
 <use Imagenes//BER1.png>
-Package pdftex.def Info: Imagenes//BER1.png  used on input line 193.
+Package pdftex.def Info: Imagenes//BER1.png  used on input line 194.
 (pdftex.def)             Requested size: 182.09833pt x 138.73846pt.
-<Imagenes//BER2.png, id=46, 409.7709pt x 312.2064pt>
+<Imagenes//BER2.png, id=50, 409.7709pt x 312.2064pt>
 File: Imagenes//BER2.png Graphic file (type png)
 <use Imagenes//BER2.png>
-Package pdftex.def Info: Imagenes//BER2.png  used on input line 199.
+Package pdftex.def Info: Imagenes//BER2.png  used on input line 200.
 (pdftex.def)             Requested size: 182.09833pt x 138.73846pt.
-<Imagenes//BER3.png, id=47, 409.7709pt x 312.2064pt>
+<Imagenes//BER3.png, id=51, 409.7709pt x 312.2064pt>
 File: Imagenes//BER3.png Graphic file (type png)
 <use Imagenes//BER3.png>
-Package pdftex.def Info: Imagenes//BER3.png  used on input line 207.
+Package pdftex.def Info: Imagenes//BER3.png  used on input line 208.
 (pdftex.def)             Requested size: 182.09833pt x 138.73846pt.
-<Imagenes//BER4.png, id=48, 409.7709pt x 312.2064pt>
+<Imagenes//BER4.png, id=52, 409.7709pt x 312.2064pt>
 File: Imagenes//BER4.png Graphic file (type png)
 <use Imagenes//BER4.png>
-Package pdftex.def Info: Imagenes//BER4.png  used on input line 213.
+Package pdftex.def Info: Imagenes//BER4.png  used on input line 214.
 (pdftex.def)             Requested size: 182.09833pt x 138.73846pt.
-<Imagenes//BER5.png, id=49, 416.2752pt x 312.2064pt>
+<Imagenes//BER5.png, id=53, 416.2752pt x 312.2064pt>
 File: Imagenes//BER5.png Graphic file (type png)
 <use Imagenes//BER5.png>
-Package pdftex.def Info: Imagenes//BER5.png  used on input line 221.
+Package pdftex.def Info: Imagenes//BER5.png  used on input line 222.
 (pdftex.def)             Requested size: 182.09833pt x 136.57567pt.
-<Imagenes//BER6.png, id=50, 409.7709pt x 314.3745pt>
+<Imagenes//BER6.png, id=54, 409.7709pt x 314.3745pt>
 File: Imagenes//BER6.png Graphic file (type png)
 <use Imagenes//BER6.png>
-Package pdftex.def Info: Imagenes//BER6.png  used on input line 227.
+Package pdftex.def Info: Imagenes//BER6.png  used on input line 228.
 (pdftex.def)             Requested size: 182.09833pt x 139.70192pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 232.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 237.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -540,12 +535,12 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 232.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 237.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[8]
+[9]
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 236.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 237.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -557,36 +552,36 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 236.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 237.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[9 <./Imagenes//BER1.png> <./Imagenes//BER2.png> <./Imagenes//BER3.png> <./Imagenes//BER4.png> <./Imagenes//BER5.png> <./Imagenes//BER6.png>]
-<Imagenes//ZCR1.png, id=64, 409.7709pt x 312.2064pt>
+[10 <./Imagenes//BER1.png> <./Imagenes//BER2.png> <./Imagenes//BER3.png> <./Imagenes//BER4.png> <./Imagenes//BER5.png> <./Imagenes//BER6.png>]
+<Imagenes//ZCR1.png, id=67, 409.7709pt x 312.2064pt>
 File: Imagenes//ZCR1.png Graphic file (type png)
 <use Imagenes//ZCR1.png>
-Package pdftex.def Info: Imagenes//ZCR1.png  used on input line 239.
+Package pdftex.def Info: Imagenes//ZCR1.png  used on input line 240.
 (pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
-<Imagenes//ZCR2.png, id=65, 409.7709pt x 312.2064pt>
+<Imagenes//ZCR2.png, id=68, 409.7709pt x 312.2064pt>
 File: Imagenes//ZCR2.png Graphic file (type png)
 <use Imagenes//ZCR2.png>
-Package pdftex.def Info: Imagenes//ZCR2.png  used on input line 246.
+Package pdftex.def Info: Imagenes//ZCR2.png  used on input line 247.
 (pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
-<Imagenes//ZCR3.png, id=66, 409.7709pt x 312.2064pt>
+<Imagenes//ZCR3.png, id=69, 409.7709pt x 312.2064pt>
 File: Imagenes//ZCR3.png Graphic file (type png)
 <use Imagenes//ZCR3.png>
-Package pdftex.def Info: Imagenes//ZCR3.png  used on input line 253.
+Package pdftex.def Info: Imagenes//ZCR3.png  used on input line 254.
 (pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Imagenes//ZCR4.png, id=67, 409.7709pt x 312.2064pt>
+<Imagenes//ZCR4.png, id=70, 409.7709pt x 312.2064pt>
 File: Imagenes//ZCR4.png Graphic file (type png)
 <use Imagenes//ZCR4.png>
-Package pdftex.def Info: Imagenes//ZCR4.png  used on input line 260.
+Package pdftex.def Info: Imagenes//ZCR4.png  used on input line 261.
 (pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 264.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 265.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -597,19 +592,35 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 264.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 265.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[10 <./Imagenes//ZCR1.png> <./Imagenes//ZCR2.png>]
-<Imagenes//ZCR5.png, id=73, 416.2752pt x 312.2064pt>
+[11 <./Imagenes//ZCR1.png> <./Imagenes//ZCR2.png>]
+<Imagenes//ZCR5.png, id=76, 416.2752pt x 312.2064pt>
 File: Imagenes//ZCR5.png Graphic file (type png)
 <use Imagenes//ZCR5.png>
-Package pdftex.def Info: Imagenes//ZCR5.png  used on input line 267.
+Package pdftex.def Info: Imagenes//ZCR5.png  used on input line 268.
 (pdftex.def)             Requested size: 182.09486pt x 136.5709pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Imagenes//SRO1.png, id=77, 409.7709pt x 315.8199pt>
+File: Imagenes//SRO1.png Graphic file (type png)
+<use Imagenes//SRO1.png>
+Package pdftex.def Info: Imagenes//SRO1.png  used on input line 278.
+(pdftex.def)             Requested size: 182.09486pt x 140.34424pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Imagenes//SRO2.png, id=78, 425.6703pt x 313.6518pt>
+File: Imagenes//SRO2.png Graphic file (type png)
+<use Imagenes//SRO2.png>
+Package pdftex.def Info: Imagenes//SRO2.png  used on input line 285.
+(pdftex.def)             Requested size: 182.09486pt x 134.17845pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 274.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 289.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
-
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
 (fancyhdr)                Make it at least 38.07542pt, for example:
@@ -619,36 +630,26 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 274.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 289.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[11 <./Imagenes//ZCR3.png> <./Imagenes//ZCR4.png> <./Imagenes//ZCR5.png>]
-<Imagenes//SRO1.png, id=80, 409.7709pt x 315.8199pt>
-File: Imagenes//SRO1.png Graphic file (type png)
-<use Imagenes//SRO1.png>
-Package pdftex.def Info: Imagenes//SRO1.png  used on input line 277.
-(pdftex.def)             Requested size: 182.09486pt x 140.34424pt.
-<Imagenes//SRO2.png, id=81, 425.6703pt x 313.6518pt>
-File: Imagenes//SRO2.png Graphic file (type png)
-<use Imagenes//SRO2.png>
-Package pdftex.def Info: Imagenes//SRO2.png  used on input line 284.
-(pdftex.def)             Requested size: 182.09486pt x 134.17845pt.
-<Imagenes//SRO3.png, id=82, 416.2752pt x 312.2064pt>
+[12 <./Imagenes//ZCR3.png> <./Imagenes//ZCR4.png>]
+<Imagenes//SRO3.png, id=86, 416.2752pt x 312.2064pt>
 File: Imagenes//SRO3.png Graphic file (type png)
 <use Imagenes//SRO3.png>
-Package pdftex.def Info: Imagenes//SRO3.png  used on input line 291.
+Package pdftex.def Info: Imagenes//SRO3.png  used on input line 292.
 (pdftex.def)             Requested size: 182.09486pt x 136.5709pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Imagenes//MFCCS1.png, id=83, 414.8298pt x 312.2064pt>
+<Imagenes//MFCCS1.png, id=87, 414.8298pt x 312.2064pt>
 File: Imagenes//MFCCS1.png Graphic file (type png)
 <use Imagenes//MFCCS1.png>
-Package pdftex.def Info: Imagenes//MFCCS1.png  used on input line 301.
+Package pdftex.def Info: Imagenes//MFCCS1.png  used on input line 302.
 (pdftex.def)             Requested size: 182.09486pt x 137.04253pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 305.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 306.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -659,22 +660,22 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 305.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 306.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[12 <./Imagenes//SRO1.png> <./Imagenes//SRO2.png>]
-<Imagenes//MFCCS3.png, id=91, 416.2752pt x 313.6518pt>
+[13 <./Imagenes//ZCR5.png> <./Imagenes//SRO1.png> <./Imagenes//SRO2.png>]
+<Imagenes//MFCCS3.png, id=94, 416.2752pt x 313.6518pt>
 File: Imagenes//MFCCS3.png Graphic file (type png)
 <use Imagenes//MFCCS3.png>
-Package pdftex.def Info: Imagenes//MFCCS3.png  used on input line 308.
+Package pdftex.def Info: Imagenes//MFCCS3.png  used on input line 309.
 (pdftex.def)             Requested size: 182.09486pt x 137.20317pt.
-<Imagenes//ENVELOPE.png, id=92, 409.7709pt x 312.2064pt>
+<Imagenes//ENVELOPE.png, id=95, 409.7709pt x 312.2064pt>
 File: Imagenes//ENVELOPE.png Graphic file (type png)
 <use Imagenes//ENVELOPE.png>
-Package pdftex.def Info: Imagenes//ENVELOPE.png  used on input line 316.
+Package pdftex.def Info: Imagenes//ENVELOPE.png  used on input line 317.
 (pdftex.def)             Requested size: 182.09486pt x 138.73846pt.
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 320.
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 321.
 (pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
 
 
@@ -686,42 +687,19 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 
 File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 320.
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 321.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[13 <./Imagenes//SRO3.png> <./Imagenes//MFCCS1.png> <./Imagenes//MFCCS3.png>]
-<Imagenes//GRUPOS1.png, id=99, 291.2481pt x 283.2984pt>
+[14 <./Imagenes//SRO3.png> <./Imagenes//MFCCS1.png> <./Imagenes//MFCCS3.png>]
+<Imagenes//GRUPOS1.png, id=102, 291.2481pt x 283.2984pt>
 File: Imagenes//GRUPOS1.png Graphic file (type png)
 <use Imagenes//GRUPOS1.png>
-Package pdftex.def Info: Imagenes//GRUPOS1.png  used on input line 327.
+Package pdftex.def Info: Imagenes//GRUPOS1.png  used on input line 328.
 (pdftex.def)             Requested size: 273.14923pt x 265.71695pt.
-<Imagenes//GRUPOS2.png, id=100, 402.00188pt x 304.88907pt>
+<Imagenes//GRUPOS2.png, id=103, 402.00188pt x 304.88907pt>
 File: Imagenes//GRUPOS2.png Graphic file (type png)
 <use Imagenes//GRUPOS2.png>
-Package pdftex.def Info: Imagenes//GRUPOS2.png  used on input line 333.
+Package pdftex.def Info: Imagenes//GRUPOS2.png  used on input line 334.
 (pdftex.def)             Requested size: 273.14923pt x 207.16364pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-File: Imagenes//escudo.PNG Graphic file (type png)
-<use Imagenes//escudo.PNG>
-Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 338.
-(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
-
-Package fancyhdr Warning: \headheight is too small (30.0pt): 
-(fancyhdr)                Make it at least 38.07542pt, for example:
-(fancyhdr)                \setlength{\headheight}{38.07542pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
-
-File: Imagenes//año.PNG Graphic file (type png)
-<use Imagenes//año.PNG>
-Package pdftex.def Info: Imagenes//año.PNG  used on input line 338.
-(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[14 <./Imagenes//ENVELOPE.png>]
 File: Imagenes//escudo.PNG Graphic file (type png)
 <use Imagenes//escudo.PNG>
 Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 338.
@@ -738,23 +716,128 @@ File: Imagenes//año.PNG Graphic file (type png)
 <use Imagenes//año.PNG>
 Package pdftex.def Info: Imagenes//año.PNG  used on input line 338.
 (pdftex.def)             Requested size: 64.13847pt x 20.175pt.
-[15 <./Imagenes//GRUPOS1.png> <./Imagenes//GRUPOS2.png>] (main.aux)
+[15 <./Imagenes//ENVELOPE.png>]
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 338.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 338.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[16 <./Imagenes//GRUPOS1.png> <./Imagenes//GRUPOS2.png>]
+
+LaTeX Warning: Citation `sobel' on page 17 undefined on input line 344.
+
+<Imagenes//SOBEL.png, id=113, 600.5637pt x 157.5486pt>
+File: Imagenes//SOBEL.png Graphic file (type png)
+<use Imagenes//SOBEL.png>
+Package pdftex.def Info: Imagenes//SOBEL.png  used on input line 347.
+(pdftex.def)             Requested size: 273.14923pt x 71.65826pt.
+
+LaTeX Warning: Citation `otsu' on page 17 undefined on input line 353.
+
+
+LaTeX Warning: Citation `lab' on page 17 undefined on input line 353.
+
+<Imagenes//MASCARAS.png, id=114, 599.841pt x 98.2872pt>
+File: Imagenes//MASCARAS.png Graphic file (type png)
+<use Imagenes//MASCARAS.png>
+Package pdftex.def Info: Imagenes//MASCARAS.png  used on input line 357.
+(pdftex.def)             Requested size: 455.24411pt x 74.59705pt.
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 363.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 363.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[17 <./Imagenes//SOBEL.png>]
+<Imagenes//CONTORNOS.png, id=119, 599.841pt x 98.2872pt>
+File: Imagenes//CONTORNOS.png Graphic file (type png)
+<use Imagenes//CONTORNOS.png>
+Package pdftex.def Info: Imagenes//CONTORNOS.png  used on input line 366.
+(pdftex.def)             Requested size: 455.24411pt x 74.59705pt.
+
+Overfull \hbox (4.66362pt too wide) in paragraph at lines 373--374
+[]\OT1/cmr/m/n/12 Por esos mo-tivos, fi-nal-mente se de-cidio uti-lizar so-la-mente fon-dos blan-cos en las imagenes
+ []
+
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 378.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 378.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[18 <./Imagenes//MASCARAS.png> <./Imagenes//CONTORNOS.png>]
+<Imagenes//imagen_mascara.jpeg, id=126, 1606.0pt x 903.375pt>
+File: Imagenes//imagen_mascara.jpeg Graphic file (type jpg)
+<use Imagenes//imagen_mascara.jpeg>
+Package pdftex.def Info: Imagenes//imagen_mascara.jpeg  used on input line 383.
+(pdftex.def)             Requested size: 182.09833pt x 102.4179pt.
+<Imagenes//mascara_mascara.jpeg, id=127, 1606.0pt x 903.375pt>
+File: Imagenes//mascara_mascara.jpeg Graphic file (type jpg)
+<use Imagenes//mascara_mascara.jpeg>
+Package pdftex.def Info: Imagenes//mascara_mascara.jpeg  used on input line 389.
+(pdftex.def)             Requested size: 182.09833pt x 102.4179pt.
+File: Imagenes//escudo.PNG Graphic file (type png)
+<use Imagenes//escudo.PNG>
+Package pdftex.def Info: Imagenes//escudo.PNG  used on input line 398.
+(pdftex.def)             Requested size: 194.82442pt x 33.72539pt.
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 38.07542pt, for example:
+(fancyhdr)                \setlength{\headheight}{38.07542pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-8.07542pt}.
+
+File: Imagenes//año.PNG Graphic file (type png)
+<use Imagenes//año.PNG>
+Package pdftex.def Info: Imagenes//año.PNG  used on input line 398.
+(pdftex.def)             Requested size: 64.13847pt x 20.175pt.
+[19 <./Imagenes//imagen_mascara.jpeg> <./Imagenes//mascara_mascara.jpeg>] (main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2439 strings out of 479321
- 39001 string characters out of 2857060
- 345435 words of memory out of 3000000
- 19880 multiletter control sequences out of 15000+600000
+ 2475 strings out of 479321
+ 39864 string characters out of 2857060
+ 344491 words of memory out of 3000000
+ 19910 multiletter control sequences out of 15000+600000
  408537 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,21n,74p,1653b,574s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,22n,74p,2007b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\Juan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Juan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (16 pages, 720094 bytes).
+Output written on main.pdf (20 pages, 922204 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
+ 155 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 151 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -527,7 +527,7 @@ while True:
     sd.wait()
     print("Grabación completa.")
 
-    orden = os.path.join(original_path, f"{len(os.listdir(original_path)) + 1}.wav")
+    orden = os.path.join(original_path, f"test{len(os.listdir(original_path)) + 1}.wav")
     sf.write(orden, data, fs)
 
     #------------------------------PROCESSING----------------------------------------
