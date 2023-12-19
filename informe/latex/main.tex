@@ -183,54 +183,55 @@ A continuación, se detallan aquellas características que finalmente se utiliza
 
 \begin{itemize}
     \item \textbf{BER:} Esta medida proporciona información sobre cómo está distribuida la energía en distintas partes del espectro de frecuencia. En esta solución se calcula como la fracción de la energía comprendida por debajo de cierta frecuencia de corte.
-    
     \begin{itemize}
         \item \textbf{Máximo:} Se utiliza el máximo del BER para una frecuencia de corte de 600 Hz. En la Figura ~\ref{BER 1} se muestra cómo se puede lograr una separación de las peras respecto de los demás.
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER1.png}
-                \caption{Máximo BER}
-                \label{BER 1}
-            \end{figure}
         \item \textbf{Mínimo:} Se utiliza el mínimo del BER a las frecuencias de corte de 1900, 5000 y 9000 Hz, en las Figuras~\ref{BER 2},~\ref{BER 3} y~\ref{BER 4}, respectivamente. Como se puede ver, la primera permite la separación de las peras respecto de los demás, la segunda logra una separación de las bananas respecto de las manzanas y la última una separación de las manzanas respecto de los demás, observándose cierta estratificación de los grupos en el medio.
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER2.png}
-                \caption{Mínimo BER - 1900 Hz}
-                \label{BER 2}
+        \item \textbf{Desviación estándar:} Para el BER normalizado y considerado respecto de la media. Se tomó con frecuencias de corte a 8000 Hz (Figura ~\ref{BER 5}) y 1000 Hz (Figura ~\ref{BER 6}). Se puede observar cómo en el primer caso se logra una separación de las manzanas respecto de los otros grupos mientras que en el segundo caso se logra una separación de las peras respecto de los otros grupos.
+            \begin{figure}[htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER1.png}
+                    \caption{Máximo BER}
+                    \label{BER 1}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER2.png}
+                    \caption{Mínimo BER - 1900 Hz}
+                    \label{BER 2}
+                \end{minipage}
             \end{figure}
-            
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER3.png}
-                \caption{Mínimo BER - 5000 Hz}
-                \label{BER 3}
+            \begin{figure}[htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER3.png}
+                    \caption{Mínimo BER - 5000 Hz}
+                    \label{BER 3}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER4.png}
+                    \caption{Mínimo BER - 9000 Hz}
+                    \label{BER 4}
+                \end{minipage}
             \end{figure}
-            
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER4.png}
-                \caption{Mínimo BER - 9000 Hz}
-                \label{BER 4}
-            \end{figure} 
-        \item \textbf{Desviación estándar:} Para el BER normalizado y considerado respecto de la media del BER del audio. Se tomó con frecuencias de corte a 8000 Hz (Figura ~\ref{BER 5}) y 1000 Hz (Figura ~\ref{BER 6}). Se puede observar cómo en el primer caso se logra una separación de las manzanas respecto de los otros grupos mientras que en el segundo caso se logra una separación de las peras respecto de los otros grupos.
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER5.png}
-                \caption{Desviación Estándar BER - 8000 Hz}
-                \label{BER 5}
-            \end{figure}
-            
-            \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.4\linewidth]{BER6.png}
-                \caption{Desviación Estándar BER - 1000 Hz}
-                \label{BER 6}
+            \begin{figure}[!htbp]
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER5.png}
+                    \caption{Std BER - 8000 Hz}
+                    \label{BER 5}
+                \end{minipage}%
+                \begin{minipage}[t]{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=0.8\linewidth]{BER6.png}
+                    \caption{Std BER - 1000 Hz}
+                    \label{BER 6}
+                \end{minipage}
             \end{figure}
     \end{itemize}
-    
-    \item \textbf{Zero Crossing Rate (ZCR):} esta medida cuenta la cantidad de veces que una señal cruza el eje horizontal (cero) en un intervalo de tiempo dado.    
-        El ZCR se expresa una tasa, representando la frecuencia con la que la señal cambia de polaridad. Un ZCR alto indica que la señal cambia de polaridad con frecuencia, lo que podría ser característico de señales con contenido de alta frecuencia o ruido. Por otro lado, un ZCR bajo indica que la señal mantiene la misma polaridad durante un período de tiempo prolongado, lo que podría ser característico de señales más suaves.
+    \item \textbf{Zero Crossing Rate (ZCR):} Esta medida cuenta la cantidad de veces que una señal cruza el eje horizontal (cero) en un intervalo de tiempo dado.    
+        El ZCR expresa una tasa, representando la frecuencia con la que la señal cambia de polaridad. Un ZCR alto indica que la señal cambia de polaridad con frecuencia. Por otro lado, un ZCR bajo indica que la señal mantiene la misma polaridad durante un período de tiempo prolongado, lo que podría ser característico de señales más suaves.
     \begin{itemize}
         \item \textbf{Media:} Se obtiene respecto del valor máximo luego de un filtro pasa banda con corte en 1000 y 5000 Hz. Como se puede ver en la Figure~\ref{ZCR 1} esto logra la separación de las manzanas respecto de los demás grupos. Eso se debe a una variación de esta propiedad que no presentan el resto de los grupos cuando se pronuncia la letra 'z'.
             \begin{figure}[h]
@@ -246,7 +247,7 @@ A continuación, se detallan aquellas características que finalmente se utiliza
                 \caption{Zero Crossing Rate - Máximo}
                 \label{ZCR 2}
             \end{figure}
-        \item \textbf{Desviación Estándar:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 20 y 10000 Hz. 
+        \item \textbf{Desviación Estándar:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 20 y 10000 Hz. En la figura ~\ref{ZCR 3} se puede ver cómo las manzanas se separan del resto y en el centro se pueden observar un grupo casi solo de naranjas.
             \begin{figure}[h]
                 \centering
                 \includegraphics[width=0.4\linewidth]{ZCR3.png}
@@ -256,21 +257,82 @@ A continuación, se detallan aquellas características que finalmente se utiliza
         \item \textbf{Media a 3/14:} Luego de un filtro pasabanda con cortes en 1000 y 5000 Hz se calcula la media del audio normalizado en ese punto en la duración del audio a lo largo de 10 frames, 5 a cada lado. Nuevamente se observa una separación de las manzanas (Figure ~\ref{ZCR 4})
             \begin{figure}[h]
                 \centering
-                \includegraphics[width=0.4\linewidth]{ZCR3.png}
-                \caption{Zero Crossing Rate - Desviación Estándar}
-                \label{ZCR 3}
+                \includegraphics[width=0.4\linewidth]{ZCR4.png}
+                \caption{Zero Crossing Rate - Media a 3/14}
+                \label{ZCR 4}
             \end{figure}
-        \item \textbf{Máximo a 3/4:} Luego de un filtro pasabanda con cortes en 10 y 10000 Hz se calcula el máximo en ese punto en la duración del audio a lo largo de 20 frames, 10 a cada lado buscando resaltar las diferencias entre las naranjas y las demás frutas cuando se pronuncia la letra 'j'. Se observa una separación de las naranjas (Figure ~\ref{ZCR 4}).
-            \begin{figure}[h]
+        \item \textbf{Máximo a 3/4:} Luego de un filtro pasabanda con cortes en 10 y 10000 Hz se calcula el máximo en ese punto en la duración del audio a lo largo de 20 frames, 10 a cada lado buscando resaltar las diferencias entre las naranjas y las demás frutas cuando se pronuncia la letra 'j' (Figura ~\ref{ZCR 4}).
+            \begin{figure}[!h]
                 \centering
-                \includegraphics[width=0.4\linewidth]{ZCR3.png}
-                \caption{Zero Crossing Rate - Desviación Estándar}
-                \label{ZCR 3}
+                \includegraphics[width=0.4\linewidth]{ZCR5.png}
+                \caption{Zero Crossing Rate - Máximo a 3/4}
+                \label{ZCR 5}
             \end{figure}
     \end{itemize}
-
-    
+    \item \textbf{Spectral Roll Off:} El \textit{Spectral Roll-off} es una medida que indica la frecuencia por debajo de la cual se encuentra un cierto porcentaje de la energía total del espectro. Un valor bajo indica una concentración en frecuencias bajas, mientras que un valor alto implica una distribución hacia frecuencias más altas.
+    \begin{itemize}
+        \item \textbf{Media:} Se obtiene respecto del máximo luego de un filtro pasa banda con cortes en 100 y 8500 considerando un pocentaje del 28\% de la energía del espectro. Se separan las manzanas y las peras también las naranjas de las bananas y de las peras aunque queda un solapamiento entre bananas y naranjas (Figura ~\ref{SRO 1}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO1.png}
+            \caption{Spectral Roll Off - Media}
+            \label{SRO 1}
+        \end{figure}
+        \item \textbf{Máximo:} Se obtiene luego de un filtro pasa banda con cortes en 100 y 8500 considerando un pocentaje del 55\% de la energía del espectro. Se observa una separación de las manzanas (Figura ~\ref{SRO 2}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO2.png}
+            \caption{Spectral Roll Off - Máximo}
+            \label{SRO 2}
+        \end{figure}
+        \item \textbf{Desviación Estándar:} Se obtiene respectro de la media luego de un filtro pasa banda con cortes en 50 y 8500 considerando un pocentaje del 28\% de la energía del espectro. Nuevamente se observa una separación de las manzanas (Figura ~\ref{SRO 3}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{SRO3.png}
+            \caption{Spectral Roll Off - Desviación Estándar}
+            \label{SRO 3}
+        \end{figure}
+    \end{itemize}
+    \item \textbf{MFCCs:} Como ya se mencionó, es de las principales características utilizadas para el reconocimiento de voz dado que tiene la capacidad de identificar fonemas y demás.
+    \begin{itemize}
+        \item \textbf{Máximo del coeficiente 3:} Se obtiene luego de un filtro pasa banda con cortes en 500 y 5000. Se separan las manzanas (Figura ~\ref{MFCCS 1}).
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{MFCCS1.png}
+            \caption{MFCCs - Máximo del coeficiente 3}
+            \label{MFCCS 1}
+        \end{figure}
+        \item \textbf{Desviación estándar coeficiente 1 a 4/5:} Se obtiene respecto de la media luego de un filtro pasa banda con cortes en 10 y 8000 en 20 frames alrededor de este punto en la duración del audio (10 frames de cada lado). Aunque existe cierta dispersión, se observa una separación de las naranjas (Figura ~\ref{MFCCS 3}).
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{MFCCS3.png}
+            \caption{MFCCs - Desviación estándar coeficiente 1 a 4/5}
+            \label{MFCCS 3}
+        \end{figure}
+    \end{itemize}
+    \item \textbf{Envolvente:} El cálculo del valor RMS en cada frame en que se divide un audio funciona como una buena envolvente de amplitud de la señal. De esta envolvente se toman 30 componentes equi-espaciadas de las cuales se conservan la componente 11 y la 12 (Figura~\ref{ENVELOPE}). Dentro de todo se logra una separación de las manzanas respecto al resto
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.4\linewidth]{ENVELOPE.png}
+        \caption{Envolvente componentes 11 y 12}
+        \label{ENVELOPE}
+    \end{figure}
 \end{itemize}
+Como se puede notar, algunas de las características extraídas son demasiado específicas. Sin embargo, este conjunto de características fue seleccionado después de muchas pruebas, ya que se consideró que lograba los mejores resultados en términos de agrupamiento y separación.
 
+\subsubsection{Reducción de componentes}
+La cantidad de componentes del vector de características de cada audio es de 17. Se pretende hacer la visualización en un gráfico de los agrupamientos que se consiguen, y para eso, luego de la extracción de las características de los audios se utiliza PCA para reducir el conjunto de componentes a 3. En la Figuras~\ref{GRUPOS 1} y ~\ref{GRUPOS 2} se observa el agrupamiento conseguido.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{GRUPOS1.png}
+    \caption{Agrupamiento post PCA - 1}
+    \label{GRUPOS 1}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{GRUPOS2.png}
+    \caption{Agrupamiento post PCA - 2}
+    \label{GRUPOS 2}
+\end{figure}
 
 \end{document}
