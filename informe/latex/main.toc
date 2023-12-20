@@ -1,0 +1,67 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Resumen}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Introduccion}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Visión Artificial}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Reconocimiento de Voz}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Especificación del Agente}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Descripción y tipo de Agente}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Tabla REAS}{6}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Descripción del Entorno}{6}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Diseño del Agente}{7}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Reconocimiento de voz}{7}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.1}Recorte de Audios}{7}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.2}Extracción de Características}{9}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.3}Reducción de componentes}{16}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Reconocimiento de Imágenes}{18}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.1}Separación del fondo}{18}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.2}Extracción de Características}{20}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.3}Clasificación con K-means}{21}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.4}Clasificación}{22}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Ejemplo de Aplicación}{22}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Dataset}{22}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}Implementación}{22}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.1}Entrenamiento}{23}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Audio:}{23}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Imagen:}{23}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.2}Validación}{23}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Reconocimiento de Audio:}{24}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Reconocimiento de Imagen:}{24}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.3}Solución}{24}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.4}Ejemplo}{24}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Resultados}{27}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Reconocimiento de voz}{27}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Reconocimiento de Imagén}{28}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Conclusiones}{28}{}%

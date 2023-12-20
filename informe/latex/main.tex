@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+\usepackage[backend=biber]{biblatex}
+\bibliography{bibliografia}
 \graphicspath{{Imagenes/}}
 
 %-------------------------ENCABEZADO Y PIE DE PÁGINA----------------------
@@ -40,6 +42,8 @@
     %Año 2023
 \end{titlepage}
 
+\tableofcontents
+\newpage
 \section{Resumen}
 %------------------------------------RESUMEN------------------------------
 En este informe se presenta el desarrollo de una solución al problema propuesto por la cátedra. Se tiene una máquina expendedora de 4 tipos de fruta: manzana, naranja, banana y pera. La máquina cuenta con una cámara para tomar fotos de las frutas en los estantes y un micrófono para solicitar frutas por voz. El software de la máquina identifica las frutas en las imágenes y sus nombres cuando son mencionadas por el usuario. La clasificación de la voz se realiza mediante un algoritmo \textbf{KNN} con k=3, y la clasificación de las imágenes se lleva a cabo con un algoritmo KNN con k=1 comparando cada imagen con los centroides obtenidos del entrenamiento de un segmentador basado en \textbf{KMeans}. Se construyó un dataset disponible en línea con audios de varias personas e imágenes recopiladas en línea o tomadas por alumnos. Los resultados obtenidos fueron suficientemente satisfactorios; en concreto, la validación del modelo de reconocimiento de voz se realizó con 24 archivos de distintas personas sin falla. El reconocimiento de frutas en imágenes, aunque no completamente probado, es vulnerable ante frutas descoloridas, siendo el color la característica principal para la separación. El desarrollo se encuentra principalmente documentado en notebooks de Jupyter.
@@ -584,5 +588,7 @@ Por otro lado, la ejecución de los programas de entrenamiento requiere un tiemp
 Tomando en consideración el tiempo invertido en el ajuste del sistema y la vulnerabilidad a variaciones en las entradas respecto del ideal, sería deseable contar con un sistema dotado de capacidades de aprendizaje automático. Este tipo de sistema tendría la capacidad de ajustarse de forma autónoma y asignar los pesos necesarios según convenga a las distintas características extraídas de los datos.
 
 Considero que explorar una solución de este tipo podría mejorar significativamente el rendimiento del agente en comparación con intentar mejorar el programa actual. Desarrollar una solución basada en aprendizaje automático podría proporcionar al sistema una mayor capacidad de generalización y adaptación a diversas condiciones, superando las limitaciones actuales, como la restricción a reconocer solo ciertas palabras y la falta de robustez frente a perturbaciones o variaciones, como el caso en el que una persona diga algo diferente a una de las frutas del problema actual y el sistema actual lo clasificaría de todas formas como una fruta.
+
+\printbibliography[title={Referencias}]
 
 \end{document}
